@@ -21,25 +21,19 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col col-sm-5">
-                                    <h2 class="mt-4">Registro de Rol</h2>
+                                    <h5 class="mt-4">Registro de Rol</h5>
                                     <hr>
-                                    <form method="post" action="">
-                                        <div class="row">
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Nombre </label>
-                                                    <input type="text" name="nombre" id="nombre" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Descripción</label>
-                                                    <input type="text" name="descripcion" id="descripcion" class="form-control">
-                                                </div>
-                                            </div>
+                                    <form method="post" action="" class="row g-2">
 
+                                        <div class="col-md-6">
+                                            <label for="nombres">Nombre </label>
+                                            <input type="text" name="nombre" id="nombre" class="form-control">
                                         </div>
-                                        <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="nombres">Descripción</label>
+                                            <input type="text" name="descripcion" id="descripcion" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">Registrar</button>
                                                 <a class="btn btn-primary" href="index.php">Regresar al inicio</a>
@@ -48,7 +42,7 @@
                                     </form>
                                 </div>
                                 <div class="col col-sm-7">
-                                    <h2 class="mt-4">Categorias</h2>
+                                    <h5 class="mt-4">Roles</h5>
                                     <hr>
                                     <table class="table">
                                         <thead>

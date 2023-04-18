@@ -23,68 +23,50 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Usuarios</h5>
                                     <hr>
-                                    <form method="post" action="">
-                                        <div class="row">
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Tipo de Cliente </label>
-                                                    <select class="form-control">
-                                                        <option>tipo 1</option>
-                                                        <option>tipo 2</option>
-                                                        <option>tipo 3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Nombres</label>
-                                                    <input type="text" name="nombres" id="nombre" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Apellidos</label>
-                                                    <input type="text" name="apellidos" id="apellidos" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Tipo de Documento </label>
-                                                    <select class="form-control">
-                                                        <option>documento 1</option>
-                                                        <option>documento 2</option>
-                                                        <option>documento 3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Nro. Documento </label>
-                                                    <input type="text" name="numDocumento" id="numDocumento" class="form-control">
-                                                </div>
-                                            </div>
-
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Dirección</label>
-                                                    <input type="text" name="direccion" id="direccion" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Teleféno</label>
-                                                    <input type="text" name="telefono" id="telefono" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Email</label>
-                                                    <input type="text" name="email" id="email" class="form-control">
-                                                </div>
-                                            </div>
-
+                                    <form method="post" action="" class="row g-2">
+                                        <div class="col-md-4">
+                                            <label for="nombres">Nombres</label>
+                                            <input type="text" class="form-control"  placeholder="Nombres">
                                         </div>
-                                        <div class="row mt-3">
+                                        <div class="col-4">
+                                            <label for="nombres">Apellidos</label>
+                                            <input type="text" class="form-control"  placeholder="Apellidos">
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label for="nombres">Tipo de Cliente </label>
+                                            <select class="form-control">
+                                                <option>tipo 1</option>
+                                                <option>tipo 2</option>
+                                                <option>tipo 3</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="nombres">Tipo de Documento </label>
+                                            <select class="form-control">
+                                                <option>documento 1</option>
+                                                <option>documento 2</option>
+                                                <option>documento 3</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="nombres">Nro. Documento </label>
+                                            <input type="text" name="numDocumento" id="numDocumento" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="nombres">Teleféno</label>
+                                            <input type="text" name="telefono" id="telefono" class="form-control">
+                                        </div>
+
+                                        <div class="col-6">
+                                            <label for="nombres">Email</label>
+                                            <input type="text" name="email" id="email" class="form-control">
+                                        </div>
+                                        <div class="col-12">
+                                            <label for="nombres">Dirección</label>
+                                            <input type="text" name="direccion" id="direccion" class="form-control">
+                                        </div>
+                                         <div class="col-12">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">Registrar</button>
                                                 <a class="btn btn-primary" href="index.html">Regresar al inicio</a>

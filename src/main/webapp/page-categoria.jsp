@@ -23,23 +23,18 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Categoría</h5>
                                     <hr>
-                                    <form method="post" action="">
-                                        <div class="row">
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Nombre </label>
-                                                    <input type="text" name="nombre" id="nombre" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Descripción</label>
-                                                    <input type="text" name="descripcion" id="descripcion" class="form-control">
-                                                </div>
-                                            </div>
+                                    <form method="post" action="" class="row g-2">
 
+                                        <div class="col-md-6">
+                                            <label for="nombres">Nombres</label>
+                                            <input type="text" class="form-control"  placeholder="Nombres" name="nombre">
                                         </div>
-                                        <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="nombres">Descripción</label>
+                                            <input type="text" class="form-control"  placeholder="Descripción" name="descripcion" >
+                                        </div>
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">Registrar</button>
                                                 <a class="btn btn-primary" href="index.html">Regresar al inicio</a>

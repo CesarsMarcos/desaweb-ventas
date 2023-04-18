@@ -24,51 +24,40 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Articulos</h5>
                                     <hr>
-                                    <form method="post" action="">
-                                        <div class="row">
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Categría </label>
-                                                    <select class="form-control">
-                                                        <option>categoria 1</option>
-                                                        <option>categoria 2</option>
-                                                        <option>categoria 3</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Código </label>
-                                                    <input type="text" name="codigo" id="codigo" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Nombre</label>
-                                                    <input type="text" name="nombre" id="nombre" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Descripción</label>
-                                                    <input type="text" name="descripcion" id="descripcion" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Stock</label>
-                                                    <input type="text" name="stock" id="stock" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="col col-12">
-                                                <div class="form-group">
-                                                    <label for="nombres">Precio Venta</label>
-                                                    <input type="text" name="precioVenta" id="precioVenta" class="form-control">
-                                                </div>
-                                            </div>
+                                    <form method="post" action="" class="row g-2">
 
+                                        <div class="col-md-6">
+                                            <label for="nombres">Nombre</label>
+                                            <input type="text" name="nombre" id="nombre" class="form-control">
                                         </div>
-                                        <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="nombres">Descripción</label>
+                                            <input type="text" name="descripcion" id="descripcion" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="nombres">Categría </label>
+                                            <select class="form-control">
+                                                <option>categoria 1</option>
+                                                <option>categoria 2</option>
+                                                <option>categoria 3</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="nombres">Código </label>
+                                            <input type="text" name="codigo" id="codigo" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label for="nombres">Stock</label>
+                                            <input type="text" name="stock" id="stock" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="nombres">Precio Venta</label>
+                                            <input type="text" name="precioVenta" id="precioVenta" class="form-control">
+                                        </div>
+
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">Registrar</button>
                                                 <a class="btn btn-primary" href="index.html">Regresar al inicio</a>
