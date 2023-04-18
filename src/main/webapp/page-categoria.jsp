@@ -24,7 +24,6 @@
                                     <h5 class="mt-4">Registro de Categoría</h5>
                                     <hr>
                                     <form method="post" action="" class="row g-2">
-
                                         <div class="col-md-6">
                                             <label for="nombres">Nombres</label>
                                             <input type="text" class="form-control"  placeholder="Nombres" name="nombre">
