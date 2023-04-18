@@ -19,6 +19,7 @@
                 <div class="container">
                     <div class="panel panel-primary mt-3">
                         <div class="panel-body">
+
                             <div class="row">
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Articulos</h5>
@@ -115,6 +116,7 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
