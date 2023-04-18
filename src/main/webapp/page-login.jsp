@@ -13,35 +13,28 @@
         <title>Login</title>
     </head>
     <body>
-        <div class="container">
-            <div class="card border-info text-center login">
-                <div class="card-header"></div>
-                <div class="card-body">
-                    <img src="#" class="logo-brand" alt="logo" width="" />
-                    <h4 class="text-center"></h4>
-                    <form id="login-form" class="form-signin" action="#" method="POST">
-                        <div class="form-group">
-                            <label class="sr-only" for="itUsuario">Username</label>
-                            <div class="input-group mb-2">
-                                <input type="text" name="usuario" class="form-control has-error" id="usuario" placeholder="Username">
+        <div class="container login">
+
+            <div class="col-sm-6 col-md-12">
+                <div class="card border-info text-center">
+                    <div class="card-header">Sistema de Ventas</div>
+                    <div class="card-body">
+                        <form (novalidate class="form-signin mt-3">
+                            <input formControlName="username" type="text" class="form-control mb-2"
+                                   placeholder="username" name="username" autofocus>
+                            <input  formControlName="password" type="password" class="form-control mb-2"
+                                   placeholder="password" name="password">
+                            <div class="form-group">
+                                <a href="HomeController?accion=articulo" class="btn btn-primary btn-block" type="submit">
+                                    Login <i class="fa fa-sign-in" aria-hidden="true"></i>
+                                </a>
                             </div>
-                            <span class="help-block" id="error"></span>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group mb-2">
-                                <input type="password" name="clave" class="form-control" id="clave" placeholder="Password">
-                            </div>
-                            <span class="help-block" id="error"></span>
-                        </div>
-                        <button type="submit" name="submit" class="btn btn-block btn-outline btn-primary" id="btnLogin">
-                            Ingresar <i class="fa fa-sign-in"></i>
-                        </button>
-                        <a class="btn btn-block btn-outline btn-primary" href="#">
-                            <i class="ion ion-md-arrow-round-back"></i> Regresar al inicio</a>
-                    </form>
+                            
+                        </form>
+                    </div>
                 </div>
-                <div class="footer my-2">Copyright &copy; 2023 &mdash; </div>
             </div>
+
         </div>
     </body>
 </html>

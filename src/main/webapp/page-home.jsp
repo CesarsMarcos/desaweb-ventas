@@ -6,20 +6,21 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%@include file="head.jsp" %>
         <title>JSP Page</title>
+ 
     </head>
-    <body>
-       
-        
-        <div class="m-4" style="height: 550px">
-            <iframe id="myFrame" style="height: 100%; width: 100%">
-                
-            </iframe>
+    <body class="d-flex h-100 text-center">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <%@include file="navbar.jsp" %>
+            <main class="px-3">
+               
+
+            </main>
+            <%@include file="footer.jsp" %>
         </div>
-        
-        
     </body>
 </html>

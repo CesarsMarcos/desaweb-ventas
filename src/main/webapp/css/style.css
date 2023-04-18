@@ -1,0 +1,80 @@
+/*
+ * Globals
+ */
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Custom default button */
+.btn-light,
+.btn-light:hover,
+.btn-light:focus {
+    color: #333;
+    text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+/*
+ * Base structure
+ */
+
+body {
+    /*text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);*/
+    font-family: 'Titillium Web', sans-serif;
+}
+
+.cover-container {
+    /*max-width: 42em;*/
+    max-width: 100%;
+}
+
+/*
+ * Header
+ */
+
+.bg-blue{
+    background-color: #3680BA !important;
+}
+
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .05);
+    min-height: 60px;
+}
+
+.nav-link {
+    color: #ffffff;
+}
+
+
+.navbar-toggler{
+    font-size: 40px;
+}
+.navbar-toggler:focus{
+    outline: none;
+}
+
+/*
+ * Header
+ */
+
+footer a{
+    color: #ffffff;
+}
+
+footer {
+    padding: 20px;
+}
+
+.login {
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
