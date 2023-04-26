@@ -4,6 +4,7 @@
     Author     : Cesar
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="h-100">
@@ -23,19 +24,15 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Categoría</h5>
                                     <hr>
-                                    <form method="post" action="" class="row g-2">
-                                        <div class="col-md-6">
-                                            <label for="nombres">Nombres</label>
-                                            <input type="text" class="form-control"  placeholder="Nombres" name="nombre">
-                                        </div>
-                                        <div class="col-md-6">
+                                    <form method="post" action="CategoriaController?accion=guardar" class="row g-1">
+                                        <div class="col-md-12">
                                             <label for="nombres">Descripción</label>
                                             <input type="text" class="form-control"  placeholder="Descripción" name="descripcion" >
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Registrar</button>
+                                                <input type="submit" name="accion" value="Registrar" class="btn btn-primary" >
                                                 <a class="btn btn-primary" href="index.html">Regresar al inicio</a>
                                             </div>
                                         </div>
@@ -49,27 +46,27 @@
                                             <thead>
                                                 <tr>
                                                     <th scope="col">Id</th>
-                                                    <th scope="col">Cetegoría</th>
                                                     <th scope="col">Descripción</th>
+                                                     <th scope="col">Estado</th>
                                                     <th scope="col">Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Calientes</td>
-                                                    <td>Calientes</td>
-                                                    <td>
-                                                        <a href="" type="button"
-                                                           class="btn btn-info btn-sm enLinea btn-xs"><i
-                                                                class="ion ion-md-create"></i></a>
-                                                        <a href="" type="button"
-                                                           class="btn btn-danger btn-sm enLinea btn-xs"><i
-                                                                class="ion ion-md-trash"></i></a>
-                                                    </td>
-                                                </tr>
-
+                                                <c:forEach items="${categorias}" var="cate" >
+                                                    <tr>
+                                                        <td>${cate.getIdCategoria()}</td>
+                                                        <td>${cate.getDescripcion()}</td>
+                                                        <td>${cate.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
+                                                        <td>
+                                                            <a href="CategoriaController?accion=modificar&id=${cate.getIdCategoria()}" type="button"
+                                                               class="btn btn-info btn-sm  btn-xs"><i
+                                                                    class="ion ion-md-create"></i></a>
+                                                            <a href="CategoriaController?accion=eliminar&id=${cate.getIdCategoria()}" type="button"
+                                                               class="btn btn-danger btn-sm  btn-xs"><i
+                                                                    class="ion ion-md-trash"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                </c:forEach>
                                             </tbody>
                                         </table>
                                     </div>

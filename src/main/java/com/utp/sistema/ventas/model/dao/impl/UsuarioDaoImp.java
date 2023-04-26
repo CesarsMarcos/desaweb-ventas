@@ -30,9 +30,9 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
             pst.setString(2, usuario.getNombres());
             pst.setString(3, usuario.getApellidos());
             pst.setString(4, usuario.getTipo_documento());
-            pst.setInt(5, usuario.getNum_documento());
+            pst.setString(5, usuario.getNum_documento());
             pst.setString(6, usuario.getDireccion());
-            pst.setInt(7, usuario.getTelefono());
+            pst.setString(7, usuario.getTelefono());
             pst.setString(8, usuario.getEmail());
             pst.setString(9, usuario.getPassword());
             pst.setInt(10, usuario.getEstado());
@@ -61,9 +61,9 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
                 usuario.setNombres(rs.getString(3));
                 usuario.setApellidos(rs.getString(4));
                 usuario.setTipo_documento(rs.getString(5));
-                usuario.setNum_documento(rs.getInt(6));
+                usuario.setNum_documento(rs.getString(6));
                 usuario.setDireccion(rs.getString(7));
-                usuario.setTelefono(rs.getInt(8));
+                usuario.setTelefono(rs.getString(8));
                 usuario.setEmail(rs.getString(9));
                 usuario.setPassword(rs.getString(10));
                 usuario.setEstado(rs.getByte(11));
@@ -96,9 +96,9 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
                 usuario.setNombres(rs.getString(3));
                 usuario.setApellidos(rs.getString(4));
                 usuario.setTipo_documento(rs.getString(5));
-                usuario.setNum_documento(rs.getInt(6));
+                usuario.setNum_documento(rs.getString(6));
                 usuario.setDireccion(rs.getString(7));
-                usuario.setTelefono(rs.getInt(8));
+                usuario.setTelefono(rs.getString(8));
                 usuario.setEmail(rs.getString(9));
                 usuario.setPassword(rs.getString(10));
                 usuario.setEstado(rs.getByte(11));
@@ -125,9 +125,9 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
             pst.setString(2, usuario.getNombres());
             pst.setString(3, usuario.getApellidos());
             pst.setString(4, usuario.getTipo_documento());
-            pst.setInt(5, usuario.getNum_documento());
+            pst.setString(5, usuario.getNum_documento());
             pst.setString(6, usuario.getDireccion());
-            pst.setInt(7, usuario.getTelefono());
+            pst.setString(7, usuario.getTelefono());
             pst.setString(8, usuario.getEmail());
             pst.setString(9, usuario.getPassword());
             pst.setInt(10, usuario.getEstado());

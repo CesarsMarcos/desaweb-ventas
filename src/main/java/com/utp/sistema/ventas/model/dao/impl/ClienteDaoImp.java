@@ -30,9 +30,9 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
             pst.setString(2, cliente.getNombres());
             pst.setString(3, cliente.getApellidos());
             pst.setString(4, cliente.getTipo_documento());
-            pst.setInt(5, cliente.getNum_documento());
+            pst.setString(5, cliente.getNum_documento());
             pst.setString(6, cliente.getDireccion());
-            pst.setInt(7, cliente.getTelefono());
+            pst.setString(7, cliente.getTelefono());
             pst.setString(8, cliente.getEmail());
 
             pst.executeUpdate();
@@ -59,9 +59,9 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
                 cliente.setNombres(rs.getString(3));
                 cliente.setApellidos(rs.getString(4));
                 cliente.setTipo_documento(rs.getString(5));
-                cliente.setNum_documento(rs.getInt(6));
+                cliente.setNum_documento(rs.getString(6));
                 cliente.setDireccion(rs.getString(7));
-                cliente.setTelefono(rs.getInt(8));
+                cliente.setTelefono(rs.getString(8));
                 cliente.setEmail(rs.getString(9));
             } else {
                 System.out.println("No se encontró Cliente con el idcliente = " + idCliente);
@@ -93,9 +93,9 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
                 cliente.setNombres(rs.getString(3));
                 cliente.setApellidos(rs.getString(4));
                 cliente.setTipo_documento(rs.getString(5));
-                cliente.setNum_documento(rs.getInt(6));
+                cliente.setNum_documento(rs.getString(6));
                 cliente.setDireccion(rs.getString(7));
-                cliente.setTelefono(rs.getInt(8));
+                cliente.setTelefono(rs.getString(8));
                 cliente.setEmail(rs.getString(9));
 
                 clientes.add(cliente);
@@ -123,9 +123,9 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
             pst.setString(2, cliente.getNombres());
             pst.setString(3, cliente.getApellidos());
             pst.setString(4, cliente.getTipo_documento());
-            pst.setInt(5, cliente.getNum_documento());
+            pst.setString(5, cliente.getNum_documento());
             pst.setString(6, cliente.getDireccion());
-            pst.setInt(7, cliente.getTelefono());
+            pst.setString(7, cliente.getTelefono());
             pst.setString(8, cliente.getEmail());
 
             pst.setInt(9, cliente.getIdCliente());

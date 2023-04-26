@@ -87,10 +87,13 @@ public class CategoriaDaoImp extends DataBase implements CategoriaDao {
             pst.close();
             con.close();
             System.out.println("SUCCESS TO FINDALL - findAll()");
+             
         } catch (SQLException e) {
             System.out.println("ERROR TO FINDALL - findAll()");
             System.out.println(e);
         }
+        
+        System.out.println("SUCCESS TO FINDALL - findAll() " +categorias.size());
         return categorias;
     }
 

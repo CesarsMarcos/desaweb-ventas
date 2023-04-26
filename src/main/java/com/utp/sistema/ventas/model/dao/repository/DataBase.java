@@ -12,7 +12,7 @@ public class DataBase {
 /* DATOS PARA LA CONEXION */
   private final String bd = "sys_venta";
   private final String username = "root";
-  private final String password = "123456";
+  private final String password = "root";
   private final String url = "jdbc:mysql://localhost/"+bd+"?characterEncoding=utf8";
   private Connection conn = null;
 

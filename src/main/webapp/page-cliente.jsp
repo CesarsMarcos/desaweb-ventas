@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="head.jsp" %>
-        <title>Usuarios</title>
+        <title>Clientes</title>
     </head>
     <body class="d-flex h-100">
         <div class="cover-container d-flex w-100 h-100  mx-auto flex-column">
@@ -21,9 +21,9 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col col-sm-5">
-                                    <h5 class="mt-4">Registro de Usuarios</h5>
+                                    <h5 class="mt-4">Registro de Clientes</h5>
                                     <hr>
-                                    <form method="post" action="UsuarioController?accion=guardar" class="row g-2">
+                                    <form method="post" action="ClienteController?accion=guardar" class="row g-2">
                                         <div class="col-md-6">
                                             <label for="nombres">Nombres</label>
                                             <input type="text" class="form-control"  placeholder="Nombres" name="nombres">
@@ -44,25 +44,21 @@
                                             <label for="nombres">Nro. Documento </label>
                                             <input type="text" name="numDocumento" id="numDocumento" class="form-control">
                                         </div>
-                                         <div class="col-6">
-                                            <label for="nombres">Rol </label>
-                                            <select class="form-control"   name="rol">
+                                        <div class="col-6">
+                                            <label for="nombres">Tipo Cliente </label>
+                                            <select class="form-control"   name="tipCliente">
                                                 <option value="">--Selecciona--</option>
-                                                <c:forEach items="${roles}" var="r" >
-                                                <option value="${r.getIdRol()}">${r.getNombre()}</option>
-                                                </c:forEach>
+                                                <option value="Natural">Natural</option>
+                                                <option value="Juridico">Juridico</option>
                                             </select>
                                         </div>
-                                        <div class="col-6">
-                                            <label for="nombres">Password</label>
-                                            <input type="password" name="password" id="password" class="form-control">
-                                        </div>
+
                                         <div class="col-md-6">
                                             <label for="nombres">Telefono</label>
                                             <input type="text" name="telefono" id="telefono" class="form-control">
                                         </div>
 
-                                        <div class="col-6">
+                                        <div class="col-12">
                                             <label for="nombres">Email</label>
                                             <input type="email" name="email" id="email" class="form-control">
                                         </div>
@@ -70,7 +66,7 @@
                                             <label for="nombres">Dirección</label>
                                             <input type="text" name="direccion" id="direccion" class="form-control">
                                         </div>
-                                        
+
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-primary">Registrar</button>
@@ -80,13 +76,13 @@
                                     </form>
                                 </div>
                                 <div class="col col-sm-7">
-                                    <h5 class="mt-4">Usuarios</h5>
+                                    <h5 class="mt-4">Clientes</h5>
                                     <hr>
                                     <table class="table">
                                         <thead>
                                             <tr>
                                                 <th scope="col">Id</th>
-                                                <th scope="col">Rol</th>
+                                                <th scope="col">Tipo Cliente</th>
                                                 <th scope="col">Nombres</th>
                                                 <th scope="col">Tipo Doc.</th>
                                                 <th scope="col">Num Documento</th>
@@ -96,20 +92,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${usuarios}" var="u" >
+                                            <c:forEach items="${clientes}" var="c" >
                                                 <tr>
-                                                    <td>${u.getIdUsuario()}</td>
-                                                    <td>${u.getIdRol()}</td>
-                                                    <td>${u.getNombres()} ${u.getApellidos()} </td>
-                                                    <td>${u.getTipo_documento()}</td>
-                                                    <td>${u.getNum_documento()}</td>
-                                                    <td>${u.getTelefono()}</td>
-                                                    <td>${u.getEmail()}</td>
+                                                    <td>${c.getIdCliente()}</td>
+                                                    <td>${c.getTipo_cliente()}</td>
+                                                    <td>${c.getNombres()} ${u.getApellidos()} </td>
+                                                    <td>${c.getTipo_documento()}</td>
+                                                    <td>${c.getNum_documento()}</td>
+                                                    <td>${c.getTelefono()}</td>
+                                                    <td>${c.getEmail()}</td>
                                                     <td>
-                                                        <a href="UsuarioController?accion=modificar&id=${u.getIdUsuario()}" type="button"
+                                                        <a href="ClienteController?accion=modificar&id=${c.getIdCliente()}" type="button"
                                                            class="btn btn-info btn-sm enLinea btn-xs"><i
                                                                 class="ion ion-md-create"></i></a>
-                                                        <a href="UsuarioController?accion=eliminar&id=${u.getIdUsuario()}" type="button"
+                                                        <a href="ClienteController?accion=eliminar&id=${c.getIdCliente()}" type="button"
                                                            class="btn btn-danger btn-sm enLinea btn-xs"><i
                                                                 class="ion ion-md-trash"></i></a>
                                                     </td>

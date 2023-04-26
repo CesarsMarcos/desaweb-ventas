@@ -8,9 +8,9 @@ public class Persona {
     private String nombres;
     private String apellidos;
     private String tipo_documento;
-    private int num_documento;
+    private String num_documento;
     private String direccion;
-    private int telefono;
+    private String telefono;
     private String email;
 
     public Persona() {
@@ -40,11 +40,11 @@ public class Persona {
         this.tipo_documento = tipo_documento;
     }
 
-    public int getNum_documento() {
+    public String getNum_documento() {
         return num_documento;
     }
 
-    public void setNum_documento(int num_documento) {
+    public void setNum_documento(String num_documento) {
         this.num_documento = num_documento;
     }
 
@@ -56,11 +56,11 @@ public class Persona {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

@@ -10,13 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="head.jsp" %>
-        <title>JSP Page</title>
- 
+        <title>Pricipal</title>
     </head>
-    <body class="d-flex h-100 text-center">
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <body class="d-flex h-100">
+        <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
             <%@include file="navbar.jsp" %>
-            <main class="px-3">
+            <main class="px-3 mt-5">
                
 
             </main>
