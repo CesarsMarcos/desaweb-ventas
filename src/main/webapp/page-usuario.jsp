@@ -23,58 +23,61 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Usuarios</h5>
                                     <hr>
-                                    <form method="post" action="UsuarioController?accion=guardar" class="row g-2">
+                                    <form method="post"  ${usuario.getIdUsuario() == null ? 'action="UsuarioController?accion=guardar"' : 'action="UsuarioController?accion=modificar"'} class="row g-2">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control" name="id" value="${usuario.getIdUsuario()}">
+                                        </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Nombres</label>
-                                            <input type="text" class="form-control"  placeholder="Nombres" name="nombres">
+                                            <input type="text" class="form-control"  placeholder="Nombres" name="nombres" value="${usuario.getNombres()}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Apellidos</label>
-                                            <input type="text" class="form-control"  placeholder="Apellidos" name="apellidos">
+                                            <input type="text" class="form-control"  placeholder="Apellidos" name="apellidos" value="${usuario.getApellidos()}">
                                         </div>
                                         <div class="col-6">
                                             <label for="nombres">Tipo de Documento </label>
                                             <select class="form-control"   name="tipDocumento">
                                                 <option value="">--Selecciona--</option>
-                                                <option value="DNI">DNI</option>
-                                                <option value="RUC">RUC</option>
+                                                <option value="DNI" ${usuario.getTipo_documento() == 'DNI' ? 'selected' : ''}>DNI</option>
+                                                <option value="RUC" ${usuario.getTipo_documento() == 'RUC' ? 'selected' : ''}>RUC</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Nro. Documento </label>
-                                            <input type="text" name="numDocumento" id="numDocumento" class="form-control">
+                                            <input type="text" name="numDocumento" id="numDocumento" class="form-control" value="${usuario.getNum_documento()}">
                                         </div>
-                                         <div class="col-6">
+                                        <div class="col-6">
                                             <label for="nombres">Rol </label>
                                             <select class="form-control"   name="rol">
                                                 <option value="">--Selecciona--</option>
                                                 <c:forEach items="${roles}" var="r" >
-                                                <option value="${r.getIdRol()}">${r.getNombre()}</option>
+                                                    <option value="${r.getIdRol()}" ${usuario.getIdRol() == r.getIdRol() ? 'selected' : ''}>${r.getNombre()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
                                         <div class="col-6">
                                             <label for="nombres">Password</label>
-                                            <input type="password" name="password" id="password" class="form-control">
+                                            <input type="password" name="password" id="password" class="form-control" >
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Telefono</label>
-                                            <input type="text" name="telefono" id="telefono" class="form-control">
+                                            <input type="text" name="telefono" id="telefono" class="form-control" value="${usuario.getTelefono()}">
                                         </div>
 
                                         <div class="col-6">
                                             <label for="nombres">Email</label>
-                                            <input type="email" name="email" id="email" class="form-control">
+                                            <input type="email" name="email" id="email" class="form-control" value="${usuario.getEmail()}">
                                         </div>
                                         <div class="col-12">
                                             <label for="nombres">Dirección</label>
-                                            <input type="text" name="direccion" id="direccion" class="form-control">
+                                            <input type="text" name="direccion" id="direccion" class="form-control" value="${usuario.getDireccion()}">
                                         </div>
-                                        
+
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Registrar</button>
-                                                <a class="btn btn-primary" href="index.html">Regresar al inicio</a>
+                                                ${usuario.getIdUsuario() == null ? '<button type="submit" class="btn btn-primary">Registrar</button>' : '<button type="submit" class="btn btn-primary">Modificar</button>'}
+                                                ${usuario.getIdUsuario() == null ? '' : '<a class="btn btn-primary"href="UsuarioController?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>
@@ -106,11 +109,11 @@
                                                     <td>${u.getTelefono()}</td>
                                                     <td>${u.getEmail()}</td>
                                                     <td>
-                                                        <a href="UsuarioController?accion=modificar&id=${u.getIdUsuario()}" type="button"
-                                                           class="btn btn-info btn-sm enLinea btn-xs"><i
+                                                        <a href="UsuarioController?accion=obtener&id=${u.getIdUsuario()}" type="button"
+                                                           class="btn btn-info btn-sm  btn-xs"><i
                                                                 class="ion ion-md-create"></i></a>
                                                         <a href="UsuarioController?accion=eliminar&id=${u.getIdUsuario()}" type="button"
-                                                           class="btn btn-danger btn-sm enLinea btn-xs"><i
+                                                           class="btn btn-danger btn-sm  btn-xs"><i
                                                                 class="ion ion-md-trash"></i></a>
                                                     </td>
                                                 </tr>

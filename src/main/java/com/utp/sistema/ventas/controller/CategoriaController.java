@@ -7,6 +7,8 @@ package com.utp.sistema.ventas.controller;
 import com.utp.sistema.ventas.model.Categoria;
 import com.utp.sistema.ventas.model.dao.impl.CategoriaDaoImp;
 import java.io.IOException;
+import java.sql.SQLOutput;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,41 +22,67 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "CategoriaController", urlPatterns = {"/CategoriaController"})
 public class CategoriaController extends HttpServlet {
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         CategoriaDaoImp categoriaDao = new CategoriaDaoImp();
-
+        Integer id = 0;
+        String descripcion;
+        Categoria categoria;
+        List<Categoria> categorias = new ArrayList<>();
         String accion = request.getParameter("accion");
-
+        
         switch (accion) {
             case "listar":
-                List<Categoria> lista = categoriaDao.findAll();
-                request.setAttribute("categorias", lista);
+                categorias = categoriaDao.findAll();
+                request.setAttribute("categorias", categorias);
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
                 break;
             case "guardar":
-                String descripcion = request.getParameter("descripcion");
-                Categoria categoria = new Categoria();
+                
+                descripcion = request.getParameter("descripcion");
+                
+                categoria = new Categoria();
                 categoria.setDescripcion(descripcion);
-
                 categoriaDao.insert(categoria);
-
+                
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
-
+                
                 break;
-             case "eliminar":
-                Integer id = Integer.parseInt(request.getParameter("id"));
+            case "modificar":
+                id = Integer.parseInt(request.getParameter("id"));
+                descripcion = request.getParameter("descripcion");
+                categoria = new Categoria();
+                categoria.setDescripcion(descripcion);
+                categoria.setIdCategoria(id);
+                categoriaDao.update(categoria);
+                
+                request.setAttribute("categorias", categoriaDao.findAll());
+                request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
+                
+                break;
+            case "eliminar":
+                id = Integer.parseInt(request.getParameter("id"));
                 categoriaDao.delete(id);
-
+                
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
-
                 break;
+            
+            case "obtener":
+                id = Integer.parseInt(request.getParameter("id"));
+                categoria = categoriaDao.find(id);
+                categorias = categoriaDao.findAll();
+                
+                request.setAttribute("categoria", categoria);
+                request.setAttribute("categorias", categorias);
+                request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
+                break;
+            
         }
-
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

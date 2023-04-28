@@ -30,22 +30,34 @@ public class UsuarioController extends HttpServlet {
         RolDaoImp rolDao = new RolDaoImp();
         String accion = request.getParameter("accion");
 
+        Integer id;
+        String nombres;
+        String apellidos;
+        Integer idRol;
+        String tipDocumento;
+        String numDocumento;
+        String password;
+        String telefono;
+        String email;
+        String direccion;
+
         switch (accion) {
             case "listar":
                 request.setAttribute("usuarios", usuarioDao.findAll());
                 request.setAttribute("roles", rolDao.findAll());
                 request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
                 break;
+
             case "guardar":
-                String nombres = request.getParameter("nombres");
-                String apellidos = request.getParameter("apellidos");
-                Integer idRol = Integer.parseInt(request.getParameter("rol"));
-                String tipDocumento = request.getParameter("tipDocumento");
-                String numDocumento = request.getParameter("numDocumento");
-                String password = request.getParameter("password");
-                String telefono = request.getParameter("telefono");
-                String email = request.getParameter("email");
-                String direccion = request.getParameter("direccion");
+                nombres = request.getParameter("nombres");
+                apellidos = request.getParameter("apellidos");
+                idRol = Integer.parseInt(request.getParameter("rol"));
+                tipDocumento = request.getParameter("tipDocumento");
+                numDocumento = request.getParameter("numDocumento");
+                password = request.getParameter("password");
+                telefono = request.getParameter("telefono");
+                email = request.getParameter("email");
+                direccion = request.getParameter("direccion");
 
                 Usuario usuario = new Usuario();
                 usuario.setNombres(nombres);
@@ -64,16 +76,58 @@ public class UsuarioController extends HttpServlet {
                 request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
 
                 break;
-                
-               case "eliminar":
-                Integer id = Integer.parseInt(request.getParameter("id"));
+
+            case "modificar":
+                id = Integer.parseInt(request.getParameter("id"));
+                nombres = request.getParameter("nombres");
+                apellidos = request.getParameter("apellidos");
+                idRol = Integer.parseInt(request.getParameter("rol"));
+                tipDocumento = request.getParameter("tipDocumento");
+                numDocumento = request.getParameter("numDocumento");
+                password = request.getParameter("password");
+                telefono = request.getParameter("telefono");
+                email = request.getParameter("email");
+                direccion = request.getParameter("direccion");
+
+                usuario = new Usuario();
+                usuario.setIdUsuario(id);
+                usuario.setNombres(nombres);
+                usuario.setApellidos(apellidos);
+                usuario.setTipo_documento(tipDocumento);
+                usuario.setNum_documento(numDocumento);
+                usuario.setIdRol(idRol);
+                usuario.setPassword(password);
+                usuario.setDireccion(direccion);
+                usuario.setTelefono(telefono);
+                usuario.setEmail(email);
+
+                usuarioDao.update(usuario);
+
+                request.setAttribute("usuarios", usuarioDao.findAll());
+                request.setAttribute("roles", rolDao.findAll());
+                request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
+
+                break;
+
+            case "obtener":
+                id = Integer.parseInt(request.getParameter("id"));
+
+                request.setAttribute("roles", rolDao.findAll());
+                request.setAttribute("usuario", usuarioDao.find(id));
+                request.setAttribute("usuarios", usuarioDao.findAll());
+                request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
+
+                break;
+
+            case "eliminar":
+                id = Integer.parseInt(request.getParameter("id"));
                 usuarioDao.delete(id);
 
                 request.setAttribute("usuarios", usuarioDao.findAll());
                 request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
 
-                break;   
-                
+                break;
+
         }
 
     }

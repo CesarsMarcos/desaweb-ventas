@@ -24,27 +24,37 @@ public class ClienteController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Integer id;
+        String nombres;
+        String apellidos;
+        String tipCliente;
+        String tipDocumento;
+        String numDocumento;
+        String telefono;
+        String email;
+        String direccion;
+
+        Cliente cliente = new Cliente();
+
         ClienteDaoImp clienteDao = new ClienteDaoImp();
 
         String accion = request.getParameter("accion");
 
         switch (accion) {
             case "listar":
-                List<Cliente> lista = clienteDao.findAll();
-                request.setAttribute("clientes", lista);
+                request.setAttribute("clientes", clienteDao.findAll());
                 request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
                 break;
-              case "guardar":
-                String nombres = request.getParameter("nombres");
-                String apellidos = request.getParameter("apellidos");
-                String tipCliente  = request.getParameter("tipCliente");
-                String tipDocumento = request.getParameter("tipDocumento");
-                String numDocumento = request.getParameter("numDocumento");
-                String telefono = request.getParameter("telefono");
-                String email = request.getParameter("email");
-                String direccion = request.getParameter("direccion");
+            case "guardar":
+                nombres = request.getParameter("nombres");
+                apellidos = request.getParameter("apellidos");
+                tipCliente = request.getParameter("tipCliente");
+                tipDocumento = request.getParameter("tipDocumento");
+                numDocumento = request.getParameter("numDocumento");
+                telefono = request.getParameter("telefono");
+                email = request.getParameter("email");
+                direccion = request.getParameter("direccion");
 
-                Cliente cliente = new Cliente();
                 cliente.setNombres(nombres);
                 cliente.setApellidos(apellidos);
                 cliente.setTipo_documento(tipDocumento);
@@ -59,9 +69,47 @@ public class ClienteController extends HttpServlet {
                 request.setAttribute("clientes", clienteDao.findAll());
                 request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
 
-                break;    
+                break;
+
+            case "modificar":
+                id = Integer.parseInt(request.getParameter("id"));
+                nombres = request.getParameter("nombres");
+                apellidos = request.getParameter("apellidos");
+                tipCliente = request.getParameter("tipCliente");
+                tipDocumento = request.getParameter("tipDocumento");
+                numDocumento = request.getParameter("numDocumento");
+                telefono = request.getParameter("telefono");
+                email = request.getParameter("email");
+                direccion = request.getParameter("direccion");
+                
+                cliente.setIdCliente(id);
+                cliente.setNombres(nombres);
+                cliente.setApellidos(apellidos);
+                cliente.setTipo_documento(tipDocumento);
+                cliente.setNum_documento(numDocumento);
+                cliente.setTipo_cliente(tipCliente);
+                cliente.setDireccion(direccion);
+                cliente.setTelefono(telefono);
+                cliente.setEmail(email);
+
+                clienteDao.update(cliente);
+
+                request.setAttribute("clientes", clienteDao.findAll());
+                request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
+
+                break;
+
+            case "obtener":
+                id = Integer.parseInt(request.getParameter("id"));
+
+                request.setAttribute("cliente", clienteDao.find(id));
+                request.setAttribute("clientes", clienteDao.findAll());
+                request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
+
+                break;
+
             case "eliminar":
-                Integer id = Integer.parseInt(request.getParameter("id"));
+                id = Integer.parseInt(request.getParameter("id"));
                 clienteDao.delete(id);
 
                 request.setAttribute("clientes", clienteDao.findAll());

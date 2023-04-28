@@ -25,6 +25,11 @@ public class ArticuloController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Integer id;
+        String descripcion;
+        Integer idCategoria, stock;
+        Double precio;
+        Articulo articulo = new Articulo();
         ArticuloDaoImp articuloDao = new ArticuloDaoImp();
         CategoriaDaoImp categoriaDao = new CategoriaDaoImp();
 
@@ -37,12 +42,11 @@ public class ArticuloController extends HttpServlet {
                 request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
                 break;
             case "guardar":
-                String descripcion = request.getParameter("descripcion");
-                Integer idCategoria = Integer.parseInt(request.getParameter("categoria"));
-                Integer stock = Integer.parseInt(request.getParameter("stock"));
-                Double precio = Double.parseDouble(request.getParameter("precioVenta"));
+                descripcion = request.getParameter("descripcion");
+                idCategoria = Integer.parseInt(request.getParameter("categoria"));
+                stock = Integer.parseInt(request.getParameter("stock"));
+                precio = Double.parseDouble(request.getParameter("precioVenta"));
 
-                Articulo articulo = new Articulo();
                 articulo.setDescripcion(descripcion);
                 articulo.setIdCategoria(idCategoria);
                 articulo.setStock(stock);
@@ -52,8 +56,37 @@ public class ArticuloController extends HttpServlet {
                 request.setAttribute("articulos", articuloDao.findAll());
                 request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
                 break;
+
+            case "modificar":
+                id = Integer.parseInt(request.getParameter("id"));
+                descripcion = request.getParameter("descripcion");
+                idCategoria = Integer.parseInt(request.getParameter("categoria"));
+                stock = Integer.parseInt(request.getParameter("stock"));
+                precio = Double.parseDouble(request.getParameter("precioVenta"));
+
+                articulo.setIdArticulo(id);
+                articulo.setDescripcion(descripcion);
+                articulo.setIdCategoria(idCategoria);
+                articulo.setStock(stock);
+                articulo.setPrecio_venta(precio);
+                articuloDao.update(articulo);
+
+                request.setAttribute("articulos", articuloDao.findAll());
+                request.setAttribute("categorias", categoriaDao.findAll());
+                request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                break;
+
+            case "obtener":
+                id = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("categorias", categoriaDao.findAll());
+                request.setAttribute("articulo", articuloDao.find(id));
+                request.setAttribute("articulos", articuloDao.findAll());
+                request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+
+                break;
+
             case "eliminar":
-                Integer id = Integer.parseInt(request.getParameter("id"));
+                id = Integer.parseInt(request.getParameter("id"));
                 articuloDao.delete(id);
 
                 request.setAttribute("articulos", articuloDao.findAll());

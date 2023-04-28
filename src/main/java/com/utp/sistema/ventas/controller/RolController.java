@@ -7,6 +7,7 @@ package com.utp.sistema.ventas.controller;
 import com.utp.sistema.ventas.model.Rol;
 import com.utp.sistema.ventas.model.dao.impl.RolDaoImp;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,35 +21,58 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RolController", urlPatterns = {"/RolController"})
 public class RolController extends HttpServlet {
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        Integer id;
+        String nombre;
+        String descripcion;
         RolDaoImp rolDao = new RolDaoImp();
-        
+        List<Rol> lista = new ArrayList<>();
+        Rol rol = new Rol();
         String accion = request.getParameter("accion");
-        
+
         switch (accion) {
             case "listar":
-                List<Rol> lista = rolDao.findAll();
+                lista = rolDao.findAll();
                 request.setAttribute("roles", lista);
                 request.getRequestDispatcher("page-rol.jsp").forward(request, response);
                 break;
             case "guardar":
-                String nombre = request.getParameter("nombre");
-                String descripcion = request.getParameter("descripcion");
-                Rol rol = new Rol();
+                nombre = request.getParameter("nombre");
+                descripcion = request.getParameter("descripcion");
                 rol.setNombre(nombre);
                 rol.setDescripcion(descripcion);
-                
+
                 rolDao.insert(rol);
-                
+
                 request.setAttribute("roles", rolDao.findAll());
                 request.getRequestDispatcher("page-rol.jsp").forward(request, response);
-                
+
                 break;
-             case "eliminar":
-                Integer id = Integer.parseInt(request.getParameter("id"));
+            case "modificar":
+                id = Integer.parseInt(request.getParameter("id"));
+                nombre = request.getParameter("nombre");
+                descripcion = request.getParameter("descripcion");
+                rol.setIdRol(id);
+                rol.setNombre(nombre);
+                rol.setDescripcion(descripcion);
+                rolDao.update(rol);
+
+                request.setAttribute("roles", rolDao.findAll());
+                request.getRequestDispatcher("page-rol.jsp").forward(request, response);
+
+                break;
+            case "obtener":
+                id = Integer.parseInt(request.getParameter("id"));
+                request.setAttribute("rol", rolDao.find(id));
+                request.setAttribute("roles", rolDao.findAll());
+                request.getRequestDispatcher("page-rol.jsp").forward(request, response);
+
+                break;
+            case "eliminar":
+                id = Integer.parseInt(request.getParameter("id"));
                 rolDao.delete(id);
 
                 request.setAttribute("roles", rolDao.findAll());

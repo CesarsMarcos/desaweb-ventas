@@ -1,4 +1,4 @@
-<%-- 
+    <%-- 
     Document   : page-usuarios
     Created on : 17 abr. 2023, 21:49:24
     Author     : Cesar
@@ -26,35 +26,37 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Articulos</h5>
                                     <hr>
-                                    <form method="post" action="ArticuloController?accion=guardar" class="row g-2">
+                                    <form method="post" ${articulo.getIdArticulo() == null ? 'action="ArticuloController?accion=guardar"' : 'action="ArticuloController?accion=modificar"'}  class="row g-2">
+                                        <div class="col-md-12">
+                                            <input type="text" name="id" class="form-control" value="${articulo.getIdArticulo()}" >
+                                        </div>
                                         <div class="col-md-12">
                                             <label for="nombres">Descripción</label>
-                                            <input type="text" name="descripcion" class="form-control">
+                                            <input type="text" name="descripcion" class="form-control" value="${articulo.getDescripcion()}" >
                                         </div>
-
                                         <div class="col-md-6">
                                             <label for="nombres">Categoría </label>
                                             <select class="form-control" name="categoria">
                                                 <option value="">--Selecciona--</option>
                                                 <c:forEach items="${categorias}" var="cate" >
-                                                    <option value="${cate.getIdCategoria()}">${cate.getDescripcion()}</option>
+                                                    <option value="${cate.getIdCategoria()}" ${articulo.getIdCategoria()== cate.getIdCategoria()  ? 'selected' : ''} >${cate.getDescripcion()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
-                                     
+
                                         <div class="col-md-6">
                                             <label for="nombres">Stock</label>
-                                            <input type="text" name="stock" class="form-control">
+                                            <input type="text" name="stock" class="form-control" value="${articulo.getStock()}" >
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Precio Venta</label>
-                                            <input type="text" name="precioVenta"  class="form-control">
+                                            <input type="text" name="precioVenta"  class="form-control" value="${articulo.getPrecio_venta()}">
                                         </div>
 
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Registrar</button>
-                                                <a class="btn btn-primary" href="index.html">Regresar al inicio</a>
+                                                ${articulo.getIdArticulo() == null ? '<button type="submit" class="btn btn-primary">Registrar</button>' : '<button type="submit" class="btn btn-primary">Modificar</button>'}
+                                                ${articulo.getIdArticulo() == null ? '' : '<a class="btn btn-primary"href="ArticuloController?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>
@@ -85,11 +87,11 @@
                                                         <td>${a.getStock()}</td>
                                                         <td>${a.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
                                                         <td>
-                                                            <a href="ArticuloController?accion=modificar&id=${a.getIdArticulo()}" 
-                                                               class="btn btn-info btn-sm enLinea btn-xs"><i
+                                                            <a href="ArticuloController?accion=obtener&id=${a.getIdArticulo()}" 
+                                                               class="btn btn-info btn-sm  btn-xs"><i
                                                                     class="ion ion-md-create"></i></a>
                                                             <a href="ArticuloController?accion=eliminar&id=${a.getIdArticulo()}"
-                                                               class="btn btn-danger btn-sm enLinea btn-xs"><i
+                                                               class="btn btn-danger btn-sm  btn-xs"><i
                                                                     class="ion ion-md-trash"></i></a>
                                                         </td>
                                                     </tr>

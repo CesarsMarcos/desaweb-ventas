@@ -23,54 +23,57 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Clientes</h5>
                                     <hr>
-                                    <form method="post" action="ClienteController?accion=guardar" class="row g-2">
+                                    <form method="post" ${cliente.getIdCliente() == null  ? 'action="ClienteController?accion=guardar"':'action="ClienteController?accion=modificar"'}  class="row g-2">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control"  placeholder="Nombres" name="id"  value = "${cliente.getIdCliente()}">
+                                        </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Nombres</label>
-                                            <input type="text" class="form-control"  placeholder="Nombres" name="nombres">
+                                            <input type="text" class="form-control"  placeholder="Nombres" name="nombres" value = "${cliente.getNombres()}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Apellidos</label>
-                                            <input type="text" class="form-control"  placeholder="Apellidos" name="apellidos">
+                                            <input type="text" class="form-control"  placeholder="Apellidos" name="apellidos" value = "${cliente.getApellidos()}">
                                         </div>
                                         <div class="col-6">
                                             <label for="nombres">Tipo de Documento </label>
                                             <select class="form-control"   name="tipDocumento">
                                                 <option value="">--Selecciona--</option>
-                                                <option value="DNI">DNI</option>
-                                                <option value="RUC">RUC</option>
+                                                <option value="DNI" ${cliente.getTipo_documento() == 'DNI' ? 'selected':''}>DNI</option>
+                                                <option value="RUC" ${cliente.getTipo_documento() == 'RUC' ? 'selected':''}>RUC</option>
                                             </select>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Nro. Documento </label>
-                                            <input type="text" name="numDocumento" id="numDocumento" class="form-control">
+                                            <input type="text" name="numDocumento" id="numDocumento" class="form-control" value = "${cliente.getNum_documento()}">
                                         </div>
                                         <div class="col-6">
                                             <label for="nombres">Tipo Cliente </label>
                                             <select class="form-control"   name="tipCliente">
                                                 <option value="">--Selecciona--</option>
-                                                <option value="Natural">Natural</option>
-                                                <option value="Juridico">Juridico</option>
+                                                <option value="Natural" ${cliente.getTipo_cliente() == 'Natural' ? 'selected':''}>Natural</option>
+                                                <option value="Juridico" ${cliente.getTipo_cliente() == 'Juridico' ? 'selected':''}>Juridico</option>
                                             </select>
                                         </div>
 
                                         <div class="col-md-6">
                                             <label for="nombres">Telefono</label>
-                                            <input type="text" name="telefono" id="telefono" class="form-control">
+                                            <input type="text" name="telefono" id="telefono" class="form-control" value = "${cliente.getTelefono()}">
                                         </div>
 
                                         <div class="col-12">
                                             <label for="nombres">Email</label>
-                                            <input type="email" name="email" id="email" class="form-control">
+                                            <input type="email" name="email" id="email" class="form-control"  value = "${cliente.getEmail()}">
                                         </div>
                                         <div class="col-12">
                                             <label for="nombres">Dirección</label>
-                                            <input type="text" name="direccion" id="direccion" class="form-control">
+                                            <input type="text" name="direccion" id="direccion" class="form-control"  value = "${cliente.getDireccion()}">
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <button type="submit" class="btn btn-primary">Registrar</button>
-                                                <a class="btn btn-primary" href="index.html">Regresar al inicio</a>
+                                                ${cliente.getIdCliente() == null  ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
+                                                ${cliente.getIdCliente() == null ? '' : '<a class="btn btn-primary"href="ClienteController?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>
@@ -102,11 +105,11 @@
                                                     <td>${c.getTelefono()}</td>
                                                     <td>${c.getEmail()}</td>
                                                     <td>
-                                                        <a href="ClienteController?accion=modificar&id=${c.getIdCliente()}" type="button"
-                                                           class="btn btn-info btn-sm enLinea btn-xs"><i
+                                                        <a href="ClienteController?accion=obtener&id=${c.getIdCliente()}" type="button"
+                                                           class="btn btn-info btn-sm  btn-xs"><i
                                                                 class="ion ion-md-create"></i></a>
                                                         <a href="ClienteController?accion=eliminar&id=${c.getIdCliente()}" type="button"
-                                                           class="btn btn-danger btn-sm enLinea btn-xs"><i
+                                                           class="btn btn-danger btn-sm  btn-xs"><i
                                                                 class="ion ion-md-trash"></i></a>
                                                     </td>
                                                 </tr>

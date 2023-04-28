@@ -24,16 +24,18 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Categoría</h5>
                                     <hr>
-                                    <form method="post" action="CategoriaController?accion=guardar" class="row g-1">
+                                    <form method="post" ${categoria.getIdCategoria() == null  ? 'action="CategoriaController?accion=guardar"' : 'action="CategoriaController?accion=modificar"'}   class="row g-1">
+                                        <div class="col-md-12">
+                                            <input type="text" class="form-control"  name="id"  value="${categoria.getIdCategoria()}" >
+                                        </div>
                                         <div class="col-md-12">
                                             <label for="nombres">Descripción</label>
-                                            <input type="text" class="form-control"  placeholder="Descripción" name="descripcion" >
+                                            <input type="text" class="form-control"  placeholder="Descripción" name="descripcion" value="${categoria.getDescripcion()}">
                                         </div>
-
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="submit" name="accion" value="Registrar" class="btn btn-primary" >
-                                                <a class="btn btn-primary" href="index.html">Regresar al inicio</a>
+                                               ${categoria.getIdCategoria() == null  ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
+                                               ${categoria.getIdCategoria() == null ? '' : '<a class="btn btn-primary"href="UsuarioController?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>
@@ -47,7 +49,7 @@
                                                 <tr>
                                                     <th scope="col">Id</th>
                                                     <th scope="col">Descripción</th>
-                                                     <th scope="col">Estado</th>
+                                                    <th scope="col">Estado</th>
                                                     <th scope="col">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -58,7 +60,7 @@
                                                         <td>${cate.getDescripcion()}</td>
                                                         <td>${cate.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
                                                         <td>
-                                                            <a href="CategoriaController?accion=modificar&id=${cate.getIdCategoria()}" type="button"
+                                                            <a href="CategoriaController?accion=obtener&id=${cate.getIdCategoria()}" type="button"
                                                                class="btn btn-info btn-sm  btn-xs"><i
                                                                     class="ion ion-md-create"></i></a>
                                                             <a href="CategoriaController?accion=eliminar&id=${cate.getIdCategoria()}" type="button"

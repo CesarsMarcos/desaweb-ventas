@@ -32,7 +32,7 @@
                     <a class="nav-link" href="ClienteController?accion=listar">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="VentaController?accion=listar">Ventas</a>
+                    <a class="nav-link" href="HomeController?menu=principal">Ventas</a>
                 </li>
 
             </ul>
