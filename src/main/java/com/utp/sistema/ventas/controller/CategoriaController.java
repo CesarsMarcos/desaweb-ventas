@@ -20,19 +20,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "CategoriaController", urlPatterns = {"/CategoriaController"})
+@WebServlet(name = "CategoriaController", urlPatterns = {"/categoria"})
 public class CategoriaController extends HttpServlet {
-    
+
+    CategoriaDaoImp categoriaDao = new CategoriaDaoImp();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        CategoriaDaoImp categoriaDao = new CategoriaDaoImp();
+
         Integer id = 0;
         String descripcion;
         Categoria categoria;
         List<Categoria> categorias = new ArrayList<>();
         String accion = request.getParameter("accion");
-        
+
         switch (accion) {
             case "listar":
                 categorias = categoriaDao.findAll();
@@ -40,16 +41,16 @@ public class CategoriaController extends HttpServlet {
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
                 break;
             case "guardar":
-                
+
                 descripcion = request.getParameter("descripcion");
-                
+
                 categoria = new Categoria();
                 categoria.setDescripcion(descripcion);
                 categoriaDao.insert(categoria);
-                
+
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
-                
+
                 break;
             case "modificar":
                 id = Integer.parseInt(request.getParameter("id"));
@@ -58,67 +59,45 @@ public class CategoriaController extends HttpServlet {
                 categoria.setDescripcion(descripcion);
                 categoria.setIdCategoria(id);
                 categoriaDao.update(categoria);
-                
+
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
-                
+
                 break;
             case "eliminar":
                 id = Integer.parseInt(request.getParameter("id"));
                 categoriaDao.delete(id);
-                
+
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
                 break;
-            
+
             case "obtener":
                 id = Integer.parseInt(request.getParameter("id"));
                 categoria = categoriaDao.find(id);
                 categorias = categoriaDao.findAll();
-                
+
                 request.setAttribute("categoria", categoria);
                 request.setAttribute("categorias", categorias);
                 request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
                 break;
-            
+
         }
-        
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -33,7 +33,9 @@ public class LoginDaoImp extends DataBase implements LoginDao{
                 usuario.setIdUsuario(rs.getInt(1));
                 usuario.setIdRol(rs.getInt(2));
                 usuario.setNombres(rs.getString(3));                                                        
-                JOptionPane.showMessageDialog(null, "Bienvenido al Sistema " + rs.getString(3) + " - " + getNombreRol(rs.getInt(2)));
+               //JOptionPane.showMessageDialog(null, "Bienvenido al Sistema " + rs.getString(3) + " - " + getNombreRol(rs.getInt(2)));
+               
+                System.out.println("Usuario ingresado " + usuario.getNombres());   
             } else {
                 System.out.println("No se encontró Usuario con el DNI y PASSWORD ingresado");                
             }

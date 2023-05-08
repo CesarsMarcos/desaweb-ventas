@@ -4,6 +4,7 @@
     Author     : Cesar
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="h-100">
@@ -18,99 +19,133 @@
             <%@include file="navbar.jsp" %>
             <main class="px-3 mt-5">
                 <div class="container">
-                    <div class="panel panel-primary mt-3">
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col col-sm-5">
-                                    <form class="row g-2">
-                                        <div class="col-12">
-                                            <h5> Cliente</h5>      
+                    <div class="panel panel-primary ">
+                        <div class="panel-body ">
+                            <form action="venta" method="post">
+                                <div class="row">
+                                    <div class="col-sm-8">
+                                        <div class="row g-3 ">
+                                            <div class="col-sm-2 text-center">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" name="idProd" placeholder="id de producto" value="${articulo.getIdArticulo()}" >    
+                                                    <button type="submit" name="accion" value="BuscarProducto"  class="btn btn-outline-success"  ><i class="fa fa-search"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control"  placeholder="Descripción" value="${articulo.getDescripcion()}" >
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <input type="text" class="form-control"  placeholder="Precio" value="${articulo.getPrecio_venta()}" >
+                                            </div>
+                                             <div class="col-sm-2">
+                                                <input type="number" class="form-control"  placeholder="Cantidad" name="cantidad" >
+                                            </div>
+                                            <div class="col-sm-2">
+                                                <button type="submit" name="accion" value="AgregarLista" class="btn btn-success"><i class="fa fa-cart-plus"></i></button>
+                                            </div>
+                                           
                                         </div>
                                         <hr>
-                                        <div class="col-md-6">
-                                            <div class="input-group mb-3">
-                                                <input type="text" class="form-control" placeholder="id de cliente">
-                                                <button class="btn btn-outline-success" type="button" id="button-addon2">Buscar</button>
+                                        <div class="col-md-12">
+                                            <div class="table-responsive">
+                                                <table class="table align-middle">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Id</th>
+                                                            <th scope="col">Descripción</th>
+                                                            <th scope="col">Cantidad</th>
+                                                            <th scope="col">Precio Venta</th>
+                                                            <th scope="col">Sub Total</th>
+                                                            <th scope="col"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <c:forEach items="${ventas}" var="venta" >
+                                                        <tr>
+                                                            <td>${venta.getId()}</td>
+                                                            <td>${venta.getDescripcion()}</td>
+                                                            <td>${venta.getCantidad()}</td>
+                                                            <td>${venta.getPrecioVenta()}</td>
+                                                            <td>${venta.getSubTotal()}</td>
+                                                            <td>
+                                                                <a href="" type="button"
+                                                                   class="btn btn-warning btn-sm  btn-xs"><i
+                                                                        class="fa fa-pencil"></i></a>
+                                                                         <a href="" type="button"
+                                                                   class="btn btn-danger btn-sm  btn-xs"><i
+                                                                        class="ion ion-md-trash"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </c:forEach>
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control"  placeholder="Nombre">
-                                        </div>
-
-                                        <div class="col-6">
-                                            <input type="text" class="form-control"  placeholder="Nombre">
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="text" class="form-control"  placeholder="DNI">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control"  placeholder="Apellidos">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control"  placeholder="Teléfono">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control"  placeholder="Dirección">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control"  placeholder="Email">
-                                        </div>
-                                        <div class="col-12">
-                                            <h5> Producto</h5>      
-                                        </div>
-                                        <hr>
-                                        <div class="col-md-6">
-                                            <div class="input-group mb-3">
-                                                <input type="text" class="form-control" placeholder="id de producto">
-                                                <button class="btn btn-outline-success" type="button" id="button-addon2">Buscar</button>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="text" class="form-control"  placeholder="Descripción">
-                                        </div>
-
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary">Agregar</button>
-                                        </div>
-                                    </form>  
-                                </div>
-                                <div class="col col-sm-7">
-                                    <h5 class="">Categorias</h5>
-                                    <hr>
-                                    <div class="table-responsive">
-                                        <table class="table align-middle">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Id</th>
-                                                    <th scope="col">Cetegoría</th>
-                                                    <th scope="col">Descripción</th>
-                                                    <th scope="col">Acciones</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Calientes</td>
-                                                    <td>Calientes</td>
-                                                    <td>
-                                                        <a href="" type="button"
-                                                           class="btn btn-info btn-sm enLinea btn-xs"><i
-                                                                class="ion ion-md-create"></i></a>
-                                                        <a href="" type="button"
-                                                           class="btn btn-danger btn-sm enLinea btn-xs"><i
-                                                                class="ion ion-md-trash"></i></a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <div class="card border-success mb-3" >
+                                            <div class="card-header  border-success text-center bg-success"> <h3 class="d-inline fw-bold">S/ ${total == null  ? 0.0 : total} </h3></div>
+                                            <div class="card-body">
+                                                <div class="row g-3 center">
+                                                    <div class="col-sm-6">
+                                                        <label class="form-label fw-bold">Documento</label>
+                                                        <select class="form-control"   name="tipDocumento">
+                                                            <option value="">--Selecciona--</option>
+                                                            <option value="DNI" >DNI</option>
+                                                            <option value="RUC" >RUC</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <label  class="form-label fw-bold">Nro. Comprobante</label>
+                                                        <input type="text" class="form-control" name="numSerie" value="${numSerie}"  placeholder="00001">
+                                                    </div>
+                                                    <div class="col-sm-6" >
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" placeholder="DOI de cliente"  name="idCli" value="${cliente.getIdCliente()}">
+                                                            <button class="btn btn-outline-success" type="submit"  name="accion"  value="BuscarCliente"><i class="fa fa-search"></i></button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <input type="text" class="form-control"  placeholder="Nombres" value="${cliente.getNombres()} ${cliente.getApellidos()}">
+                                                    </div>
+                                                    <hr>
+                                                    <div class="col-sm-6 ">
+                                                        <p class="d-inline">SUB TOTAL</p>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <p class="d-inline">S/ ${subTotal  == null  ? 0.0 : subTotal}</p>
+                                                    </div>
+
+                                                    <div class="col-sm-6">
+                                                        <p class="d-inline">IGV</p>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <p class="d-inline">S/ ${igv  == null  ? 0.0 : igv}</p>
+                                                    </div>
+
+                                                    <div class="col-sm">
+                                                        <p class="d-inline">TOTAL</p>
+                                                    </div>
+                                                    <div class="col-sm">
+                                                        <p class="d-inline">S/ ${total == null  ? 0.0 : total}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                           
                                 </div>
-                            </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar Venta </button>
+                                     <button type="submit" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
+                                </div>
+                            </form>
                         </div>
                     </div>
+
+
                 </div>
             </main>
+
             <%@include file="footer.jsp" %>
         </div>
 

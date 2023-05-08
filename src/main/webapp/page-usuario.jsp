@@ -23,9 +23,9 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Usuarios</h5>
                                     <hr>
-                                    <form method="post"  ${usuario.getIdUsuario() == null ? 'action="UsuarioController?accion=guardar"' : 'action="UsuarioController?accion=modificar"'} class="row g-2">
+                                    <form method="post"  ${usuario.getIdUsuario() == null ? 'action="usuario?accion=guardar"' : 'action="usuario?accion=modificar"'} class="row g-2">
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control" name="id" value="${usuario.getIdUsuario()}">
+                                            <input type="hidden" class="form-control" name="id" value="${usuario.getIdUsuario()}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Nombres</label>
@@ -77,7 +77,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 ${usuario.getIdUsuario() == null ? '<button type="submit" class="btn btn-primary">Registrar</button>' : '<button type="submit" class="btn btn-primary">Modificar</button>'}
-                                                ${usuario.getIdUsuario() == null ? '' : '<a class="btn btn-primary"href="UsuarioController?accion=listar">Cancelar</a>'} 
+                                                ${usuario.getIdUsuario() == null ? '' : '<a class="btn btn-primary" href="usuario?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>
@@ -109,10 +109,10 @@
                                                     <td>${u.getTelefono()}</td>
                                                     <td>${u.getEmail()}</td>
                                                     <td>
-                                                        <a href="UsuarioController?accion=obtener&id=${u.getIdUsuario()}" type="button"
+                                                        <a href="usuario?accion=obtener&id=${u.getIdUsuario()}" type="button"
                                                            class="btn btn-info btn-sm  btn-xs"><i
                                                                 class="ion ion-md-create"></i></a>
-                                                        <a href="UsuarioController?accion=eliminar&id=${u.getIdUsuario()}" type="button"
+                                                        <a href="usuario?accion=eliminar&id=${u.getIdUsuario()}" type="button"
                                                            class="btn btn-danger btn-sm  btn-xs"><i
                                                                 class="ion ion-md-trash"></i></a>
                                                     </td>

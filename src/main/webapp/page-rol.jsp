@@ -23,9 +23,9 @@
                             <div class="row">
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Rol</h5>
-                                    <form method="post"  ${rol.getIdRol() == null ? 'action="RolController?accion=guardar"': 'action="RolController?accion=modificar"'} class="row g-2">
+                                    <form method="post"  ${rol.getIdRol() == null ? 'action="rol?accion=guardar"': 'action="rol?accion=modificar"'} class="row g-2">
                                         <div class="col-md-12">
-                                            <input type="text" name="id" id="nombre" class="form-control" value="${rol.getIdRol()}">
+                                            <input type="hidden" name="id" id="nombre" class="form-control" value="${rol.getIdRol()}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Nombre </label>
@@ -64,10 +64,10 @@
                                                     <td>${r.getDescripcion()}</td>
                                                     <td>${r.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
                                                     <td>
-                                                        <a href="RolController?accion=obtener&id=${r.getIdRol()}" type="button"
+                                                        <a href="rol?accion=obtener&id=${r.getIdRol()}" type="button"
                                                            class="btn btn-info btn-sm  btn-xs"><i
                                                                 class="ion ion-md-create"></i></a>
-                                                        <a href="RolController?accion=eliminar&id=${r.getIdRol()}" type="button"
+                                                        <a href="rol?accion=eliminar&id=${r.getIdRol()}" type="button"
                                                            class="btn btn-danger btn-sm  btn-xs"><i
                                                                 class="ion ion-md-trash"></i></a>
                                                     </td>

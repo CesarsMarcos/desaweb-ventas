@@ -4,55 +4,39 @@
  */
 package com.utp.sistema.ventas.controller;
 
-import com.utp.sistema.ventas.model.Usuario;
-import com.utp.sistema.ventas.model.dao.impl.LoginDaoImp;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Cesar
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
-
-    LoginDaoImp loginDao = new LoginDaoImp();
+@WebServlet(name = "/admin/LogoutController", urlPatterns = {"/logout"})
+public class LogoutController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getSession(false).invalidate();
+
+        request.setAttribute("message", "Cerraste Sessión de forma correcta");
+        request.getRequestDispatcher("page-login.jsp").forward(request, response);
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
-
-        HttpSession session = request.getSession();
-
-        String nombre = request.getParameter("username");
-        String password = request.getParameter("password");
-
-        Usuario usuario = loginDao.validateLogin(nombre, password);
-
-        if (nombre == null || password == null || usuario == null) {
-            request.setAttribute("message", "El nombre de usuario o la contraseña son incorrectos");
-            request.getRequestDispatcher("page-login.jsp").forward(request, response);
-        } else {
-            session.setAttribute("username", usuario.getNombres());
-            request.getRequestDispatcher("home?menu=principal").forward(request, response);
-        }
-
+        processRequest(request, response);
     }
 
     @Override

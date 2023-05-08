@@ -19,18 +19,16 @@
                 <div class="card border-info text-center">
                     <div class="card-header">Sistema de Ventas </div>
                     <div class="card-body">
-                        <form (novalidate class="form-signin mt-3">
+                         <form action="login" method="post">
                             <img src="images/123282.png" alt="" class="figure-img img-fluid rounded" style="width: 150px">
-                            <input formControlName="username" type="text" class="form-control mb-2"
+                            <input type="text" class="form-control mb-2"
                                    placeholder="username" name="username" autofocus>
-                            <input  formControlName="password" type="password" class="form-control mb-2"
-                                   placeholder="password" name="password">
+                            <input   type="password" class="form-control mb-2"
+                                     placeholder="password" name="password">
                             <div class="form-group">
-                                <a href="HomeController?menu=principal" class="btn btn-primary btn-block" type="submit">
-                                    Login <i class="fa fa-sign-in" aria-hidden="true"></i>
-                                </a>
+                                <button  class="btn btn-primary btn-block" type="submit">Login</button>
                             </div>
-                            
+                            <span style="color: red">${message}</span>
                         </form>
                     </div>
                 </div>

@@ -12,4 +12,6 @@ crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200&family=Titillium+Web:wght@300;400;600&display=swap" rel="stylesheet">
 <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
 
+<script src="https://use.fontawesome.com/9365300063.js"></script>
+
 <link href="css/style.css" rel="stylesheet" type="text/css"/>

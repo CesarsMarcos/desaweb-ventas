@@ -23,9 +23,9 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Clientes</h5>
                                     <hr>
-                                    <form method="post" ${cliente.getIdCliente() == null  ? 'action="ClienteController?accion=guardar"':'action="ClienteController?accion=modificar"'}  class="row g-2">
+                                    <form method="post" ${cliente.getIdCliente() == null  ? 'action="cliente?accion=guardar"':'action="cliente?accion=modificar"'}  class="row g-2">
                                         <div class="col-md-12">
-                                            <input type="text" class="form-control"  placeholder="Nombres" name="id"  value = "${cliente.getIdCliente()}">
+                                            <input type="hidden" class="form-control"  placeholder="Nombres" name="id"  value = "${cliente.getIdCliente()}">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Nombres</label>
@@ -105,10 +105,10 @@
                                                     <td>${c.getTelefono()}</td>
                                                     <td>${c.getEmail()}</td>
                                                     <td>
-                                                        <a href="ClienteController?accion=obtener&id=${c.getIdCliente()}" type="button"
+                                                        <a href="cliente?accion=obtener&id=${c.getIdCliente()}" type="button"
                                                            class="btn btn-info btn-sm  btn-xs"><i
                                                                 class="ion ion-md-create"></i></a>
-                                                        <a href="ClienteController?accion=eliminar&id=${c.getIdCliente()}" type="button"
+                                                        <a href="cliente?accion=eliminar&id=${c.getIdCliente()}" type="button"
                                                            class="btn btn-danger btn-sm  btn-xs"><i
                                                                 class="ion ion-md-trash"></i></a>
                                                     </td>

@@ -2,16 +2,17 @@
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
-   
-    <servlet>
-        <servlet-name>CategoriaController</servlet-name>
-        <servlet-class>com.utp.sistema.ventas.controller.CategoriaController</servlet-class>
-    </servlet>
-  
-  
+         
+ 
+    <filter-mapping>
+        <filter-name>SessionFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+    
+    
     <session-config>
         <session-timeout>
-            30
+            1
         </session-timeout>
     </session-config>
 </web-app>

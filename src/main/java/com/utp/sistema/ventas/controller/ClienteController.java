@@ -7,7 +7,6 @@ package com.utp.sistema.ventas.controller;
 import com.utp.sistema.ventas.model.Cliente;
 import com.utp.sistema.ventas.model.dao.impl.ClienteDaoImp;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "ClienteController", urlPatterns = {"/ClienteController"})
+@WebServlet(name = "ClienteController", urlPatterns = {"/cliente"})
 public class ClienteController extends HttpServlet {
+
+    ClienteDaoImp clienteDao = new ClienteDaoImp();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,8 +36,6 @@ public class ClienteController extends HttpServlet {
         String direccion;
 
         Cliente cliente = new Cliente();
-
-        ClienteDaoImp clienteDao = new ClienteDaoImp();
 
         String accion = request.getParameter("accion");
 
@@ -81,7 +80,7 @@ public class ClienteController extends HttpServlet {
                 telefono = request.getParameter("telefono");
                 email = request.getParameter("email");
                 direccion = request.getParameter("direccion");
-                
+
                 cliente.setIdCliente(id);
                 cliente.setNombres(nombres);
                 cliente.setApellidos(apellidos);
@@ -120,40 +119,19 @@ public class ClienteController extends HttpServlet {
 
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/HomeController"})
+@WebServlet(name = "HomeController", urlPatterns = {"/home"})
 public class HomeController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
