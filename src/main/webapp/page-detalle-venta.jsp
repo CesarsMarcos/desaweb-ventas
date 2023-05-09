@@ -37,13 +37,13 @@
                                             <div class="col-sm-2">
                                                 <input type="text" class="form-control"  placeholder="Precio" value="${articulo.getPrecio_venta()}" >
                                             </div>
-                                             <div class="col-sm-2">
+                                            <div class="col-sm-2">
                                                 <input type="number" class="form-control"  placeholder="Cantidad" name="cantidad" >
                                             </div>
                                             <div class="col-sm-2">
                                                 <button type="submit" name="accion" value="AgregarLista" class="btn btn-success"><i class="fa fa-cart-plus"></i></button>
                                             </div>
-                                           
+
                                         </div>
                                         <hr>
                                         <div class="col-md-12">
@@ -60,23 +60,23 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <c:forEach items="${ventas}" var="venta" >
-                                                        <tr>
-                                                            <td>${venta.getId()}</td>
-                                                            <td>${venta.getDescripcion()}</td>
-                                                            <td>${venta.getCantidad()}</td>
-                                                            <td>${venta.getPrecioVenta()}</td>
-                                                            <td>${venta.getSubTotal()}</td>
-                                                            <td>
-                                                                <a href="" type="button"
-                                                                   class="btn btn-warning btn-sm  btn-xs"><i
-                                                                        class="fa fa-pencil"></i></a>
-                                                                         <a href="" type="button"
-                                                                   class="btn btn-danger btn-sm  btn-xs"><i
-                                                                        class="ion ion-md-trash"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
+                                                        <c:forEach items="${ventas}" var="venta" >
+                                                            <tr>
+                                                                <td>${venta.getId()}</td>
+                                                                <td>${venta.getDescripcion()}</td>
+                                                                <td>${venta.getCantidad()}</td>
+                                                                <td>${venta.getPrecioVenta()}</td>
+                                                                <td>${venta.getSubTotal()}</td>
+                                                                <td>
+                                                                    <a href="" type="button"
+                                                                       class="btn btn-warning btn-sm  btn-xs"><i
+                                                                            class="fa fa-pencil"></i></a>
+                                                                    <a href="" type="button"
+                                                                       class="btn btn-danger btn-sm  btn-xs"><i
+                                                                            class="ion ion-md-trash"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        </c:forEach>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -136,7 +136,7 @@
                                 </div>
                                 <div class="col-12">
                                     <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar Venta </button>
-                                     <button type="submit" class="btn btn-danger"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
+                                    <button type="submit" class="btn btn-danger" name="accion" value="cancelar"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
                                 </div>
                             </form>
                         </div>

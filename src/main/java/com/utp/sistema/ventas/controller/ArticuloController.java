@@ -53,8 +53,9 @@ public class ArticuloController extends HttpServlet {
                 articulo.setPrecio_venta(precio);
                 articuloDao.insert(articulo);
 
+                request.setAttribute("categorias", categoriaDao.findAll());
                 request.setAttribute("articulos", articuloDao.findAll());
-                request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
                 break;
 
             case "modificar":
@@ -73,7 +74,7 @@ public class ArticuloController extends HttpServlet {
 
                 request.setAttribute("articulos", articuloDao.findAll());
                 request.setAttribute("categorias", categoriaDao.findAll());
-                request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
                 break;
 
             case "obtener":
@@ -81,18 +82,20 @@ public class ArticuloController extends HttpServlet {
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.setAttribute("articulo", articuloDao.find(id));
                 request.setAttribute("articulos", articuloDao.findAll());
-                request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
 
                 break;
 
             case "eliminar":
                 id = Integer.parseInt(request.getParameter("id"));
                 articuloDao.delete(id);
-
                 request.setAttribute("articulos", articuloDao.findAll());
+                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                break;
+
+            default:
                 request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
 
-                break;
         }
     }
 

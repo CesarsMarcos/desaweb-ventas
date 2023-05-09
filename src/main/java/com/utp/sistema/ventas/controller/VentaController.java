@@ -49,6 +49,12 @@ public class VentaController extends HttpServlet {
                 Integer idCli = Integer.parseInt(request.getParameter("idCli"));
                 cliente = clienteDao.find(idCli);
                 request.setAttribute("cliente", cliente);
+                request.setAttribute("articulo", articulo);
+                request.setAttribute("articulo", articulo);
+                request.setAttribute("subTotal", subTotal);
+                request.setAttribute("igv", igv);
+                request.setAttribute("total", total);
+                request.setAttribute("ventas", ventas);
                 request.getRequestDispatcher("page-detalle-venta.jsp").forward(request, response);
                 break;
 
@@ -56,15 +62,15 @@ public class VentaController extends HttpServlet {
                 Integer idProd = Integer.parseInt(request.getParameter("idProd"));
                 articulo = productoDao.find(idProd);
                 request.setAttribute("articulo", articulo);
-                /* request.setAttribute("ventas", ventas);
-                request.setAttribute("subTotal", subTotalFinal);
+                request.setAttribute("articulo", articulo);
+                request.setAttribute("subTotal", subTotal);
                 request.setAttribute("igv", igv);
-                request.setAttribute("total", total);*/
+                request.setAttribute("total", total);
+                request.setAttribute("ventas", ventas);
                 request.getRequestDispatcher("page-detalle-venta.jsp").forward(request, response);
                 break;
 
             case "AgregarLista":
-
                 total = 0.0;
                 item = item + 1;
                 descripcion = articulo.getDescripcion();
@@ -94,8 +100,25 @@ public class VentaController extends HttpServlet {
                 request.setAttribute("ventas", ventas);
                 request.getRequestDispatcher("page-detalle-venta.jsp").forward(request, response);
                 break;
+            case "cancelar":
+                ventas = new ArrayList<>();
+                venta = new VentaDTO();
+
+                subTotal = 0.0;
+                igv = 0.0;
+                total = 0.0;
+
+                request.setAttribute("articulo", articulo);
+                request.setAttribute("subTotal", subTotal);
+                request.setAttribute("igv", igv);
+                request.setAttribute("total", total);
+                request.setAttribute("ventas", ventas);
+                request.getRequestDispatcher("page-detalle-venta.jsp").forward(request, response);
+                break;
+
             default:
                 //throw new AssertionError();
+                venta = new VentaDTO();
                 numSerie = util.generateNumComprobante();
                 request.setAttribute("numSerie", numSerie);
                 request.getRequestDispatcher("page-detalle-venta.jsp").forward(request, response);
