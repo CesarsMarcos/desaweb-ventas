@@ -15,7 +15,7 @@ public class Venta {
     private double impuesto;
     private double descuento;
     private double total;
-    private byte estado;
+    private int estado;
     private int idUsuario;
 
     public Venta() {
@@ -23,7 +23,7 @@ public class Venta {
 
     public Venta(int idVenta, String ruc, String tipo_comprobante,
             String num_comprobante, int idCliente, String fecha_hora, double impuesto,
-            double descuento, double total, byte estado, int idUsuario) {
+            double descuento, double total, int estado, int idUsuario) {
         this.idVenta = idVenta;
         this.ruc = ruc;
         this.tipo_comprobante = tipo_comprobante;
@@ -117,11 +117,11 @@ public class Venta {
         this.total = total;
     }
 
-    public byte getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(byte estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

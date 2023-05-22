@@ -14,4 +14,4 @@ crossorigin="anonymous"></script>
 
 <script src="https://use.fontawesome.com/9365300063.js"></script>
 
-<link href="css/style.css" rel="stylesheet" type="text/css"/>
+<link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet" type="text/css"/>

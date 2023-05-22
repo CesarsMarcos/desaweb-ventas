@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "/admin/LogoutController", urlPatterns = {"/logout"})
+@WebServlet(name = "/LogoutController", urlPatterns = {"/logout"})
 public class LogoutController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -27,9 +27,9 @@ public class LogoutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getSession(false).invalidate();
-
+        
         request.setAttribute("message", "Cerraste Sessión de forma correcta");
-        request.getRequestDispatcher("page-login.jsp").forward(request, response);
+        request.getRequestDispatcher("./page-login.jsp").forward(request, response);
 
     }
 

@@ -77,7 +77,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 ${usuario.getIdUsuario() == null ? '<button type="submit" class="btn btn-primary">Registrar</button>' : '<button type="submit" class="btn btn-primary">Modificar</button>'}
-                                                ${usuario.getIdUsuario() == null ? '' : '<a class="btn btn-primary" href="usuario?accion=listar">Cancelar</a>'} 
+                                                ${usuario.getIdUsuario() == null ? '' : '<a class="btn btn-primary" href="../pages/usuario?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>

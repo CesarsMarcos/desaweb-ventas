@@ -135,7 +135,7 @@ public class VentaDaoImp extends DataBase implements VentaDao {
             pst.setDouble(6, venta.getImpuesto());
             pst.setDouble(7, venta.getDescuento());
             pst.setDouble(8, venta.getTotal());
-            pst.setByte(9, venta.getEstado());
+            pst.setInt(9, venta.getEstado());
             pst.setInt(10, venta.getIdUsuario());
 
             pst.setInt(11, venta.getIdVenta());

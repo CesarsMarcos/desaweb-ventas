@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
+@WebServlet(name = "HomeController", urlPatterns = {"/pages/home"})
 public class HomeController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -24,10 +24,8 @@ public class HomeController extends HttpServlet {
         String menu = request.getParameter("menu");
 
         if (menu.equals("principal")) {
-            request.getRequestDispatcher("page-home.jsp").forward(request, response);
+            request.getRequestDispatcher("/page-home.jsp").forward(request, response);
         }
-
-
     }
 
     @Override

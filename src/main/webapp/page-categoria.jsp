@@ -35,7 +35,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                ${categoria.getIdCategoria() == null  ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
-                                               ${categoria.getIdCategoria() == null ? '' : '<a class="btn btn-primary"href="UsuarioController?accion=listar">Cancelar</a>'} 
+                                               ${categoria.getIdCategoria() == null ? '' : '<a class="btn btn-primary" href="../pages/categoria?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>

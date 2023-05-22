@@ -3,16 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
          
- 
-    <filter-mapping>
-        <filter-name>SessionFilter</filter-name>
-        <url-pattern>/admin/*</url-pattern>
-    </filter-mapping>
+
+  
     
     
     <session-config>
         <session-timeout>
-        30
+            30
         </session-timeout>
     </session-config>
 </web-app>

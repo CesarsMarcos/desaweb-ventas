@@ -50,9 +50,8 @@ public class LoginController extends HttpServlet {
             request.getRequestDispatcher("page-login.jsp").forward(request, response);
         } else {
             session.setAttribute("username", usuario.getNombres());
-            request.getRequestDispatcher("home?menu=principal").forward(request, response);
+            request.getRequestDispatcher("/pages/home?menu=principal").forward(request, response);
         }
-
     }
 
     @Override

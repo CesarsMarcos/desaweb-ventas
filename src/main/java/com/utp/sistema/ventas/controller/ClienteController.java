@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "ClienteController", urlPatterns = {"/cliente"})
+@WebServlet(name = "ClienteController", urlPatterns = {"/pages/cliente"})
 public class ClienteController extends HttpServlet {
 
     ClienteDaoImp clienteDao = new ClienteDaoImp();
@@ -42,7 +42,7 @@ public class ClienteController extends HttpServlet {
         switch (accion) {
             case "listar":
                 request.setAttribute("clientes", clienteDao.findAll());
-                request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
                 break;
             case "guardar":
                 nombres = request.getParameter("nombres");
@@ -66,7 +66,7 @@ public class ClienteController extends HttpServlet {
                 clienteDao.insert(cliente);
 
                 request.setAttribute("clientes", clienteDao.findAll());
-                request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
 
                 break;
 
@@ -94,7 +94,7 @@ public class ClienteController extends HttpServlet {
                 clienteDao.update(cliente);
 
                 request.setAttribute("clientes", clienteDao.findAll());
-                request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
 
                 break;
 
@@ -103,7 +103,7 @@ public class ClienteController extends HttpServlet {
 
                 request.setAttribute("cliente", clienteDao.find(id));
                 request.setAttribute("clientes", clienteDao.findAll());
-                request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
 
                 break;
 
@@ -112,7 +112,7 @@ public class ClienteController extends HttpServlet {
                 clienteDao.delete(id);
 
                 request.setAttribute("clientes", clienteDao.findAll());
-                request.getRequestDispatcher("page-cliente.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
 
                 break;
         }

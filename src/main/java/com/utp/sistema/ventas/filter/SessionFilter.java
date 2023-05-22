@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
  */
-package com.utp.sistema.ventas.controller;
+package com.utp.sistema.ventas.filter;
 
 import java.io.IOException;
 import javax.servlet.Filter;
@@ -21,14 +21,12 @@ import javax.servlet.http.HttpSession;
  *
  * @author Cesar
  */
-@WebFilter(filterName = "SessionFilter", urlPatterns = {"/admin"})
+@WebFilter(filterName = "SessionFilter", urlPatterns = {"/pages/*"})
 public class SessionFilter implements Filter {
 
     private ServletContext context;
 
     public void init(FilterConfig fConfig) throws ServletException {
-        this.context = fConfig.getServletContext();
-        this.context.log("AuthenticationFilter initialized");
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -36,14 +34,19 @@ public class SessionFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        HttpSession session = req.getSession(false);
+        String uri = req.getRequestURI();
 
-        if (session == null) {   
-            this.context.log("Unauthorized access request");
+        HttpSession session = req.getSession();
+
+        if (session == null || session.getAttribute("username") == null) {
+
+            System.out.println("No hay session");
             res.sendRedirect(req.getContextPath() + "/page-login.jsp");
+            //request.getRequestDispatcher("./page-login.jsp").forward(request, response);
         } else {
             chain.doFilter(request, response);
         }
+
     }
 
     public void destroy() {

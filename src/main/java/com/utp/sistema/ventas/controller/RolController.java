@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "RolController", urlPatterns = {"/rol"})
+@WebServlet(name = "RolController", urlPatterns = {"/pages/rol"})
 public class RolController extends HttpServlet {
 
     RolDaoImp rolDao = new RolDaoImp();
@@ -38,7 +38,7 @@ public class RolController extends HttpServlet {
         switch (accion) {
             case "listar":
                 request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("page-rol.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
                 break;
             case "guardar":
                 nombre = request.getParameter("nombre");
@@ -49,7 +49,7 @@ public class RolController extends HttpServlet {
                 rolDao.insert(rol);
 
                 request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("page-rol.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
 
                 break;
             case "modificar":
@@ -62,14 +62,14 @@ public class RolController extends HttpServlet {
                 rolDao.update(rol);
 
                 request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("page-rol.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
 
                 break;
             case "obtener":
                 id = Integer.parseInt(request.getParameter("id"));
                 request.setAttribute("rol", rolDao.find(id));
                 request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("page-rol.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
 
                 break;
             case "eliminar":
@@ -77,7 +77,7 @@ public class RolController extends HttpServlet {
                 rolDao.delete(id);
 
                 request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("page-rol.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
 
                 break;
         }

@@ -8,18 +8,18 @@ import com.utp.sistema.ventas.model.Articulo;
 import com.utp.sistema.ventas.model.dao.impl.ArticuloDaoImp;
 import com.utp.sistema.ventas.model.dao.impl.CategoriaDaoImp;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 /**
  *
  * @author Cesar
  */
-@WebServlet(name = "ArticuloController", urlPatterns = {"/articulo"})
+@WebServlet(name = "ArticuloController", urlPatterns = {"/pages/articulo"})
 public class ArticuloController extends HttpServlet {
 
     ArticuloDaoImp articuloDao = new ArticuloDaoImp();
@@ -39,7 +39,7 @@ public class ArticuloController extends HttpServlet {
             case "listar":
                 request.setAttribute("articulos", articuloDao.findAll());
                 request.setAttribute("categorias", categoriaDao.findAll());
-                request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
                 break;
             case "guardar":
                 descripcion = request.getParameter("descripcion");
@@ -55,7 +55,7 @@ public class ArticuloController extends HttpServlet {
 
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.setAttribute("articulos", articuloDao.findAll());
-                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
                 break;
 
             case "modificar":
@@ -74,7 +74,7 @@ public class ArticuloController extends HttpServlet {
 
                 request.setAttribute("articulos", articuloDao.findAll());
                 request.setAttribute("categorias", categoriaDao.findAll());
-                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
                 break;
 
             case "obtener":
@@ -82,7 +82,7 @@ public class ArticuloController extends HttpServlet {
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.setAttribute("articulo", articuloDao.find(id));
                 request.setAttribute("articulos", articuloDao.findAll());
-                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
 
                 break;
 
@@ -90,11 +90,11 @@ public class ArticuloController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 articuloDao.delete(id);
                 request.setAttribute("articulos", articuloDao.findAll());
-                //request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
                 break;
 
             default:
-                request.getRequestDispatcher("page-articulo.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
 
         }
     }

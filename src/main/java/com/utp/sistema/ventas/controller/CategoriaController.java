@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "CategoriaController", urlPatterns = {"/categoria"})
+@WebServlet(name = "CategoriaController", urlPatterns = {"/pages/categoria"})
 public class CategoriaController extends HttpServlet {
 
     CategoriaDaoImp categoriaDao = new CategoriaDaoImp();
@@ -38,7 +38,7 @@ public class CategoriaController extends HttpServlet {
             case "listar":
                 categorias = categoriaDao.findAll();
                 request.setAttribute("categorias", categorias);
-                request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
                 break;
             case "guardar":
 
@@ -49,7 +49,7 @@ public class CategoriaController extends HttpServlet {
                 categoriaDao.insert(categoria);
 
                 request.setAttribute("categorias", categoriaDao.findAll());
-                request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
 
                 break;
             case "modificar":
@@ -61,7 +61,7 @@ public class CategoriaController extends HttpServlet {
                 categoriaDao.update(categoria);
 
                 request.setAttribute("categorias", categoriaDao.findAll());
-                request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
 
                 break;
             case "eliminar":
@@ -69,7 +69,7 @@ public class CategoriaController extends HttpServlet {
                 categoriaDao.delete(id);
 
                 request.setAttribute("categorias", categoriaDao.findAll());
-                request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
                 break;
 
             case "obtener":
@@ -79,7 +79,7 @@ public class CategoriaController extends HttpServlet {
 
                 request.setAttribute("categoria", categoria);
                 request.setAttribute("categorias", categorias);
-                request.getRequestDispatcher("page-categoria.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
                 break;
 
         }

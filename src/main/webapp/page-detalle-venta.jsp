@@ -135,7 +135,7 @@
                                     </div>                           
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar Venta </button>
+                                    <button type="submit"  name="accion" value="guardar" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar Venta </button>
                                     <button type="submit" class="btn btn-danger" name="accion" value="cancelar"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
                                 </div>
                             </form>

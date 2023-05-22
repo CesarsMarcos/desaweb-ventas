@@ -11,13 +11,15 @@ package com.utp.sistema.ventas.model.dto;
 public class VentaDTO {
 
     private Integer id;
+    private Integer idProd;
     private String descripcion;
     private Integer cantidad;
     private Double precioVenta;
     private Double SubTotal;
 
-    public VentaDTO(Integer id, String descripcion, Integer cantidad, Double precioVenta, Double SubTotal) {
+    public VentaDTO(Integer id,Integer idProd, String descripcion, Integer cantidad, Double precioVenta, Double SubTotal) {
         this.id = id;
+        this.idProd=idProd;
         this.descripcion = descripcion;
         this.cantidad = cantidad;
         this.precioVenta = precioVenta;
@@ -70,4 +72,15 @@ public class VentaDTO {
         this.SubTotal = SubTotal;
     }
 
+    public Integer getIdProd() {
+        return idProd;
+    }
+
+    public void setIdProd(Integer idProd) {
+        this.idProd = idProd;
+    }
+
+    
+    
+    
 }

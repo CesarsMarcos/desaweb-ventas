@@ -17,22 +17,22 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="articulo?accion=listar">Articulos</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/articulo?accion=listar">Articulos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="categoria?accion=listar">Categoría</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/categoria?accion=listar">Categoría</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="usuario?accion=listar">Usuarios</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/usuario?accion=listar">Usuarios</a>
                 </li> 
                 <li class="nav-item">
-                    <a class="nav-link" href="rol?accion=listar">Roles</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/rol?accion=listar">Roles</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="cliente?accion=listar">Clientes</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/cliente?accion=listar">Clientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="venta">Ventas</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/venta">Ventas</a>
                 </li>
             </ul>
             <form class="d-flex" role="search">
@@ -44,7 +44,7 @@
                             <%= session.getAttribute("username")%>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="logout">Cerrar sessión</a></li>
+                            <li><a class="dropdown-item" href="${pageContext.request.contextPath}/logout">Cerrar sessión</a></li>
 
                         </ul>
                     </li>

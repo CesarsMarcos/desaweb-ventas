@@ -73,7 +73,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 ${cliente.getIdCliente() == null  ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
-                                                ${cliente.getIdCliente() == null ? '' : '<a class="btn btn-primary"href="ClienteController?accion=listar">Cancelar</a>'} 
+                                                ${cliente.getIdCliente() == null ? '' : '<a class="btn btn-primary" href="../pages/cliente?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>

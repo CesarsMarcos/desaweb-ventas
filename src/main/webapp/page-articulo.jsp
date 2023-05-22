@@ -56,7 +56,7 @@
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 ${articulo.getIdArticulo() == null ? '<button type="submit" class="btn btn-primary">Registrar</button>' : '<button type="submit" class="btn btn-primary">Modificar</button>'}
-                                                ${articulo.getIdArticulo() == null ? '' : '<a class="btn btn-primary"href="ArticuloController?accion=listar">Cancelar</a>'} 
+                                                ${articulo.getIdArticulo() == null ? '' : '<a class="btn btn-primary" href="../pages/articulo?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>

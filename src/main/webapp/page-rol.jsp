@@ -38,7 +38,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 ${rol.getIdRol() == null ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
-                                                ${rol.getIdRol() == null ? '' : '<a class="btn btn-primary"href="ClienteController?accion=listar">Cancelar</a>'} 
+                                                ${rol.getIdRol() == null ? '' : '<a class="btn btn-primary"href="../pages/rol?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
                                     </form>

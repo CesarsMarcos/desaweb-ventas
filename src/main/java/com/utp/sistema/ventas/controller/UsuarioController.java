@@ -8,8 +8,6 @@ import com.utp.sistema.ventas.model.Usuario;
 import com.utp.sistema.ventas.model.dao.impl.RolDaoImp;
 import com.utp.sistema.ventas.model.dao.impl.UsuarioDaoImp;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "UsuarioController", urlPatterns = {"/usuario"})
+@WebServlet(name = "UsuarioController", urlPatterns = {"/pages/usuario"})
 public class UsuarioController extends HttpServlet {
 
     UsuarioDaoImp usuarioDao = new UsuarioDaoImp();
@@ -46,7 +44,7 @@ public class UsuarioController extends HttpServlet {
             case "listar":
                 request.setAttribute("usuarios", usuarioDao.findAll());
                 request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
                 break;
             case "guardar":
                 nombres = request.getParameter("nombres");
@@ -105,7 +103,7 @@ public class UsuarioController extends HttpServlet {
 
                 request.setAttribute("usuarios", usuarioDao.findAll());
                 request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
 
                 break;
 
@@ -115,7 +113,7 @@ public class UsuarioController extends HttpServlet {
                 request.setAttribute("roles", rolDao.findAll());
                 request.setAttribute("usuario", usuarioDao.find(id));
                 request.setAttribute("usuarios", usuarioDao.findAll());
-                request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
 
                 break;
 
@@ -124,7 +122,7 @@ public class UsuarioController extends HttpServlet {
                 usuarioDao.delete(id);
 
                 request.setAttribute("usuarios", usuarioDao.findAll());
-                request.getRequestDispatcher("page-usuario.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
                 break;
         }
     }
