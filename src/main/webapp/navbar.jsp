@@ -5,6 +5,8 @@
 --%>
 
 
+<%@page import="com.utp.sistema.ventas.model.Menu"%>
+<%@page import="java.util.List"%>
 <nav class="navbar navbar-expand-lg bg-body-tertiary bg-blue">
     <div class="container-fluid">
         <a class="navbar-brand" href="home?menu=principal">SV</a>
@@ -16,24 +18,40 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
+
+                <%
+                    List<Menu> menus = (List) request.getSession().getAttribute("menu");
+                    if (menus != null) {
+                        for (Menu m : menus) {
+                %>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/articulo?accion=listar">Articulos</a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/articulo?accion=listar"><%= m.getMenu()%></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/categoria?accion=listar">Categoría</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/usuario?accion=listar">Usuarios</a>
-                </li> 
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/rol?accion=listar">Roles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/cliente?accion=listar">Clientes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/venta">Ventas</a>
-                </li>
+
+                <%
+                        }
+                    }%>
+                <!-- 
+               <li class="nav-item">
+                   <a class="nav-link" href="${pageContext.request.contextPath}/pages/articulo?accion=listar">Articulos</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="${pageContext.request.contextPath}/pages/categoria?accion=listar">Categorías</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="${pageContext.request.contextPath}/pages/usuario?accion=listar">Usuarios</a>
+               </li> 
+               <li class="nav-item">
+                   <a class="nav-link" href="${pageContext.request.contextPath}/pages/rol?accion=listar">Roles</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="${pageContext.request.contextPath}/pages/cliente?accion=listar">Clientes</a>
+               </li>
+               <li class="nav-item">
+                   <a class="nav-link" href="${pageContext.request.contextPath}/pages/venta">Ventas</a>
+               </li>
+                -->
+
             </ul>
             <form class="d-flex" role="search">
 

@@ -12,10 +12,8 @@
         <%@include file="head.jsp" %>
         <title>Pricipal</title>
     </head>
-     
-    <body class="d-flex h-100">
-      
 
+    <body class="d-flex h-100">
         <div class="cover-container d-flex w-100 h-100 mx-auto flex-column">
             <%@include file="navbar.jsp" %>
             <main class="px-3 mt-5">

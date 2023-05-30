@@ -24,6 +24,12 @@ import javax.servlet.http.HttpSession;
 @WebFilter(filterName = "SessionFilter", urlPatterns = {"/pages/*"})
 public class SessionFilter implements Filter {
 
+    private HttpServletRequest req;
+
+    private static final String[] loginRequiredURLs = {
+        "/cliente", "/venta"
+    };
+
     private ServletContext context;
 
     public void init(FilterConfig fConfig) throws ServletException {
@@ -31,22 +37,41 @@ public class SessionFilter implements Filter {
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        HttpServletRequest req = (HttpServletRequest) request;
+        req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        String uri = req.getRequestURI();
-
         HttpSession session = req.getSession();
+        //HttpSession session = req.getSession(false);
 
-        if (session == null || session.getAttribute("username") == null) {
+        String loginURI = req.getContextPath() + "/";
+        boolean isUser = (session != null && session.getAttribute("role") != null && session.getAttribute("role").equals(2));
+        boolean isLoggedIn = (session != null && session.getAttribute("username") != null);
+        boolean isLoginRequest = req.getRequestURI().equals(loginURI);
+        boolean isLoginPage = req.getRequestURI().endsWith("/");
 
-            System.out.println("No hay session");
-            res.sendRedirect(req.getContextPath() + "/page-login.jsp");
-            //request.getRequestDispatcher("./page-login.jsp").forward(request, response);
+        if (isLoggedIn && (isLoginRequest || isLoginPage)) {
+            req.getRequestDispatcher("/").forward(request, response);
+        } else if (isLoggedIn && isUser && (!isLoginRequired())) {
+            res.sendRedirect(req.getContextPath() + "/page-403");
+        } else if (!isLoggedIn) {
+            res.sendRedirect(req.getContextPath() + "/");
         } else {
+            isLoginRequired();
             chain.doFilter(request, response);
         }
 
+    }
+
+    private boolean isLoginRequired() {
+        String requestURL = req.getRequestURL().toString();
+
+        for (String loginRequiredURL : loginRequiredURLs) {
+            if (requestURL.contains(loginRequiredURL)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void destroy() {
