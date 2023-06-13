@@ -23,7 +23,7 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Usuarios</h5>
                                     <hr>
-                                    <form method="post"  ${usuario.getIdUsuario() == null ? 'action="usuario?accion=guardar"' : 'action="usuario?accion=modificar"'} class="row g-2">
+                                    <form method="post"  ${usuario.getIdUsuario() == null ? 'action="usuarios?accion=guardar"' : 'action="usuarios?accion=modificar"'} class="row g-2">
                                         <div class="col-md-12">
                                             <input type="hidden" class="form-control" name="id" value="${usuario.getIdUsuario()}">
                                         </div>
@@ -109,10 +109,10 @@
                                                     <td>${u.getTelefono()}</td>
                                                     <td>${u.getEmail()}</td>
                                                     <td>
-                                                        <a href="usuario?accion=obtener&id=${u.getIdUsuario()}" type="button"
+                                                        <a href="usuarios?accion=obtener&id=${u.getIdUsuario()}" type="button"
                                                            class="btn btn-info btn-sm  btn-xs"><i
                                                                 class="ion ion-md-create"></i></a>
-                                                        <a href="usuario?accion=eliminar&id=${u.getIdUsuario()}" type="button"
+                                                        <a href="usuarios?accion=eliminar&id=${u.getIdUsuario()}" type="button"
                                                            class="btn btn-danger btn-sm  btn-xs"><i
                                                                 class="ion ion-md-trash"></i></a>
                                                     </td>

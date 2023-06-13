@@ -8,20 +8,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <%@include file="head.jsp" %>
+         <%@include file="head.jsp" %>
         <title>Login</title>
-       
     </head>
     <body>
         <div class="container login">
-
             <div class="col-sm-6 col-md-12">
                 <div class="card border-info text-center">
                     <div class="card-header">Sistema de Ventas </div>
                     <div class="card-body">
                         <form action="login" method="post">
-                            <img src="images/123282.png" alt="" class="figure-img img-fluid rounded" style="width: 150px">
+                            <img src="${pageContext.request.contextPath}/images/123282.png" alt="" class="figure-img img-fluid rounded" style="width: 150px">
                             <input type="text" class="form-control mb-2"
                                    placeholder="username" name="username" autofocus>
                             <input   type="password" class="form-control mb-2"
@@ -34,7 +31,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </body>
 </html>

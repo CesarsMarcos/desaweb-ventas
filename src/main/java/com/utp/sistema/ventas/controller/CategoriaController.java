@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "CategoriaController", urlPatterns = {"/pages/categoria"})
+@WebServlet(name = "CategoriaController", urlPatterns = {"/pages/categorias"})
 public class CategoriaController extends HttpServlet {
 
     CategoriaDaoImp categoriaDao = new CategoriaDaoImp();

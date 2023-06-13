@@ -41,7 +41,6 @@ public class SessionFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         HttpSession session = req.getSession();
-        //HttpSession session = req.getSession(false);
 
         String loginURI = req.getContextPath() + "/";
         boolean isUser = (session != null && session.getAttribute("role") != null && session.getAttribute("role").equals(2));
@@ -50,11 +49,11 @@ public class SessionFilter implements Filter {
         boolean isLoginPage = req.getRequestURI().endsWith("/");
 
         if (isLoggedIn && (isLoginRequest || isLoginPage)) {
-            req.getRequestDispatcher("/").forward(request, response);
+            req.getRequestDispatcher("/login").forward(request, response);
         } else if (isLoggedIn && isUser && (!isLoginRequired())) {
             res.sendRedirect(req.getContextPath() + "/page-403");
         } else if (!isLoggedIn) {
-            res.sendRedirect(req.getContextPath() + "/");
+            res.sendRedirect(req.getContextPath() + "/login");
         } else {
             isLoginRequired();
             chain.doFilter(request, response);

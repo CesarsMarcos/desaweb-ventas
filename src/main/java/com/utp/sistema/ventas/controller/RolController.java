@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "RolController", urlPatterns = {"/pages/rol"})
+@WebServlet(name = "RolController", urlPatterns = {"/pages/roles"})
 public class RolController extends HttpServlet {
 
     RolDaoImp rolDao = new RolDaoImp();

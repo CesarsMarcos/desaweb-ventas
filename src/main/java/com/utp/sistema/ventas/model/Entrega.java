@@ -6,27 +6,27 @@ package com.utp.sistema.ventas.model;
  */
 public class Entrega {
 
-    private int identrega;
+    private int idEntrega;
     private int idVenta;
     private String fecha;
-    private byte estado;
+    private int estado;
 
     public Entrega() {
     }
 
-    public Entrega(int identrega, int idVenta, String fecha, byte estado) {
-        this.identrega = identrega;
+    public Entrega(int idEntrega, int idVenta, String fecha, int estado) {
+        this.idEntrega = idEntrega;
         this.idVenta = idVenta;
         this.fecha = fecha;
         this.estado = estado;
     }
 
-    public int getIdentrega() {
-        return identrega;
+    public int getIdEntrega() {
+        return idEntrega;
     }
 
-    public void setIdentrega(int identrega) {
-        this.identrega = identrega;
+    public void setIdEntrega(int idEntrega) {
+        this.idEntrega = idEntrega;
     }
 
     public int getIdVenta() {
@@ -45,11 +45,11 @@ public class Entrega {
         this.fecha = fecha;
     }
 
-    public byte getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(byte estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

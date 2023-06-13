@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "ClienteController", urlPatterns = {"/pages/cliente"})
+@WebServlet(name = "ClienteController", urlPatterns = {"/pages/clientes"})
 public class ClienteController extends HttpServlet {
 
     ClienteDaoImp clienteDao = new ClienteDaoImp();

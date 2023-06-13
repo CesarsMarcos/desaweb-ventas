@@ -26,7 +26,7 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Articulos</h5>
                                     <hr>
-                                    <form method="post" ${articulo.getIdArticulo() == null ? 'action="articulo?accion=guardar"' : 'action="articulo?accion=modificar"'}  class="row g-2">
+                                    <form method="post" ${articulo.getIdArticulo() == null ? 'action="articulos?accion=guardar"' : 'action="articulos?accion=modificar"'}  class="row g-2">
                                         <div class="col-md-12">
                                             <input type="hidden" name="id" class="form-control" value="${articulo.getIdArticulo()}" >
                                         </div>
@@ -87,10 +87,10 @@
                                                         <td>${a.getStock()}</td>
                                                         <td>${a.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
                                                         <td>
-                                                            <a href="articulo?accion=obtener&id=${a.getIdArticulo()}" 
+                                                            <a href="articulos?accion=obtener&id=${a.getIdArticulo()}" 
                                                                class="btn btn-info btn-sm  btn-xs"><i
                                                                     class="ion ion-md-create"></i></a>
-                                                            <a href="articulo?accion=eliminar&id=${a.getIdArticulo()}"
+                                                            <a href="articulos?accion=eliminar&id=${a.getIdArticulo()}"
                                                                class="btn btn-danger btn-sm  btn-xs"><i
                                                                     class="ion ion-md-trash"></i></a>
                                                         </td>

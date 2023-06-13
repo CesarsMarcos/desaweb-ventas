@@ -24,7 +24,7 @@
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Categoría</h5>
                                     <hr>
-                                    <form method="post" ${categoria.getIdCategoria() == null  ? 'action="categoria?accion=guardar"' : 'action="categoria?accion=modificar"'}   class="row g-1">
+                                    <form method="post" ${categoria.getIdCategoria() == null  ? 'action="categorias?accion=guardar"' : 'action="categorias?accion=modificar"'}   class="row g-1">
                                         <div class="col-md-12">
                                             <input type="hidden" class="form-control"  name="id"  value="${categoria.getIdCategoria()}" >
                                         </div>
@@ -60,10 +60,10 @@
                                                         <td>${cate.getDescripcion()}</td>
                                                         <td>${cate.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
                                                         <td>
-                                                            <a href="categoria?accion=obtener&id=${cate.getIdCategoria()}" type="button"
+                                                            <a href="categorias?accion=obtener&id=${cate.getIdCategoria()}" type="button"
                                                                class="btn btn-info btn-sm  btn-xs"><i
                                                                     class="ion ion-md-create"></i></a>
-                                                            <a href="categoria?accion=eliminar&id=${cate.getIdCategoria()}" type="button"
+                                                            <a href="categorias?accion=eliminar&id=${cate.getIdCategoria()}" type="button"
                                                                class="btn btn-danger btn-sm  btn-xs"><i
                                                                     class="ion ion-md-trash"></i></a>
                                                         </td>

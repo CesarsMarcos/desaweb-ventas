@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -26,11 +27,16 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession(false).invalidate();
-        
-        request.setAttribute("message", "Cerraste Sessión de forma correcta");
-        request.getRequestDispatcher("./page-login.jsp").forward(request, response);
 
+        HttpSession session = request.getSession();
+        boolean isLoggedIn = (session != null && session.getAttribute("username") != null);
+        if (isLoggedIn) {
+            request.getSession(false).invalidate();
+             request.setAttribute("message", "Cerraste Sessión de forma correcta");
+        request.getRequestDispatcher("./page-login.jsp").forward(request, response);
+        }
+
+     
     }
 
     @Override

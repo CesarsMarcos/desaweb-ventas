@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Cesar
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login", "/"})
+@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
 
     LoginDaoImp loginDao = new LoginDaoImp();
@@ -29,13 +29,13 @@ public class LoginController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/page-login.jsp").forward(request, response);
+        request.getRequestDispatcher("/page-login.jsp")
+                .forward(request, response);
         //processRequest(request, response);
 
     }

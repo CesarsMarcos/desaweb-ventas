@@ -58,7 +58,7 @@ public class EntregaDaoImpl extends DataBase implements EntregaDao {
             while (rs.next()) {
                 Entrega entrega = new Entrega();
 
-                entrega.setIdentrega(rs.getInt(1));
+                entrega.setIdEntrega(rs.getInt(1));
                 entrega.setIdVenta(Integer.parseInt(rs.getString(2)));
                 entrega.setFecha(rs.getString(3));
                 entrega.setEstado(rs.getByte(4));

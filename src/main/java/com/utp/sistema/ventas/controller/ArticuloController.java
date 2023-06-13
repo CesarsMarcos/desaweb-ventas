@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Cesar
  */
-@WebServlet(name = "ArticuloController", urlPatterns = {"/pages/articulo"})
+@WebServlet(name = "ArticuloController", urlPatterns = {"/pages/articulos"})
 public class ArticuloController extends HttpServlet {
 
     ArticuloDaoImp articuloDao = new ArticuloDaoImp();

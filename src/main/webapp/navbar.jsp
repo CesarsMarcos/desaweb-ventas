@@ -25,7 +25,7 @@
                         for (Menu m : menus) {
                 %>
                 <li class="nav-item">
-                    <a class="nav-link" href="${pageContext.request.contextPath}/pages/articulo?accion=listar"><%= m.getMenu()%></a>
+                    <a class="nav-link" href="${pageContext.request.contextPath}/pages<%= m.getRuta()%>?accion=listar"><%= m.getMenu()%></a>
                 </li>
 
                 <%
