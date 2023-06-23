@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.Rol;
 import com.utp.sistema.ventas.model.dao.RolDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.Connection;
@@ -12,16 +13,18 @@ import java.sql.SQLException;
 
 /**
  *
- * @author 
+ * @author
  */
 public class RolDaoImp extends DataBase implements RolDao {
 
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(Rol rol) {
+    public String insert(Rol rol) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("insert into rol (nombre,descripcion,estado) values(?,?,?)");
@@ -30,7 +33,10 @@ public class RolDaoImp extends DataBase implements RolDao {
             pst.setString(2, rol.getDescripcion());
             pst.setInt(3, rol.getEstado());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO INSERT - insert()");
@@ -38,6 +44,7 @@ public class RolDaoImp extends DataBase implements RolDao {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override
@@ -99,7 +106,8 @@ public class RolDaoImp extends DataBase implements RolDao {
     }
 
     @Override
-    public void update(Rol rol) {
+    public String  update(Rol rol) {
+         int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("update rol set nombre= ?, descripcion= ?, estado= ? where idrol=?");
@@ -109,7 +117,10 @@ public class RolDaoImp extends DataBase implements RolDao {
             pst.setInt(3, rol.getEstado());
 
             pst.setInt(4, rol.getIdRol());
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_ACTUALIZAR;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO UPDATE - update()");
@@ -117,6 +128,7 @@ public class RolDaoImp extends DataBase implements RolDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+         return mensaje;
     }
 
     @Override

@@ -61,11 +61,11 @@ public class VentaController extends HttpServlet {
                 request.setAttribute("igv", igv);
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
-                request.getRequestDispatcher("/page-detalle-venta.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
                 break;
 
             case "BuscarProducto":
-                Integer idProd = Integer.parseInt(request.getParameter("idProd"));
+                Integer idProd = Integer.parseInt(request.getParameter("idProducto"));
                 articulo = productoDao.find(idProd);
                 request.setAttribute("articulo", articulo);
                 request.setAttribute("articulo", articulo);
@@ -73,7 +73,7 @@ public class VentaController extends HttpServlet {
                 request.setAttribute("igv", igv);
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
-                request.getRequestDispatcher("/page-detalle-venta.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
                 break;
 
             case "AgregarLista":
@@ -105,7 +105,7 @@ public class VentaController extends HttpServlet {
                 request.setAttribute("igv", igv);
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
-                request.getRequestDispatcher("/page-detalle-venta.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
                 break;
             case "cancelar":
                 ventas = new ArrayList<>();
@@ -120,7 +120,7 @@ public class VentaController extends HttpServlet {
                 request.setAttribute("igv", igv);
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
-                request.getRequestDispatcher("/page-detalle-venta.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
                 break;
 
             case "guardar":
@@ -153,7 +153,7 @@ public class VentaController extends HttpServlet {
                 ventaDTO = new VentaDTO();
                 numSerie = util.generateNumComprobante();
                 request.setAttribute("numSerie", numSerie);
-                request.getRequestDispatcher("/page-detalle-venta.jsp").forward(request, response);
+                request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
         }
 
     }
@@ -162,7 +162,7 @@ public class VentaController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //processRequest(request, response);
-        request.getRequestDispatcher("/page-detalle-venta.jsp").forward(request, response);
+        request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
 
     }
 

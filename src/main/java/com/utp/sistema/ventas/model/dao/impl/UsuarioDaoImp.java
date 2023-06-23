@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.Usuario;
 import com.utp.sistema.ventas.model.dao.UsuarioDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +20,11 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(Usuario usuario) {
+    public String insert(Usuario usuario) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("insert into usuario (idrol,nombres,apellidos,tipo_documento,num_documento,direccion,telefono,email,password,estado) values(?,?,?,?,?,?,?,?,?,?)");
@@ -37,7 +40,10 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
             pst.setString(9, usuario.getPassword());
             pst.setInt(10, usuario.getEstado());
 
-            pst.executeUpdate();
+             flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO INSERT - insert()");
@@ -45,6 +51,7 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+          return mensaje;
     }
 
     @Override
@@ -116,7 +123,8 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
     }
 
     @Override
-    public void update(Usuario usuario) {
+    public String update(Usuario usuario) {
+         int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("update usuario set idrol=?, nombres=?, apellidos=?, tipo_documento=?, num_documento=?, direccion=?, telefono=?, email=?, password=?, estado=? where idusuario=?");
@@ -133,7 +141,10 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
             pst.setInt(10, usuario.getEstado());
 
             pst.setInt(11, usuario.getIdUsuario());
-            pst.executeUpdate();
+           flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_ACTUALIZAR;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO UPDATE - update()");
@@ -141,6 +152,7 @@ public class UsuarioDaoImp extends DataBase implements UsuarioDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override

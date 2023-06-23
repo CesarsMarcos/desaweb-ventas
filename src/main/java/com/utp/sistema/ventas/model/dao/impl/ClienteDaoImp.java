@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.Cliente;
 import com.utp.sistema.ventas.model.dao.ClienteDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,16 +13,18 @@ import java.util.ArrayList;
 
 /**
  *
- * @author 
+ * @author
  */
 public class ClienteDaoImp extends DataBase implements ClienteDao {
 
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(Cliente cliente) {
+    public String insert(Cliente cliente) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("insert into cliente (tipo_cliente,nombres,apellidos,tipo_documento,num_documento,direccion,telefono,email) values(?,?,?,?,?,?,?,?)");
@@ -35,7 +38,10 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
             pst.setString(7, cliente.getTelefono());
             pst.setString(8, cliente.getEmail());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO INSERT - insert()");
@@ -43,6 +49,7 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override
@@ -112,7 +119,8 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
     }
 
     @Override
-    public void update(Cliente cliente) {
+    public String update(Cliente cliente) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("update cliente set tipo_cliente=?, nombres=?,"
@@ -129,7 +137,10 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
             pst.setString(8, cliente.getEmail());
 
             pst.setInt(9, cliente.getIdCliente());
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_ACTUALIZAR;
+            }
 
             pst.close();
             con.close();
@@ -138,6 +149,7 @@ public class ClienteDaoImp extends DataBase implements ClienteDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+          return mensaje; 
     }
 
     @Override

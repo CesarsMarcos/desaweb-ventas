@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.Venta;
 import com.utp.sistema.ventas.model.dao.VentaDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +20,11 @@ public class VentaDaoImp extends DataBase implements VentaDao {
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(Venta venta) {
+    public String insert(Venta venta) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("INSERT INTO venta (ruc, tipo_comprobante, num_comprobante, idcliente, "
@@ -39,7 +42,10 @@ public class VentaDaoImp extends DataBase implements VentaDao {
             pst.setInt(9, venta.getEstado());
             pst.setInt(10, venta.getIdUsuario());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
 
             pst.close();
             con.close();
@@ -49,6 +55,7 @@ public class VentaDaoImp extends DataBase implements VentaDao {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override
@@ -120,7 +127,8 @@ public class VentaDaoImp extends DataBase implements VentaDao {
     }
 
     @Override
-    public void update(Venta venta) {
+    public String update(Venta venta) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("UPDATE venta SET ruc=?, tipo_comprobante=?, "
@@ -139,7 +147,11 @@ public class VentaDaoImp extends DataBase implements VentaDao {
             pst.setInt(10, venta.getIdUsuario());
 
             pst.setInt(11, venta.getIdVenta());
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_ACTUALIZAR;
+            }
+
             pst.close();
             con.close();
             System.out.println("SUCCESS TO UPDATE - update()");
@@ -147,6 +159,7 @@ public class VentaDaoImp extends DataBase implements VentaDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override

@@ -32,11 +32,10 @@ public class LogoutController extends HttpServlet {
         boolean isLoggedIn = (session != null && session.getAttribute("username") != null);
         if (isLoggedIn) {
             request.getSession(false).invalidate();
-             request.setAttribute("message", "Cerraste Sessión de forma correcta");
-        request.getRequestDispatcher("./page-login.jsp").forward(request, response);
+            request.setAttribute("message", "Cerraste Sessión de forma correcta");
+            request.getRequestDispatcher("./page-login.jsp").forward(request, response);
         }
 
-     
     }
 
     @Override

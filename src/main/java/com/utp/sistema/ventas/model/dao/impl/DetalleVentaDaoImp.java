@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.DetalleVenta;
 import com.utp.sistema.ventas.model.dao.DetalleVentaDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,10 +20,11 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(DetalleVenta detalleVenta) {
-
+    public String insert(DetalleVenta detalleVenta) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("insert into detalle_venta (idventa, "
@@ -33,7 +35,10 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
             pst.setInt(3, detalleVenta.getCantidad());
             pst.setDouble(4, detalleVenta.getPrecio());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO INSERT - insert()");
@@ -41,6 +46,7 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override
@@ -101,7 +107,8 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
     }
 
     @Override
-    public void update(DetalleVenta detalleVenta) {
+    public String update(DetalleVenta detalleVenta) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("update detalle_venta set idventa=?, "
@@ -114,7 +121,10 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
             pst.setDouble(4, detalleVenta.getPrecio());
 
             pst.setInt(5, detalleVenta.getIdDetalle_venta());
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_ACTUALIZAR;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO UPDATE - update()");
@@ -122,6 +132,7 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override

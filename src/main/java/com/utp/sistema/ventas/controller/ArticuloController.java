@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 /**
  *
  * @author Cesar
@@ -34,7 +33,8 @@ public class ArticuloController extends HttpServlet {
         Double precio;
         Articulo articulo = new Articulo();
         String accion = request.getParameter("accion");
-
+        String mensaje = null;
+        
         switch (accion) {
             case "listar":
                 request.setAttribute("articulos", articuloDao.findAll());
@@ -51,10 +51,11 @@ public class ArticuloController extends HttpServlet {
                 articulo.setIdCategoria(idCategoria);
                 articulo.setStock(stock);
                 articulo.setPrecio_venta(precio);
-                articuloDao.insert(articulo);
+                mensaje = articuloDao.insert(articulo);
 
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.setAttribute("articulos", articuloDao.findAll());
+                request.setAttribute("mensaje", mensaje);
                 request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
                 break;
 
@@ -70,10 +71,11 @@ public class ArticuloController extends HttpServlet {
                 articulo.setIdCategoria(idCategoria);
                 articulo.setStock(stock);
                 articulo.setPrecio_venta(precio);
-                articuloDao.update(articulo);
+                mensaje = articuloDao.update(articulo);
 
                 request.setAttribute("articulos", articuloDao.findAll());
                 request.setAttribute("categorias", categoriaDao.findAll());
+                request.setAttribute("mensaje", mensaje);
                 request.getRequestDispatcher("/page-articulo.jsp").forward(request, response);
                 break;
 

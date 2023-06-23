@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.Articulo;
 import com.utp.sistema.ventas.model.dao.ArticuloDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,10 +20,11 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(Articulo articulo) {
-
+    public String insert(Articulo articulo) {
+        int flag = 0;
         try {
             con = getConnection();
             pst = con.prepareStatement("insert into articulo (idcategoria,descripcion,precio_venta,stock,estado) values(?,?,?,?,?)");
@@ -33,7 +35,10 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
             pst.setInt(4, articulo.getStock());
             pst.setInt(5, articulo.getEstado());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
 
             pst.close();
             con.close();
@@ -43,6 +48,7 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override
@@ -114,7 +120,8 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
     }
 
     @Override
-    public void update(Articulo articulo) {
+    public String update(Articulo articulo) {
+        int flag = 0;
         try {
             con = getConnection();
             pst = con.prepareStatement("update articulo set idcategoria=?, descripcion=?, precio_venta=?, stock=?, estado=? where idarticulo=?");
@@ -127,7 +134,10 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
 
             pst.setInt(6, articulo.getIdArticulo());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_ACTUALIZAR;
+            }
 
             pst.close();
             con.close();
@@ -137,6 +147,7 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override

@@ -1,7 +1,7 @@
-    <%-- 
-    Document   : page-usuarios
-    Created on : 17 abr. 2023, 21:49:24
-    Author     : Cesar
+<%-- 
+Document   : page-usuarios
+Created on : 17 abr. 2023, 21:49:24
+Author     : Cesar
 --%>
 
 
@@ -59,6 +59,8 @@
                                                 ${articulo.getIdArticulo() == null ? '' : '<a class="btn btn-primary" href="../pages/articulo?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
+
+                                        ${mensaje == null ? '' : ' <div class="alert alert-success" role="alert">'+mensaje+'</div>'}
                                     </form>
                                 </div>
                                 <div class="col-md-7">

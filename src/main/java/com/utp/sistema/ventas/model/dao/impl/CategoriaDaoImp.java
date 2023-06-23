@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.Categoria;
 import com.utp.sistema.ventas.model.dao.CategoriaDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,9 +20,11 @@ public class CategoriaDaoImp extends DataBase implements CategoriaDao {
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(Categoria categoria) {
+    public String insert(Categoria categoria) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("insert into categoria (descripcion,estado) values (?,?)");
@@ -29,21 +32,25 @@ public class CategoriaDaoImp extends DataBase implements CategoriaDao {
             pst.setString(1, categoria.getDescripcion());
             pst.setInt(2, categoria.getEstado());
 
-            pst.executeUpdate();
-            
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
+
             pst.close();
             con.close();
-            
+
             System.out.println("SUCCESS TO INSERT - insert()");
         } catch (SQLException e) {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override
     public Categoria find(Integer idCategoria) {
-         Categoria categoria = null;
+        Categoria categoria = null;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("select * from categoria where idcategoria= " + idCategoria + "");
@@ -56,7 +63,7 @@ public class CategoriaDaoImp extends DataBase implements CategoriaDao {
             } else {
                 System.out.println("No se encontró Categoria con el idcategoria = " + idCategoria);
             }
-                
+
             rs.close();
             pst.close();
             con.close();
@@ -87,18 +94,19 @@ public class CategoriaDaoImp extends DataBase implements CategoriaDao {
             pst.close();
             con.close();
             System.out.println("SUCCESS TO FINDALL - findAll()");
-             
+
         } catch (SQLException e) {
             System.out.println("ERROR TO FINDALL - findAll()");
             System.out.println(e);
         }
-        
-        System.out.println("SUCCESS TO FINDALL - findAll() " +categorias.size());
+
+        System.out.println("SUCCESS TO FINDALL - findAll() " + categorias.size());
         return categorias;
     }
 
     @Override
-    public void update(Categoria categoria) {
+    public String update(Categoria categoria) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("update categoria set descripcion= ?, estado= ? where idcategoria=?");
@@ -108,7 +116,10 @@ public class CategoriaDaoImp extends DataBase implements CategoriaDao {
 
             pst.setInt(3, categoria.getIdCategoria());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_ACTUALIZAR;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO UPDATE - update()");
@@ -116,6 +127,7 @@ public class CategoriaDaoImp extends DataBase implements CategoriaDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override

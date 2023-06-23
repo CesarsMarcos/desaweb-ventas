@@ -12,7 +12,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <%@include file="head.jsp" %>
         <title>Detalle de Venta</title>
-
     </head>
     <body class="d-flex h-100">
         <div class="cover-container d-flex w-100 h-100  mx-auto flex-column">
@@ -21,13 +20,15 @@
                 <div class="container">
                     <div class="panel panel-primary ">
                         <div class="panel-body ">
-                            <form action="venta" method="post">
+                            <form action="ventas" method="post">
                                 <div class="row">
+                                     <h5 class="mt-4">Registro de Nueva Venta</h5>
+                                    <hr>
                                     <div class="col-sm-8">
                                         <div class="row g-3 ">
                                             <div class="col-sm-2 text-center">
                                                 <div class="input-group">
-                                                    <input type="text" class="form-control" name="idProd" placeholder="id de producto" value="${articulo.getIdArticulo()}" >    
+                                                    <input type="text" class="form-control" name="idProducto" placeholder="id de producto" value="${articulo.getIdArticulo()}" >    
                                                     <button type="submit" name="accion" value="BuscarProducto"  class="btn btn-outline-success"  ><i class="fa fa-search"></i></button>
                                                 </div>
                                             </div>
@@ -41,7 +42,7 @@
                                                 <input type="number" class="form-control"  placeholder="Cantidad" name="cantidad" >
                                             </div>
                                             <div class="col-sm-2">
-                                                <button type="submit" name="accion" value="AgregarLista" class="btn btn-success"><i class="fa fa-cart-plus"></i></button>
+                                                <button type="submit" name="accion" value="AgregarLista" class="btn btn-success"><i class="fa fa-cart-plus" ></i></button>
                                             </div>
 
                                         </div>

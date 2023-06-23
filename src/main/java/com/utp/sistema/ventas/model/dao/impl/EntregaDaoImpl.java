@@ -3,6 +3,7 @@ package com.utp.sistema.ventas.model.dao.impl;
 import com.utp.sistema.ventas.model.Entrega;
 import com.utp.sistema.ventas.model.dao.EntregaDao;
 import com.utp.sistema.ventas.model.dao.repository.DataBase;
+import com.utp.sistema.ventas.model.util.Constantes;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,9 +22,11 @@ public class EntregaDaoImpl extends DataBase implements EntregaDao {
     private Connection con;
     private PreparedStatement pst;
     private ResultSet rs;
+    static String mensaje = null;
 
     @Override
-    public void insert(Entrega entrega) {
+    public String insert(Entrega entrega) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("insert into entrega_producto (idventa, fecha_hora, estado) values (?, ?, ?)");
@@ -32,7 +35,10 @@ public class EntregaDaoImpl extends DataBase implements EntregaDao {
             pst.setString(2, entrega.getFecha());
             pst.setInt(3, entrega.getEstado());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = Constantes.MENSAJE_REGISTRO;
+            }
             pst.close();
             con.close();
             System.out.println("SUCCESS TO INSERT - insert()");
@@ -40,6 +46,7 @@ public class EntregaDaoImpl extends DataBase implements EntregaDao {
             System.out.println("ERROR TO INSERT - insert()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override
@@ -77,16 +84,21 @@ public class EntregaDaoImpl extends DataBase implements EntregaDao {
     }
 
     @Override
-    public void update(Entrega entrega) {
+    public String update(Entrega entrega) {
+        int flag = 0;
         try {
             con = this.getConnection();
             pst = con.prepareStatement("update entrega_producto set estado= ? where identrega=?");
 
             pst.setInt(1, entrega.getEstado());
 
-            pst.setInt(2, entrega.getIdentrega());
+            pst.setInt(2, entrega.getIdEntrega());
 
-            pst.executeUpdate();
+            flag = pst.executeUpdate();
+            if (flag != 0) {
+                mensaje = "Updated  SuccessFully";
+            }
+
             pst.close();
             con.close();
             System.out.println("SUCCESS TO UPDATE - update()");
@@ -94,6 +106,7 @@ public class EntregaDaoImpl extends DataBase implements EntregaDao {
             System.out.println("ERROR TO UPDATE - update()");
             System.out.println(e);
         }
+        return mensaje;
     }
 
     @Override

@@ -33,7 +33,12 @@ public class EntregaController extends HttpServlet {
 
         switch (accion) {
             case "listar":
-                request.setAttribute("entregas", entregaDao.findAll());
+                request.setAttribute("pendientes", entregaDao.findAllEntregaPending());
+                request.getRequestDispatcher("/page-entrega.jsp").forward(request, response);
+                break;
+
+            case "entregados":
+                request.setAttribute("entregados", entregaDao.findAllEntregaComplete());
                 request.getRequestDispatcher("/page-entrega.jsp").forward(request, response);
                 break;
             case "guardar":
@@ -51,32 +56,33 @@ public class EntregaController extends HttpServlet {
 
                 break;
 
-            case "eliminar":
-                idVenta = Integer.parseInt(request.getParameter("id"));
-                entregaDao.delete(idVenta);
+            case "modificar-estado":
+                idEntrega = Integer.parseInt(request.getParameter("idEntrega"));
 
-                request.setAttribute("entregas", entregaDao.findAll());
+                entrega.setIdEntrega(idEntrega);
+                entrega.setEstado(1);
+
+                entregaDao.update(entrega);
+
+                request.setAttribute("entregas", entregaDao.findAllEntregaPending());
                 request.getRequestDispatcher("/page-entrega.jsp").forward(request, response);
 
                 break;
         }
     }
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-   
     @Override
     public String getServletInfo() {
         return "Short description";

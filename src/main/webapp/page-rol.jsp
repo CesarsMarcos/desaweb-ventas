@@ -23,6 +23,7 @@
                             <div class="row">
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Rol</h5>
+                                     <hr>
                                     <form method="post"  ${rol.getIdRol() == null ? 'action="roles?accion=guardar"': 'action="roles?accion=modificar"'} class="row g-2">
                                         <div class="col-md-12">
                                             <input type="hidden" name="id" id="nombre" class="form-control" value="${rol.getIdRol()}">
