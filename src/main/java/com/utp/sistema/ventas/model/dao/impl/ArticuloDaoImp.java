@@ -102,7 +102,7 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
                 articulo.setDescripcion(rs.getString(3));
                 articulo.setPrecio_venta(rs.getDouble(4));
                 articulo.setStock(rs.getInt(5));
-                articulo.setEstado(rs.getByte(6));
+                articulo.setEstado(rs.getInt(6));
 
                 articulos.add(articulo);
             }

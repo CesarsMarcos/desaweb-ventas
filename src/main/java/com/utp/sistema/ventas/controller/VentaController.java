@@ -10,7 +10,10 @@ import com.utp.sistema.ventas.model.dto.VentaDTO;
 import com.utp.sistema.ventas.model.util.Util;
 
 import java.io.IOException;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +36,7 @@ public class VentaController extends HttpServlet {
 
     VentaDTO ventaDTO = new VentaDTO();
     Venta venta = new Venta();
-    DetalleVenta detalleV= new DetalleVenta();
+    DetalleVenta detalleV = new DetalleVenta();
     DetalleVentaDaoImp detalleDao = new DetalleVentaDaoImp();
     Articulo articulo = new Articulo();
     Cliente cliente = new Cliente();
@@ -49,15 +52,20 @@ public class VentaController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String accion = request.getParameter("accion");
+        String mensaje = null;
 
         switch (accion) {
             case "BuscarCliente":
                 Integer idCli = Integer.parseInt(request.getParameter("idCli"));
                 cliente = clienteDao.find(idCli);
+                if (cliente == null) {
+                    mensaje = "Cliente con código " + idCli + " no existe";
+                }
                 request.setAttribute("cliente", cliente);
                 request.setAttribute("articulo", articulo);
                 request.setAttribute("articulo", articulo);
                 request.setAttribute("subTotal", subTotal);
+                request.setAttribute("mensaje", mensaje);
                 request.setAttribute("igv", igv);
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
@@ -67,12 +75,18 @@ public class VentaController extends HttpServlet {
             case "BuscarProducto":
                 Integer idProd = Integer.parseInt(request.getParameter("idProducto"));
                 articulo = productoDao.find(idProd);
+
+                if (articulo.getIdArticulo() == 0 || articulo == null) {
+                    mensaje = "Producto ingresado con código " + idProd + " no existe, ingreso un código valido";
+                }
+
                 request.setAttribute("articulo", articulo);
                 request.setAttribute("articulo", articulo);
                 request.setAttribute("subTotal", subTotal);
                 request.setAttribute("igv", igv);
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
+                request.setAttribute("mensaje", mensaje);
                 request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
                 break;
 
@@ -127,7 +141,7 @@ public class VentaController extends HttpServlet {
 
                 venta.setRuc("000000");
                 venta.setTipo_comprobante("tipo_comprobante");
-                venta.setNum_comprobante("xxxxx");
+                venta.setNum_comprobante(util.generateNumComprobante());
                 venta.setIdCliente(cliente.getIdCliente());
                 venta.setImpuesto(igv);
                 venta.setDescuento(0);
@@ -135,6 +149,10 @@ public class VentaController extends HttpServlet {
                 venta.setEstado(0);
                 venta.setIdUsuario(1);
 
+                Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String s = formatter.format(new Date());
+
+                venta.setFecha_hora(s);
                 ventaDao.insert(venta);
 
                 int idV = ventaDao.getLastIdVenta();
@@ -148,11 +166,14 @@ public class VentaController extends HttpServlet {
                     detalleDao.insert(detalleV);
                 }
 
+                request.setAttribute("mensaje", "Venta registrada con exito");
+                request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
+                break;
             default:
                 //throw new AssertionError();
                 ventaDTO = new VentaDTO();
-                numSerie = util.generateNumComprobante();
-                request.setAttribute("numSerie", numSerie);
+                // numSerie = util.generateNumComprobante();
+                //request.setAttribute("numSerie", numSerie);
                 request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
         }
 

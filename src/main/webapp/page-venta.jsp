@@ -22,7 +22,7 @@
                         <div class="panel-body ">
                             <form action="ventas" method="post">
                                 <div class="row">
-                                     <h5 class="mt-4">Registro de Nueva Venta</h5>
+                                    <h5 class="mt-4">Registro de Nueva Venta</h5>
                                     <hr>
                                     <div class="col-sm-8">
                                         <div class="row g-3 ">
@@ -139,6 +139,11 @@
                                     <button type="submit"  name="accion" value="guardar" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar Venta </button>
                                     <button type="submit" class="btn btn-danger" name="accion" value="cancelar"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
                                 </div>
+                                <c:if test="${not empty mensaje}">                
+                                    <div class="alert alert-success mt-2">
+                                        ${mensaje}
+                                    </div>
+                                </c:if>                      
                             </form>
                         </div>
                     </div>

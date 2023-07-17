@@ -21,12 +21,11 @@ Author     : Cesar
                 <div class="container">
                     <div class="panel panel-primary mt-3">
                         <div class="panel-body">
-
                             <div class="row">
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Articulos</h5>
                                     <hr>
-                                    <form method="post" ${articulo.getIdArticulo() == null ? 'action="articulos?accion=guardar"' : 'action="articulos?accion=modificar"'}  class="row g-2">
+                                    <form method="post" ${(articulo.getIdArticulo() == null )  ? 'action="articulos?accion=guardar"' : 'action="articulos?accion=modificar"'}  class="row g-2">
                                         <div class="col-md-12">
                                             <input type="hidden" name="id" class="form-control" value="${articulo.getIdArticulo()}" >
                                         </div>
@@ -37,16 +36,15 @@ Author     : Cesar
                                         <div class="col-md-6">
                                             <label for="nombres">Categoría </label>
                                             <select class="form-control" name="categoria">
-                                                <option value="">--Selecciona--</option>
+                                                <option value="0">--Selecciona--</option>
                                                 <c:forEach items="${categorias}" var="cate" >
                                                     <option value="${cate.getIdCategoria()}" ${articulo.getIdCategoria()== cate.getIdCategoria()  ? 'selected' : ''} >${cate.getDescripcion()}</option>
                                                 </c:forEach>
                                             </select>
                                         </div>
-
                                         <div class="col-md-6">
                                             <label for="nombres">Stock</label>
-                                            <input type="text" name="stock" class="form-control" value="${articulo.getStock()}" >
+                                            <input type="number" name="stock" class="form-control" value="${articulo.getStock()}" >
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Precio Venta</label>
@@ -56,11 +54,15 @@ Author     : Cesar
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 ${articulo.getIdArticulo() == null ? '<button type="submit" class="btn btn-primary">Registrar</button>' : '<button type="submit" class="btn btn-primary">Modificar</button>'}
-                                                ${articulo.getIdArticulo() == null ? '' : '<a class="btn btn-primary" href="../pages/articulo?accion=listar">Cancelar</a>'} 
+                                                ${articulo.getIdArticulo() == null ? '' : '<a class="btn btn-primary" href="../pages/articulos?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
-
-                                        ${mensaje == null ? '' : ' <div class="alert alert-success" role="alert">'+mensaje+'</div>'}
+                                        <div>${requestScope.validaciones}</div>    
+                                        <c:if test="${not empty mensaje}">                
+                                            <div class="alert alert-success">
+                                                ${mensaje}
+                                            </div>
+                                        </c:if> 
                                     </form>
                                 </div>
                                 <div class="col-md-7">
@@ -87,7 +89,7 @@ Author     : Cesar
                                                         <td>${a.getDescripcion()}</td>
                                                         <td>${a.getPrecio_venta()}</td>
                                                         <td>${a.getStock()}</td>
-                                                        <td>${a.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
+                                                        <td>${a.getEstado()== 0 ? '<span class="badge bg-success">activo</span>': '<span class="badge bg-danger">inactivo</span>' }   </td>
                                                         <td>
                                                             <a href="articulos?accion=obtener&id=${a.getIdArticulo()}" 
                                                                class="btn btn-info btn-sm  btn-xs"><i

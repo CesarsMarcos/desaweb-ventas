@@ -34,10 +34,16 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                               ${categoria.getIdCategoria() == null  ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
-                                               ${categoria.getIdCategoria() == null ? '' : '<a class="btn btn-primary" href="../pages/categoria?accion=listar">Cancelar</a>'} 
+                                                ${categoria.getIdCategoria() == null  ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
+                                                ${categoria.getIdCategoria() == null ? '' : '<a class="btn btn-primary" href="../pages/categorias?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
+                                        <div>${requestScope.validaciones}</div>   
+                                        <c:if test="${not empty mensaje}">                
+                                            <div class="alert alert-success">
+                                                ${mensaje}
+                                            </div>
+                                        </c:if>     
                                     </form>
                                 </div>
                                 <div class="col col-sm-7">
@@ -58,7 +64,7 @@
                                                     <tr>
                                                         <td>${cate.getIdCategoria()}</td>
                                                         <td>${cate.getDescripcion()}</td>
-                                                        <td>${cate.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
+                                                        <td>${cate.getEstado()== 0 ? '<span class="badge bg-success">activo</span>': '<span class="badge bg-danger">inactivo</span>' }   </td>
                                                         <td>
                                                             <a href="categorias?accion=obtener&id=${cate.getIdCategoria()}" type="button"
                                                                class="btn btn-info btn-sm  btn-xs"><i

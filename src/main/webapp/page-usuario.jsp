@@ -76,11 +76,17 @@
 
                                         <div class="col-12">
                                             <div class="form-group">
-                                                ${usuario.getIdUsuario() == null ? '<button type="submit" class="btn btn-primary">Registrar</button>' : '<button type="submit" class="btn btn-primary">Modificar</button>'}
-                                                ${usuario.getIdUsuario() == null ? '' : '<a class="btn btn-primary" href="../pages/usuario?accion=listar">Cancelar</a>'} 
+                                                ${usuario.getIdUsuario() == null ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary">' : '<input type="submit" name="accion" value="Modificar"  class="btn btn-primary">'}
+                                                ${usuario.getIdUsuario() == null ? '' : '<a class="btn btn-primary" href="../pages/usuarios?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
-                                    </form>
+                                        <div>${requestScope.validaciones}</div>    
+                                        <c:if test="${not empty mensaje}">                
+                                            <div class="alert alert-success">
+                                                ${mensaje}
+                                            </div>
+                                        </c:if>   
+                                    </form>  
                                 </div>
                                 <div class="col col-sm-7">
                                     <h5 class="mt-4">Usuarios</h5>

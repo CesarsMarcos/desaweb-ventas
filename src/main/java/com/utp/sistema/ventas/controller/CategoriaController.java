@@ -7,7 +7,6 @@ package com.utp.sistema.ventas.controller;
 import com.utp.sistema.ventas.model.Categoria;
 import com.utp.sistema.ventas.model.dao.impl.CategoriaDaoImp;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -31,6 +30,8 @@ public class CategoriaController extends HttpServlet {
         Integer id = 0;
         String descripcion;
         Categoria categoria;
+        String mensaje = null;
+        String validaciones = "";
         List<Categoria> categorias = new ArrayList<>();
         String accion = request.getParameter("accion");
 
@@ -41,24 +42,35 @@ public class CategoriaController extends HttpServlet {
                 request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
                 break;
             case "guardar":
-
                 descripcion = request.getParameter("descripcion");
 
-                categoria = new Categoria();
-                categoria.setDescripcion(descripcion);
-                categoriaDao.insert(categoria);
-
+                if (descripcion.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo descripcion esta vacio";
+                }
+                if (validaciones.equals("")) {
+                    categoria = new Categoria();
+                    categoria.setDescripcion(descripcion);
+                    mensaje = categoriaDao.insert(categoria);
+                }
                 request.setAttribute("categorias", categoriaDao.findAll());
+                request.setAttribute("mensaje", mensaje);
+                request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
-
                 break;
             case "modificar":
                 id = Integer.parseInt(request.getParameter("id"));
                 descripcion = request.getParameter("descripcion");
-                categoria = new Categoria();
-                categoria.setDescripcion(descripcion);
-                categoria.setIdCategoria(id);
-                categoriaDao.update(categoria);
+
+                if (descripcion.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo descripcion esta vacio";
+                }
+
+                if (validaciones.equals("")) {
+                    categoria = new Categoria();
+                    categoria.setDescripcion(descripcion);
+                    categoria.setIdCategoria(id);
+                    mensaje = categoriaDao.update(categoria);
+                }
 
                 request.setAttribute("categorias", categoriaDao.findAll());
                 request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
@@ -76,12 +88,14 @@ public class CategoriaController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 categoria = categoriaDao.find(id);
                 categorias = categoriaDao.findAll();
-
                 request.setAttribute("categoria", categoria);
                 request.setAttribute("categorias", categorias);
                 request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);
                 break;
-
+            /*default:
+                categorias = categoriaDao.findAll();
+                request.setAttribute("categorias", categorias);
+                request.getRequestDispatcher("/page-categoria.jsp").forward(request, response);*/
         }
 
     }

@@ -13,5 +13,6 @@ public interface Constantes {
     public final static String MENSAJE_REGISTRO = "Registro exitoso";
     public final static String MENSAJE_ACTUALIZAR = "Modificado exitoso";
     public final static String MENSAJE_ERROR = "Error al registrar";
+    public final static String MENSAJE_BORRADO = "Registro eliminado con éxito";
 
 }

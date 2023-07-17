@@ -44,7 +44,7 @@ public class SessionFilter implements Filter {
 
         String loginURI = req.getContextPath() + "/";
         boolean isUser = (session != null && session.getAttribute("role") != null && session.getAttribute("role").equals(2));
-        boolean isLoggedIn = (session != null && session.getAttribute("username") != null);
+        boolean isLoggedIn = (session != null && session.getAttribute("username") != null && session.getAttribute("menu") != null);
         boolean isLoginRequest = req.getRequestURI().equals(loginURI);
         boolean isLoginPage = req.getRequestURI().endsWith("/");
 

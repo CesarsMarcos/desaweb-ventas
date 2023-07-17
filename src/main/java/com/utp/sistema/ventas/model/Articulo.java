@@ -11,13 +11,13 @@ public class Articulo {
     private String descripcion;
     private double precio_venta;
     private int stock;
-    private byte estado;
+    private int estado;
 
     public Articulo() {
     }
 
     public Articulo(int idArticulo, int idCategoria, String nombre,
-            String descripcion, double precio_venta, int stock, byte estado) {
+            String descripcion, double precio_venta, int stock, int estado) {
         this.idArticulo = idArticulo;
         this.idCategoria = idCategoria;
         this.descripcion = descripcion;
@@ -66,11 +66,11 @@ public class Articulo {
         this.descripcion = descripcion;
     }
 
-    public byte getEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(byte estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
@@ -84,5 +84,7 @@ public class Articulo {
                 + "\n stock=" + stock + ""
                 + "\n estado=" + estado + '}';
     }
+
+ 
 
 }

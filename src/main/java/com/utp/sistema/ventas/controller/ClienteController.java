@@ -24,7 +24,7 @@ public class ClienteController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String accion = request.getParameter("accion");
         Integer id;
         String nombres;
         String apellidos;
@@ -34,10 +34,10 @@ public class ClienteController extends HttpServlet {
         String telefono;
         String email;
         String direccion;
-
         Cliente cliente = new Cliente();
 
-        String accion = request.getParameter("accion");
+        String mensaje = null;
+        String validaciones = "";
 
         switch (accion) {
             case "listar":
@@ -54,18 +54,52 @@ public class ClienteController extends HttpServlet {
                 email = request.getParameter("email");
                 direccion = request.getParameter("direccion");
 
-                cliente.setNombres(nombres);
-                cliente.setApellidos(apellidos);
-                cliente.setTipo_documento(tipDocumento);
-                cliente.setNum_documento(numDocumento);
-                cliente.setTipo_cliente(tipCliente);
-                cliente.setDireccion(direccion);
-                cliente.setTelefono(telefono);
-                cliente.setEmail(email);
+                if (nombres.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo nombres esta vacio";
+                }
 
-                clienteDao.insert(cliente);
+                if (apellidos.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo apellidos esta vacio";
+                }
+                if (tipCliente.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>Debes seleccionar el Tipo de Cliente";
+                }
+
+                if (tipDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>Debes seleccionar un Tipo de Documento";
+                }
+
+                if (numDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo Número de Documento esta vacio";
+                }
+
+                if (telefono.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo password esta vacio";
+                }
+
+                if (email.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo email esta vacio";
+                }
+
+                if (direccion.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo direccion esta vacio";
+                }
+
+                if (validaciones.equals("")) {
+                    cliente.setNombres(nombres);
+                    cliente.setApellidos(apellidos);
+                    cliente.setTipo_documento(tipDocumento);
+                    cliente.setNum_documento(numDocumento);
+                    cliente.setTipo_cliente(tipCliente);
+                    cliente.setDireccion(direccion);
+                    cliente.setTelefono(telefono);
+                    cliente.setEmail(email);
+                    mensaje = clienteDao.insert(cliente);
+                }
 
                 request.setAttribute("clientes", clienteDao.findAll());
+                request.setAttribute("mensaje", mensaje);
+                request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
 
                 break;
@@ -81,19 +115,52 @@ public class ClienteController extends HttpServlet {
                 email = request.getParameter("email");
                 direccion = request.getParameter("direccion");
 
-                cliente.setIdCliente(id);
-                cliente.setNombres(nombres);
-                cliente.setApellidos(apellidos);
-                cliente.setTipo_documento(tipDocumento);
-                cliente.setNum_documento(numDocumento);
-                cliente.setTipo_cliente(tipCliente);
-                cliente.setDireccion(direccion);
-                cliente.setTelefono(telefono);
-                cliente.setEmail(email);
+                if (nombres.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo nombres esta vacio";
+                }
 
-                clienteDao.update(cliente);
+                if (apellidos.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo apellidos esta vacio";
+                }
+                if (tipCliente.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>Debes seleccionar el Tipo de Cliente";
+                }
 
+                if (tipDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>Debes seleccionar un Tipo de Documento";
+                }
+
+                if (numDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo Número de Documento esta vacio";
+                }
+
+                if (telefono.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo password esta vacio";
+                }
+
+                if (email.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo email esta vacio";
+                }
+
+                if (direccion.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo direccion esta vacio";
+                }
+
+                if (validaciones.equals("")) {
+                    cliente.setIdCliente(id);
+                    cliente.setNombres(nombres);
+                    cliente.setApellidos(apellidos);
+                    cliente.setTipo_documento(tipDocumento);
+                    cliente.setNum_documento(numDocumento);
+                    cliente.setTipo_cliente(tipCliente);
+                    cliente.setDireccion(direccion);
+                    cliente.setTelefono(telefono);
+                    cliente.setEmail(email);
+                    mensaje = clienteDao.update(cliente);
+                }
                 request.setAttribute("clientes", clienteDao.findAll());
+                request.setAttribute("mensaje", mensaje);
+                request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
 
                 break;
@@ -113,8 +180,10 @@ public class ClienteController extends HttpServlet {
 
                 request.setAttribute("clientes", clienteDao.findAll());
                 request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);
-
                 break;
+            /*default:
+                request.setAttribute("clientes", clienteDao.findAll());
+                request.getRequestDispatcher("/page-cliente.jsp").forward(request, response);*/
         }
 
     }

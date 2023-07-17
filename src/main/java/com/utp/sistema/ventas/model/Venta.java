@@ -1,5 +1,8 @@
 package com.utp.sistema.ventas.model;
 
+import java.sql.Date;
+
+
 /**
  *
  * @author
@@ -22,7 +25,7 @@ public class Venta {
     }
 
     public Venta(int idVenta, String ruc, String tipo_comprobante,
-            String num_comprobante, int idCliente, String fecha_hora, double impuesto,
+            String num_comprobante, int idCliente, String  fecha_hora, double impuesto,
             double descuento, double total, int estado, int idUsuario) {
         this.idVenta = idVenta;
         this.ruc = ruc;

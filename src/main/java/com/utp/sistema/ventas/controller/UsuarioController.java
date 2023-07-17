@@ -32,13 +32,19 @@ public class UsuarioController extends HttpServlet {
         Integer id;
         String nombres;
         String apellidos;
-        Integer idRol;
+        String idRol;
+        Integer idRolInt;
         String tipDocumento;
         String numDocumento;
         String password;
         String telefono;
         String email;
         String direccion;
+
+        Usuario usuario = new Usuario();
+
+        String mensaje = null;
+        String validaciones = "";
 
         switch (accion) {
             case "listar":
@@ -47,9 +53,10 @@ public class UsuarioController extends HttpServlet {
                 request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
                 break;
             case "guardar":
+                validaciones = "";
                 nombres = request.getParameter("nombres");
                 apellidos = request.getParameter("apellidos");
-                idRol = Integer.parseInt(request.getParameter("rol"));
+                idRol = request.getParameter("rol");
                 tipDocumento = request.getParameter("tipDocumento");
                 numDocumento = request.getParameter("numDocumento");
                 password = request.getParameter("password");
@@ -57,52 +64,129 @@ public class UsuarioController extends HttpServlet {
                 email = request.getParameter("email");
                 direccion = request.getParameter("direccion");
 
-                Usuario usuario = new Usuario();
-                usuario.setNombres(nombres);
-                usuario.setApellidos(apellidos);
-                usuario.setTipo_documento(tipDocumento);
-                usuario.setNum_documento(numDocumento);
-                usuario.setIdRol(idRol);
-                usuario.setPassword(password);
-                usuario.setDireccion(direccion);
-                usuario.setTelefono(telefono);
-                usuario.setEmail(email);
+                idRolInt = (idRol.equals("") || idRol == null ? 0 : Integer.valueOf(idRol));
 
-                usuarioDao.insert(usuario);
+                if (nombres.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo nombres esta vacio";
+                }
 
+                if (apellidos.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo apellidos esta vacio";
+                }
+                if (idRolInt == 0) {
+                    validaciones += "<br/>Debes seleccionar un Rol";
+                }
+
+                if (tipDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>Debes seleccionar un Tipo de Documento";
+                }
+
+                if (numDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo Número de Documento esta vacio";
+                }
+
+                if (password.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo password esta vacio";
+                }
+
+                if (telefono.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo password esta vacio";
+                }
+
+                if (email.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo email esta vacio";
+                }
+
+                if (direccion.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo direccion esta vacio";
+                }
+
+                if (validaciones.equals("")) {
+                    usuario.setNombres(nombres);
+                    usuario.setApellidos(apellidos);
+                    usuario.setTipo_documento(tipDocumento);
+                    usuario.setNum_documento(numDocumento);
+                    usuario.setIdRol(idRolInt);
+                    usuario.setPassword(password);
+                    usuario.setDireccion(direccion);
+                    usuario.setTelefono(telefono);
+                    usuario.setEmail(email);
+                    mensaje = usuarioDao.insert(usuario);
+                }
                 request.setAttribute("usuarios", usuarioDao.findAll());
-                request.getRequestDispatcher("usuario").forward(request, response);
-
+                request.setAttribute("mensaje", mensaje);
+                request.setAttribute("validaciones", validaciones);
+                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
                 break;
 
             case "modificar":
                 id = Integer.parseInt(request.getParameter("id"));
                 nombres = request.getParameter("nombres");
                 apellidos = request.getParameter("apellidos");
-                idRol = Integer.parseInt(request.getParameter("rol"));
+                idRol = request.getParameter("rol");
                 tipDocumento = request.getParameter("tipDocumento");
                 numDocumento = request.getParameter("numDocumento");
                 password = request.getParameter("password");
                 telefono = request.getParameter("telefono");
                 email = request.getParameter("email");
                 direccion = request.getParameter("direccion");
+                idRolInt = (idRol.equals("") || idRol == null ? 0 : Integer.valueOf(idRol));
 
-                usuario = new Usuario();
-                usuario.setIdUsuario(id);
-                usuario.setNombres(nombres);
-                usuario.setApellidos(apellidos);
-                usuario.setTipo_documento(tipDocumento);
-                usuario.setNum_documento(numDocumento);
-                usuario.setIdRol(idRol);
-                usuario.setPassword(password);
-                usuario.setDireccion(direccion);
-                usuario.setTelefono(telefono);
-                usuario.setEmail(email);
+                if (nombres.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo nombres esta vacio";
+                }
 
-                usuarioDao.update(usuario);
+                if (apellidos.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo apellidos esta vacio";
+                }
+                if (idRolInt == 0) {
+                    validaciones += "<br/>Debes seleccionar un Rol";
+                }
+
+                if (tipDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>Debes seleccionar un Tipo de Documento";
+                }
+
+                if (numDocumento.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo Número de Documento esta vacio";
+                }
+
+                /*if (password.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo password esta vacio";
+                }*/
+
+                if (telefono.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo password esta vacio";
+                }
+
+                if (email.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo email esta vacio";
+                }
+
+                if (direccion.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo direccion esta vacio";
+                }
+
+                if (validaciones.equals("")) {
+                    usuario = new Usuario();
+                    usuario.setIdUsuario(id);
+                    usuario.setNombres(nombres);
+                    usuario.setApellidos(apellidos);
+                    usuario.setTipo_documento(tipDocumento);
+                    usuario.setNum_documento(numDocumento);
+                    usuario.setIdRol(idRolInt);
+                    usuario.setPassword(password);
+                    usuario.setDireccion(direccion);
+                    usuario.setTelefono(telefono);
+                    usuario.setEmail(email);
+
+                    mensaje = usuarioDao.update(usuario);
+                }
 
                 request.setAttribute("usuarios", usuarioDao.findAll());
                 request.setAttribute("roles", rolDao.findAll());
+                request.setAttribute("mensaje", mensaje);
+                request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
 
                 break;
@@ -120,10 +204,13 @@ public class UsuarioController extends HttpServlet {
             case "eliminar":
                 id = Integer.parseInt(request.getParameter("id"));
                 usuarioDao.delete(id);
-
                 request.setAttribute("usuarios", usuarioDao.findAll());
                 request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
                 break;
+            /*default:
+                request.setAttribute("usuarios", usuarioDao.findAll());
+                request.setAttribute("roles", rolDao.findAll());
+                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);*/
         }
     }
 

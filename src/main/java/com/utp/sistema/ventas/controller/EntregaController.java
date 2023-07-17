@@ -29,7 +29,7 @@ public class EntregaController extends HttpServlet {
 
         Entrega entrega = new Entrega();
 
-        String accion = request.getParameter("accion");
+         String accion = request.getParameter("accion");
 
         switch (accion) {
             case "listar":
@@ -38,7 +38,7 @@ public class EntregaController extends HttpServlet {
                 break;
 
             case "entregados":
-                request.setAttribute("entregados", entregaDao.findAllEntregaComplete());
+                request.setAttribute("entregados", entregaDao.findAllEntregaPending());
                 request.getRequestDispatcher("/page-entrega.jsp").forward(request, response);
                 break;
             case "guardar":
@@ -56,8 +56,9 @@ public class EntregaController extends HttpServlet {
 
                 break;
 
-            case "modificar-estado":
+            case "modificarEstado":
                 idEntrega = Integer.parseInt(request.getParameter("idEntrega"));
+                
 
                 entrega.setIdEntrega(idEntrega);
                 entrega.setEstado(1);
@@ -66,8 +67,10 @@ public class EntregaController extends HttpServlet {
 
                 request.setAttribute("entregas", entregaDao.findAllEntregaPending());
                 request.getRequestDispatcher("/page-entrega.jsp").forward(request, response);
-
                 break;
+            /*default:
+                request.setAttribute("pendientes", entregaDao.findAllEntregaPending());
+                request.getRequestDispatcher("/page-entrega.jsp").forward(request, response);*/
         }
     }
 

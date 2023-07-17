@@ -73,9 +73,15 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 ${cliente.getIdCliente() == null  ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
-                                                ${cliente.getIdCliente() == null ? '' : '<a class="btn btn-primary" href="../pages/cliente?accion=listar">Cancelar</a>'} 
+                                                ${cliente.getIdCliente() == null ? '' : '<a class="btn btn-primary" href="../pages/clientes?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
+                                        <div>${requestScope.validaciones}</div>    
+                                        <c:if test="${not empty mensaje}">                
+                                            <div class="alert alert-success">
+                                                ${mensaje}
+                                            </div>
+                                        </c:if>   
                                     </form>
                                 </div>
                                 <div class="col col-sm-7">

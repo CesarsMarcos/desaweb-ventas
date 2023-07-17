@@ -26,14 +26,15 @@ public class RolController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String accion = request.getParameter("accion");
         Integer id;
         String nombre;
         String descripcion;
-
         List<Rol> lista = new ArrayList<>();
         Rol rol = new Rol();
-        String accion = request.getParameter("accion");
+
+        String mensaje = null;
+        String validaciones = "";
 
         switch (accion) {
             case "listar":
@@ -43,12 +44,24 @@ public class RolController extends HttpServlet {
             case "guardar":
                 nombre = request.getParameter("nombre");
                 descripcion = request.getParameter("descripcion");
-                rol.setNombre(nombre);
-                rol.setDescripcion(descripcion);
 
-                rolDao.insert(rol);
+                if (nombre.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo Nombre esta vacio";
+                }
+                if (descripcion.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo Descripcion esta vacio";
+                }
+                if (validaciones.equals("")) {
+
+                    rol.setNombre(nombre);
+                    rol.setDescripcion(descripcion);
+
+                    mensaje = rolDao.insert(rol);
+                }
 
                 request.setAttribute("roles", rolDao.findAll());
+                request.setAttribute("mensaje", mensaje);
+                request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
 
                 break;
@@ -56,10 +69,19 @@ public class RolController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
                 nombre = request.getParameter("nombre");
                 descripcion = request.getParameter("descripcion");
-                rol.setIdRol(id);
-                rol.setNombre(nombre);
-                rol.setDescripcion(descripcion);
-                rolDao.update(rol);
+
+                if (nombre.replaceAll(" ", "").equals("")) {
+                    validaciones += "El campo Nombre esta vacio";
+                }
+                if (descripcion.replaceAll(" ", "").equals("")) {
+                    validaciones += "<br/>El campo Descripcion esta vacio";
+                }
+                if (validaciones.equals("")) {
+                    rol.setIdRol(id);
+                    rol.setNombre(nombre);
+                    rol.setDescripcion(descripcion);
+                    mensaje = rolDao.update(rol);
+                }
 
                 request.setAttribute("roles", rolDao.findAll());
                 request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
@@ -75,11 +97,12 @@ public class RolController extends HttpServlet {
             case "eliminar":
                 id = Integer.parseInt(request.getParameter("id"));
                 rolDao.delete(id);
-
                 request.setAttribute("roles", rolDao.findAll());
                 request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
-
                 break;
+            /*default:
+                request.setAttribute("roles", rolDao.findAll());
+                request.getRequestDispatcher("/page-rol.jsp").forward(request, response);*/
         }
     }
 

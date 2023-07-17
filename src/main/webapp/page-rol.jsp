@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col col-sm-5">
                                     <h5 class="mt-4">Registro de Rol</h5>
-                                     <hr>
+                                    <hr>
                                     <form method="post"  ${rol.getIdRol() == null ? 'action="roles?accion=guardar"': 'action="roles?accion=modificar"'} class="row g-2">
                                         <div class="col-md-12">
                                             <input type="hidden" name="id" id="nombre" class="form-control" value="${rol.getIdRol()}">
@@ -39,9 +39,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 ${rol.getIdRol() == null ? '<input type="submit" name="accion" value="Registrar" class="btn btn-primary" >' : '<input type="submit" name="accion" value="Modificar" class="btn btn-primary" >'} 
-                                                ${rol.getIdRol() == null ? '' : '<a class="btn btn-primary"href="../pages/rol?accion=listar">Cancelar</a>'} 
+                                                ${rol.getIdRol() == null ? '' : '<a class="btn btn-primary"href="../pages/roles?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
+                                        <div>${requestScope.validaciones}</div>    
+                                        <c:if test="${not empty mensaje}">                
+                                            <div class="alert alert-success">
+                                                ${mensaje}
+                                            </div>
+                                        </c:if>   
                                     </form>
                                 </div>
                                 <div class="col col-sm-7">
@@ -63,7 +69,7 @@
                                                     <td>${r.getIdRol()}</td>
                                                     <td>${r.getNombre()}</td>
                                                     <td>${r.getDescripcion()}</td>
-                                                    <td>${r.getEstado()== 0 ? '<span class="badge text-bg-success">activo</span>': '<span class="badge text-bg-danger">inactivo</span>' }   </td>
+                                                    <td>${r.getEstado()== 0 ? '<span class="badge bg-success">activo</span>': '<span class="badge bg-danger">inactivo</span>' }   </td>
                                                     <td>
                                                         <a href="roles?accion=obtener&id=${r.getIdRol()}" type="button"
                                                            class="btn btn-info btn-sm  btn-xs"><i

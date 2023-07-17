@@ -18,7 +18,7 @@
                     <div class="card-header">Sistema de Ventas </div>
                     <div class="card-body">
                         <form action="login" method="post">
-                            <img src="${pageContext.request.contextPath}/images/123282.png" alt="" class="figure-img img-fluid rounded" style="width: 150px">
+                            <img src="${pageContext.request.contextPath}/images/fd859ef51486d397f541d978b954aed9.jpg" alt="" class="figure-img img-fluid rounded" style="width: 150px">
                             <input type="text" class="form-control mb-2"
                                    placeholder="username" name="username" autofocus>
                             <input   type="password" class="form-control mb-2"
