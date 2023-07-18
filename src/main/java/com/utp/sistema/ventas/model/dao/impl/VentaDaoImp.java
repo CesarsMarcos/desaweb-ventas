@@ -97,7 +97,7 @@ public class VentaDaoImp extends DataBase implements VentaDao {
         List<Venta> ventas = new ArrayList<>();
         try {
             con = this.getConnection();
-            pst = con.prepareStatement("select * from venta");
+            pst = con.prepareStatement("select * from venta where estado =0");
             rs = pst.executeQuery();
 
             while (rs.next()) {

@@ -9,7 +9,6 @@ import com.utp.sistema.ventas.model.dao.impl.ArticuloDaoImp;
 import com.utp.sistema.ventas.model.dao.impl.CategoriaDaoImp;
 import com.utp.sistema.ventas.model.util.Constantes;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,12 +30,12 @@ public class ArticuloController extends HttpServlet {
 
         Integer id;
         String descripcion, stock, precio, idCategoria;
-
+        String accion = request.getParameter("accion");
         int idCategoriaInt, stockInt;
         double precioDouble;
 
         Articulo articulo = new Articulo();
-        String accion = request.getParameter("accion");
+
         String validaciones = "";
         String mensaje = null;
 

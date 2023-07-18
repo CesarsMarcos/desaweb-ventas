@@ -26,39 +26,12 @@
                                     <h5 class="mt-4">Listado de Entregas</h5>
                                     <hr>
                                     <div class="list-group" id="list-tab" role="tablist">
-                                        <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="#listar" href="entregas?accion=listar" role="tab" aria-controls="list-home">Pendientes</a>
                                         <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="#entregados" href="entregas?accion=entregados" role="tab" aria-controls="list-profile">Entregados</a>
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="listar" role="tabpanel" aria-labelledby="list-home-list">
-                                            <h5 class="mt-4">Pendientes</h5>
-                                            <hr>
-                                            <table class="table">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Id</th>
-                                                        <th scope="col">Id Venta </th>
-                                                        <th scope="col">Cliente</th>
-                                                        <th scope="col">Estado</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <c:forEach items="${pendientes}" var="e" >
-                                                        <tr>
-                                                            <td>${e.idEntrega}</td>
-                                                            <td>${e.idVenta}</td>
-                                                            <td>${e.Cliente}  </td>
-                                                            <td>${e.Estado == 0 ? '<span class="badge bg-warning">Pendiente</span>' : '<span class="badge bg-primary">Entregado</span>'} </td>
-                                                            <td>
-                                                                <a href="entregas?accion=modificar-estado&idEntrega=${e.idEntrega}" type="button" class="btn btn-success btn-sm  btn-xs"><i class="ion ion-md-bus"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                    </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                        
                                         <div class="tab-pane fade" id="entregados" role="tabpanel" aria-labelledby="list-profile-list">
                                             <div class="col col-sm-12">
                                                 <h5 class="mt-4">Entregadas</h5>
@@ -73,7 +46,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <c:forEach items="${entregas}" var="e" >
+                                                        <c:forEach items="${entregados}" var="e" >
                                                             <tr>
                                                                 <td>${e.idEntrega}</td>
                                                                 <td>${e.idVenta}</td>

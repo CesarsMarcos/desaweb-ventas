@@ -139,6 +139,8 @@
                                     <button type="submit"  name="accion" value="guardar" class="btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> Registrar Venta </button>
                                     <button type="submit" class="btn btn-danger" name="accion" value="cancelar"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
                                 </div>
+
+                                <div>${requestScope.validaciones}</div>                        
                                 <c:if test="${not empty mensaje}">                
                                     <div class="alert alert-success mt-2">
                                         ${mensaje}

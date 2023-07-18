@@ -51,16 +51,28 @@ public class VentaController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String idCli, idProd;
+        int idCliInt, idProdInt;
         String accion = request.getParameter("accion");
         String mensaje = null;
+        String validaciones = "";
 
         switch (accion) {
             case "BuscarCliente":
-                Integer idCli = Integer.parseInt(request.getParameter("idCli"));
-                cliente = clienteDao.find(idCli);
-                if (cliente == null) {
-                    mensaje = "Cliente con código " + idCli + " no existe";
+                idCli = request.getParameter("idCli");
+                idCliInt = (idCli.equals("") || idCli == null ? 0 : Integer.valueOf(idCli));
+
+                if (idCliInt == 0) {
+                    validaciones += "<br />Ingresa el código de cliente";
                 }
+
+                if (validaciones.equals("")) {
+                    cliente = clienteDao.find(idCliInt);
+                    if (cliente == null) {
+                        mensaje = "Cliente con código " + idCli + " no existe";
+                    }
+                }
+
                 request.setAttribute("cliente", cliente);
                 request.setAttribute("articulo", articulo);
                 request.setAttribute("articulo", articulo);
@@ -69,15 +81,23 @@ public class VentaController extends HttpServlet {
                 request.setAttribute("igv", igv);
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
+                request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
                 break;
 
             case "BuscarProducto":
-                Integer idProd = Integer.parseInt(request.getParameter("idProducto"));
-                articulo = productoDao.find(idProd);
+                idProd = request.getParameter("idProducto");
+                idProdInt = (idProd.equals("") || idProd == null ? 0 : Integer.valueOf(idProd));
 
-                if (articulo.getIdArticulo() == 0 || articulo == null) {
-                    mensaje = "Producto ingresado con código " + idProd + " no existe, ingreso un código valido";
+                if (idProdInt == 0) {
+                    validaciones += "<br />Ingresa el código de producto";
+                }
+
+                if (validaciones.equals("")) {
+                    articulo = productoDao.find(idProdInt);
+                    if (articulo.getIdArticulo() == 0 || articulo == null) {
+                        mensaje = "Producto ingresado con código " + idProd + " no existe, ingreso un código valido";
+                    }
                 }
 
                 request.setAttribute("articulo", articulo);
@@ -87,6 +107,7 @@ public class VentaController extends HttpServlet {
                 request.setAttribute("total", total);
                 request.setAttribute("ventas", ventas);
                 request.setAttribute("mensaje", mensaje);
+                request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
                 break;
 
