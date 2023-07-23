@@ -52,10 +52,8 @@ public class RolController extends HttpServlet {
                     validaciones += "<br/>El campo Descripcion esta vacio";
                 }
                 if (validaciones.equals("")) {
-
                     rol.setNombre(nombre);
                     rol.setDescripcion(descripcion);
-
                     mensaje = rolDao.insert(rol);
                 }
 
@@ -63,6 +61,7 @@ public class RolController extends HttpServlet {
                 request.setAttribute("mensaje", mensaje);
                 request.setAttribute("validaciones", validaciones);
                 request.getRequestDispatcher("/page-rol.jsp").forward(request, response);
+                
 
                 break;
             case "modificar":

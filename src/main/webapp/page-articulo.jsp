@@ -48,7 +48,7 @@ Author     : Cesar
                                         </div>
                                         <div class="col-md-6">
                                             <label for="nombres">Precio Venta</label>
-                                            <input type="text" name="precioVenta"  class="form-control" value="${articulo.getPrecio_venta()}">
+                                            <input type="text" name="precioVenta"  class="form-control" value="${articulo.getPrecioVenta()}">
                                         </div>
 
                                         <div class="col-md-12">
@@ -57,9 +57,13 @@ Author     : Cesar
                                                 ${articulo.getIdArticulo() == null ? '' : '<a class="btn btn-primary" href="../pages/articulos?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
-                                        <div>${requestScope.validaciones}</div>    
+                                        <c:if test="${not empty validaciones}">          
+                                            <div class="alert alert-danger mt-1">
+                                                ${validaciones}
+                                            </div>
+                                        </c:if>
                                         <c:if test="${not empty mensaje}">                
-                                            <div class="alert alert-success">
+                                            <div class="alert alert-success mt-1">
                                                 ${mensaje}
                                             </div>
                                         </c:if> 
@@ -87,7 +91,7 @@ Author     : Cesar
                                                         <td>${a.getIdArticulo()}</td>
                                                         <td>${a.getIdCategoria()}</td>
                                                         <td>${a.getDescripcion()}</td>
-                                                        <td>${a.getPrecio_venta()}</td>
+                                                        <td>${a.getPrecioVenta()}</td>
                                                         <td>${a.getStock()}</td>
                                                         <td>${a.getEstado()== 0 ? '<span class="badge bg-success">activo</span>': '<span class="badge bg-danger">inactivo</span>' }   </td>
                                                         <td>

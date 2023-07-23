@@ -11,9 +11,9 @@ import java.sql.SQLException;
 
 /**
  *
- * @author 
+ * @author
  */
-public class LoginDaoImp extends DataBase implements LoginDao{
+public class LoginDaoImp extends DataBase implements LoginDao {
 
     private Connection con;
     private PreparedStatement pst;
@@ -31,12 +31,12 @@ public class LoginDaoImp extends DataBase implements LoginDao{
                 usuario = new Usuario();
                 usuario.setIdUsuario(rs.getInt(1));
                 usuario.setIdRol(rs.getInt(2));
-                usuario.setNombres(rs.getString(3));                                                        
-               //JOptionPane.showMessageDialog(null, "Bienvenido al Sistema " + rs.getString(3) + " - " + getNombreRol(rs.getInt(2)));
-               
-                System.out.println("Usuario ingresado " + usuario.getNombres());   
+                usuario.setNombres(rs.getString(3));
+                //JOptionPane.showMessageDialog(null, "Bienvenido al Sistema " + rs.getString(3) + " - " + getNombreRol(rs.getInt(2)));
+
+                System.out.println("Usuario ingresado " + usuario.getNombres());
             } else {
-                System.out.println("No se encontró Usuario con el DNI y PASSWORD ingresado");                
+                System.out.println("No se encontró Usuario con el DNI y PASSWORD ingresado");
             }
             rs.close();
             pst.close();

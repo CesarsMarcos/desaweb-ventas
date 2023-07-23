@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-         <%@include file="head.jsp" %>
+        <%@include file="head.jsp" %>
         <title>Login</title>
     </head>
     <body>
@@ -26,7 +26,11 @@
                             <div class="form-group">
                                 <button  class="btn btn-primary btn-block" type="submit">Login</button>
                             </div>
-                            <span style="color: red">${message}</span>
+
+                            <c:if test="${not empty message}">                
+                                <span style="color: red">${message}</span>
+                            </c:if> 
+
                         </form>
                     </div>
                 </div>

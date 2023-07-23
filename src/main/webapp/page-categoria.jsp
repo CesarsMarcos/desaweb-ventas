@@ -38,7 +38,11 @@
                                                 ${categoria.getIdCategoria() == null ? '' : '<a class="btn btn-primary" href="../pages/categorias?accion=listar">Cancelar</a>'} 
                                             </div>
                                         </div>
-                                        <div>${requestScope.validaciones}</div>   
+                                        <c:if test="${not empty validaciones}">          
+                                            <div class="alert alert-danger">
+                                                ${validaciones}
+                                            </div>
+                                        </c:if>
                                         <c:if test="${not empty mensaje}">                
                                             <div class="alert alert-success">
                                                 ${mensaje}

@@ -25,7 +25,8 @@
                                     <h5 class="mt-4">Registro de Nueva Venta</h5>
                                     <hr>
                                     <div class="col-sm-8">
-                                        <div class="row g-3 ">
+
+                                        <div class="row g-3">
                                             <div class="col-sm-2 text-center">
                                                 <div class="input-group">
                                                     <input type="text" class="form-control" name="idProducto" placeholder="id de producto" value="${articulo.getIdArticulo()}" >    
@@ -33,16 +34,13 @@
                                                 </div>
                                             </div>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control"  placeholder="Descripción" value="${articulo.getDescripcion()}" >
+                                                <input type="text" class="form-control"  readonly="" placeholder="Descripción" value="${articulo.getDescripcion()}" >
                                             </div>
                                             <div class="col-sm-2">
-                                                <input type="text" class="form-control"  placeholder="Precio" value="${articulo.getPrecio_venta()}" >
+                                                <input type="text" class="form-control" readonly  placeholder="Precio" value="${articulo.getPrecioVenta()}" >
                                             </div>
-                                            <div class="col-sm-2">
-                                                <input type="number" class="form-control"  placeholder="Cantidad" name="cantidad" >
-                                            </div>
-                                            <div class="col-sm-2">
-                                                <button type="submit" name="accion" value="AgregarLista" class="btn btn-success"><i class="fa fa-cart-plus" ></i></button>
+                                            <div class="col-sm-3">
+                                                <button type="submit" name="accion" value="AgregarACarrito" class="btn btn-success"><i class="fa fa-cart-plus" ></i></button>
                                             </div>
 
                                         </div>
@@ -52,26 +50,21 @@
                                                 <table class="table align-middle">
                                                     <thead>
                                                         <tr>
-                                                            <th scope="col">Id</th>
                                                             <th scope="col">Descripción</th>
-                                                            <th scope="col">Cantidad</th>
                                                             <th scope="col">Precio Venta</th>
-                                                            <th scope="col">Sub Total</th>
+                                                            <th scope="col">Cantidad</th>
+                                                            <th scope="col">Total</th>
                                                             <th scope="col"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <c:forEach items="${ventas}" var="venta" >
+                                                        <c:forEach items="${sessionScope.carrito}" var="venta" >
                                                             <tr>
-                                                                <td>${venta.getId()}</td>
                                                                 <td>${venta.getDescripcion()}</td>
-                                                                <td>${venta.getCantidad()}</td>
                                                                 <td>${venta.getPrecioVenta()}</td>
-                                                                <td>${venta.getSubTotal()}</td>
+                                                                <td>${venta.getCantidad()}</td>
+                                                                <td>${venta.getTotal()}</td>
                                                                 <td>
-                                                                    <a href="" type="button"
-                                                                       class="btn btn-warning btn-sm  btn-xs"><i
-                                                                            class="fa fa-pencil"></i></a>
                                                                     <a href="" type="button"
                                                                        class="btn btn-danger btn-sm  btn-xs"><i
                                                                             class="ion ion-md-trash"></i></a>
@@ -140,9 +133,13 @@
                                     <button type="submit" class="btn btn-danger" name="accion" value="cancelar"><i class="fa fa-times" aria-hidden="true"></i> Cancelar </button>
                                 </div>
 
-                                <div>${requestScope.validaciones}</div>                        
+                                <c:if test="${not empty validaciones}">          
+                                    <div class="alert alert-danger mt-1">
+                                        ${validaciones}
+                                    </div>
+                                </c:if>                  
                                 <c:if test="${not empty mensaje}">                
-                                    <div class="alert alert-success mt-2">
+                                    <div class="alert alert-success mt-1">
                                         ${mensaje}
                                     </div>
                                 </c:if>                      

@@ -6,31 +6,39 @@ package com.utp.sistema.ventas.model;
  */
 public class Articulo {
 
-    private int idArticulo;
+    private Integer idArticulo;
     private int idCategoria;
     private String descripcion;
-    private Float precio_venta;
+    private Float precioVenta;
     private int stock;
     private int estado;
 
     public Articulo() {
     }
 
-    public Articulo(int idArticulo, int idCategoria, String nombre,
-            String descripcion, Float precio_venta, int stock, int estado) {
-        this.idArticulo = idArticulo;
+    public Articulo(int idCategoria, String descripcion, Float precioVenta, int stock, int estado) {
         this.idCategoria = idCategoria;
         this.descripcion = descripcion;
-        this.precio_venta = precio_venta;
+        this.precioVenta = precioVenta;
         this.stock = stock;
         this.estado = estado;
     }
 
-    public int getIdArticulo() {
+    public Articulo(int idArticulo, int idCategoria,
+            String descripcion, Float precioVenta, int stock, int estado) {
+        this.idArticulo = idArticulo;
+        this.idCategoria = idCategoria;
+        this.descripcion = descripcion;
+        this.precioVenta = precioVenta;
+        this.stock = stock;
+        this.estado = estado;
+    }
+
+    public Integer getIdArticulo() {
         return idArticulo;
     }
 
-    public void setIdArticulo(int idArticulo) {
+    public void setIdArticulo(Integer idArticulo) {
         this.idArticulo = idArticulo;
     }
 
@@ -42,12 +50,12 @@ public class Articulo {
         this.idCategoria = idCategoria;
     }
 
-    public Float getPrecio_venta() {
-        return precio_venta;
+    public Float getPrecioVenta() {
+        return precioVenta;
     }
 
-    public void setPrecio_venta(Float precio_venta) {
-        this.precio_venta = precio_venta;
+    public void setPrecioVenta(Float precioVenta) {
+        this.precioVenta = precioVenta;
     }
 
     public int getStock() {
@@ -74,17 +82,12 @@ public class Articulo {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "\n Articulo{"
-                + "\n idArticulo=" + idArticulo + ""
-                + "\n idCategoria=" + idCategoria + ""
-                + "\n descripcion=" + descripcion + ""
-                + "\n precio_venta=" + precio_venta + ""
-                + "\n stock=" + stock + ""
-                + "\n estado=" + estado + '}';
+    public boolean sinExistencia() {
+        return this.stock <= 0;
     }
 
- 
+    public void restarExistencia(Float stock) {
+        this.stock -= stock;
+    }
 
 }

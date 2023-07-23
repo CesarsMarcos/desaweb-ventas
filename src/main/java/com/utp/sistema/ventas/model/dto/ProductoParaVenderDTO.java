@@ -10,11 +10,13 @@ public class ProductoParaVenderDTO extends Articulo {
 
     private Float cantidad;
 
-    public ProductoParaVenderDTO() {
+    public ProductoParaVenderDTO(Float cantidad, int idCategoria, String descripcion, Float precioVenta, int stock, int estado) {
+        super(idCategoria, descripcion, precioVenta, stock, estado);
+        this.cantidad = cantidad;
     }
 
-    public ProductoParaVenderDTO(int idArticulo, int idCategoria, String nombre, String descripcion, Float precio_venta, int stock, int estado) {
-        super(idArticulo, idCategoria, nombre, descripcion, precio_venta, stock, estado);
+    public ProductoParaVenderDTO(Float cantidad, int idArticulo, int idCategoria, String descripcion, Float precioVenta, int stock, int estado) {
+        super(idArticulo, idCategoria, descripcion, precioVenta, stock, estado);
         this.cantidad = cantidad;
     }
 
@@ -22,10 +24,11 @@ public class ProductoParaVenderDTO extends Articulo {
         this.cantidad++;
     }
 
-    public Float  getTotal() {
-        return this.getPrecio_venta() * this.cantidad;
+    public Float getTotal() {
+        return this.getPrecioVenta() * this.cantidad;
     }
 
+ 
     public Float getCantidad() {
         return cantidad;
     }

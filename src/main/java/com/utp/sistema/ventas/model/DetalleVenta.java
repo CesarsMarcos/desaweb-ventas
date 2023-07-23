@@ -8,21 +8,24 @@ public class DetalleVenta {
 
     private int idDetalle_venta;
     private int idVenta;
-    private int idArticulo;
-    private int cantidad;
+    private Integer idArticulo;
+    private Float cantidad;
     private double precio;
 
     public DetalleVenta() {
     }
 
-    public DetalleVenta(int idDetalle_venta, int idVenta, int idArticulo,
-            int cantidad, double precio) {
-        this.idDetalle_venta = idDetalle_venta;
+    public DetalleVenta(int idVenta, Integer idArticulo, Float cantidad, double precio) {
         this.idVenta = idVenta;
         this.idArticulo = idArticulo;
         this.cantidad = cantidad;
         this.precio = precio;
     }
+
+   
+    
+    
+
 
     public int getIdDetalle_venta() {
         return idDetalle_venta;
@@ -48,11 +51,11 @@ public class DetalleVenta {
         this.idArticulo = idArticulo;
     }
 
-    public int getCantidad() {
+    public Float getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(Float cantidad) {
         this.cantidad = cantidad;
     }
 

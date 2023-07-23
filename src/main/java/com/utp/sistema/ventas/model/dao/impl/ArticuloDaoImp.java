@@ -31,7 +31,7 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
 
             pst.setInt(1, articulo.getIdCategoria());
             pst.setString(2, articulo.getDescripcion());
-            pst.setDouble(3, articulo.getPrecio_venta());
+            pst.setFloat(3, articulo.getPrecioVenta());
             pst.setInt(4, articulo.getStock());
             pst.setInt(5, articulo.getEstado());
 
@@ -66,7 +66,7 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
                 articulo.setIdArticulo(rs.getInt(1));
                 articulo.setIdCategoria(rs.getInt(2));
                 articulo.setDescripcion(rs.getString(3));
-                articulo.setPrecio_venta(rs.getFloat(4));
+                articulo.setPrecioVenta(rs.getFloat(4));
                 articulo.setStock(rs.getInt(5));
                 articulo.setEstado(rs.getByte(6));
             } else {
@@ -100,7 +100,7 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
                 articulo.setIdArticulo(rs.getInt(1));
                 articulo.setIdCategoria(rs.getInt(2));
                 articulo.setDescripcion(rs.getString(3));
-                articulo.setPrecio_venta(rs.getFloat(4));
+                articulo.setPrecioVenta(rs.getFloat(4));
                 articulo.setStock(rs.getInt(5));
                 articulo.setEstado(rs.getInt(6));
 
@@ -128,7 +128,7 @@ public class ArticuloDaoImp extends DataBase implements ArticuloDao {
 
             pst.setInt(1, articulo.getIdCategoria());
             pst.setString(2, articulo.getDescripcion());
-            pst.setDouble(3, articulo.getPrecio_venta());
+            pst.setDouble(3, articulo.getPrecioVenta());
             pst.setInt(4, articulo.getStock());
             pst.setInt(5, articulo.getEstado());
 

@@ -27,11 +27,10 @@ public class ArticuloController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        Integer id;
-        String descripcion, stock, precio, idCategoria;
         String accion = request.getParameter("accion");
-        int idCategoriaInt, stockInt;
+
+        String descripcion, precio;
+        Integer id, idCategoria, stock;
         Float precioFloat;
 
         Articulo articulo = new Articulo();
@@ -47,33 +46,22 @@ public class ArticuloController extends HttpServlet {
 
                 break;
             case "guardar":
+
                 descripcion = request.getParameter("descripcion");
-                idCategoria = request.getParameter("categoria");
-                stock = request.getParameter("stock");
+                idCategoria = (request.getParameter("categoria") == null || request.getParameter("categoria") == "") ? 0 : Integer.valueOf(request.getParameter("categoria"));
+                stock = (request.getParameter("stock") == null || request.getParameter("stock") == "") ? 0 : Integer.valueOf(request.getParameter("stock"));
                 precio = request.getParameter("precioVenta");
-                idCategoriaInt = (idCategoria.equals("") || idCategoria == null ? 0 : Integer.valueOf(idCategoria));
-                stockInt = (stock.equals("") || stock == null ? 0 : Integer.valueOf(stock));
                 precioFloat = (precio.equals("") || precio == null ? 0 : Float.valueOf(precio));
 
-                if (descripcion.replaceAll(" ", "").equals("")) {
-                    validaciones += "El campo descripcion esta vacio";
-                }
-                if (stockInt == 0) {
-                    validaciones += "<br />Ingresa el stock";
-                }
-
-                if (precioFloat == 0) {
-                    validaciones += "<br />Ingresa el precio";
-                }
-
-                if (idCategoriaInt == 0) {
-                    validaciones += "<br />Debes seleccionar una categoria";
-                }
-
+                if (descripcion.replaceAll(" ", "").equals("")) validaciones += "El campo descripcion esta vacio";
+                if (idCategoria == 0) validaciones += "<br />Debes seleccionar una categoria";
+                if (stock == 0)  validaciones += "<br />Ingresa el stock";
+                if (precioFloat == 0) validaciones += "<br />Ingresa el precio";
+                
                 articulo.setDescripcion(descripcion);
-                articulo.setIdCategoria(idCategoriaInt);
-                articulo.setStock(stockInt);
-                articulo.setPrecio_venta(precioFloat);
+                articulo.setIdCategoria(idCategoria);
+                articulo.setStock(stock);
+                articulo.setPrecioVenta(precioFloat);
 
                 if (validaciones.equals("")) {
                     mensaje = articuloDao.insert(articulo);
@@ -91,19 +79,23 @@ public class ArticuloController extends HttpServlet {
                 id = Integer.parseInt(request.getParameter("id"));
 
                 descripcion = request.getParameter("descripcion");
-                idCategoria = request.getParameter("categoria");
-                stock = request.getParameter("stock");
+                idCategoria = (request.getParameter("categoria") == null || request.getParameter("categoria") == "") ? 0 : Integer.valueOf(request.getParameter("categoria"));
+                stock = (request.getParameter("stock") == null || request.getParameter("stock") == "") ? 0 : Integer.valueOf(request.getParameter("stock"));
                 precio = request.getParameter("precioVenta");
-                idCategoriaInt = (idCategoria.equals("") || idCategoria == null ? 0 : Integer.valueOf(idCategoria));
-                stockInt = (stock.equals("") || stock == null ? 0 : Integer.valueOf(stock));
                 precioFloat = (precio.equals("") || precio == null ? 0 : Float.valueOf(precio));
+                
+                if (descripcion.replaceAll(" ", "").equals("")) validaciones += "El campo descripcion esta vacio";
+                if (idCategoria == 0) validaciones += "<br />Debes seleccionar una categoria";
+                if (stock == 0)  validaciones += "<br />Ingresa el stock";
+                if (precioFloat == 0) validaciones += "<br />Ingresa el precio";
+                
 
                 if (validaciones.equals("")) {
                     articulo.setIdArticulo(id);
                     articulo.setDescripcion(descripcion);
-                    articulo.setIdCategoria(idCategoriaInt);
-                    articulo.setStock(stockInt);
-                    articulo.setPrecio_venta(precioFloat);
+                    articulo.setIdCategoria(idCategoria);
+                    articulo.setStock(stock);
+                    articulo.setPrecioVenta(precioFloat);
                     mensaje = articuloDao.update(articulo);
                 }
 

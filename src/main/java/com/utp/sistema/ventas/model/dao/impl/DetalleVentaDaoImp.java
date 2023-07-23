@@ -32,7 +32,7 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
 
             pst.setInt(1, detalleVenta.getIdVenta());
             pst.setInt(2, detalleVenta.getIdArticulo());
-            pst.setInt(3, detalleVenta.getCantidad());
+            pst.setFloat(3, detalleVenta.getCantidad());
             pst.setDouble(4, detalleVenta.getPrecio());
 
             flag = pst.executeUpdate();
@@ -62,7 +62,7 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
                 detalleVenta.setIdDetalle_venta(rs.getInt(1));
                 detalleVenta.setIdVenta(rs.getInt(2));
                 detalleVenta.setIdArticulo(rs.getInt(3));
-                detalleVenta.setCantidad(rs.getInt(4));
+                detalleVenta.setCantidad(rs.getFloat(4));
                 detalleVenta.setPrecio(rs.getDouble(5));
             } else {
                 System.out.println("No se encontró DetalleVenta con el iddetalle_venta = " + idDetalleVenta);
@@ -91,7 +91,7 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
                 detalleVenta.setIdDetalle_venta(rs.getInt(1));
                 detalleVenta.setIdVenta(rs.getInt(2));
                 detalleVenta.setIdArticulo(rs.getInt(3));
-                detalleVenta.setCantidad(rs.getInt(4));
+                detalleVenta.setCantidad(rs.getFloat(4));
                 detalleVenta.setPrecio(rs.getDouble(5));
                 detalleVentas.add(detalleVenta);
             }
@@ -117,7 +117,7 @@ public class DetalleVentaDaoImp extends DataBase implements DetalleVentaDao {
 
             pst.setInt(1, detalleVenta.getIdVenta());
             pst.setInt(2, detalleVenta.getIdArticulo());
-            pst.setInt(3, detalleVenta.getCantidad());
+            pst.setFloat(3, detalleVenta.getCantidad());
             pst.setDouble(4, detalleVenta.getPrecio());
 
             pst.setInt(5, detalleVenta.getIdDetalle_venta());

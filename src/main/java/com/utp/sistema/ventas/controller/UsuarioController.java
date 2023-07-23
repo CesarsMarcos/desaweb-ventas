@@ -7,6 +7,7 @@ package com.utp.sistema.ventas.controller;
 import com.utp.sistema.ventas.model.Usuario;
 import com.utp.sistema.ventas.model.dao.impl.RolDaoImp;
 import com.utp.sistema.ventas.model.dao.impl.UsuarioDaoImp;
+import com.utp.sistema.ventas.model.dto.ProductoParaVenderDTO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,8 +33,7 @@ public class UsuarioController extends HttpServlet {
         Integer id;
         String nombres;
         String apellidos;
-        String idRol;
-        Integer idRolInt;
+        Integer idRol;
         String tipDocumento;
         String numDocumento;
         String password;
@@ -46,172 +46,171 @@ public class UsuarioController extends HttpServlet {
         String mensaje = null;
         String validaciones = "";
 
-        switch (accion) {
-            case "listar":
-                request.setAttribute("usuarios", usuarioDao.findAll());
-                request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
-                break;
-            case "guardar":
-                validaciones = "";
-                nombres = request.getParameter("nombres");
-                apellidos = request.getParameter("apellidos");
-                idRol = request.getParameter("rol");
-                tipDocumento = request.getParameter("tipDocumento");
-                numDocumento = request.getParameter("numDocumento");
-                password = request.getParameter("password");
-                telefono = request.getParameter("telefono");
-                email = request.getParameter("email");
-                direccion = request.getParameter("direccion");
+        if (accion == null) {
 
-                idRolInt = (idRol.equals("") || idRol == null ? 0 : Integer.valueOf(idRol));
+        } else {
+            switch (accion) {
 
-                if (nombres.replaceAll(" ", "").equals("")) {
-                    validaciones += "El campo nombres esta vacio";
-                }
+                case "listar":
+                    request.setAttribute("usuarios", usuarioDao.findAll());
+                    request.setAttribute("roles", rolDao.findAll());
+                    request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
+                    break;
+                case "guardar":
+                    validaciones = "";
+                    nombres = request.getParameter("nombres");
+                    apellidos = request.getParameter("apellidos");
+                    tipDocumento = request.getParameter("tipDocumento");
+                    numDocumento = request.getParameter("numDocumento");
+                    password = request.getParameter("password");
+                    telefono = request.getParameter("telefono");
+                    email = request.getParameter("email");
+                    direccion = request.getParameter("direccion");
+                    idRol = (request.getParameter("rol") == null || request.getParameter("rol") == "") ? 0 : Integer.valueOf(request.getParameter("rol"));
 
-                if (apellidos.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo apellidos esta vacio";
-                }
-                if (idRolInt == 0) {
-                    validaciones += "<br/>Debes seleccionar un Rol";
-                }
+                    if (nombres.replaceAll(" ", "").equals("")) {
+                        validaciones += "El campo nombres esta vacio";
+                    }
 
-                if (tipDocumento.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>Debes seleccionar un Tipo de Documento";
-                }
+                    if (apellidos.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo apellidos esta vacio";
+                    }
+                    if (idRol == 0) {
+                        validaciones += "<br/>Debes seleccionar un Rol";
+                    }
 
-                if (numDocumento.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo Número de Documento esta vacio";
-                }
+                    if (tipDocumento.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>Debes seleccionar un Tipo de Documento";
+                    }
 
-                if (password.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo password esta vacio";
-                }
+                    if (numDocumento.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo Número de Documento esta vacio";
+                    }
 
-                if (telefono.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo password esta vacio";
-                }
+                    if (password.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo password esta vacio";
+                    }
 
-                if (email.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo email esta vacio";
-                }
+                    if (telefono.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo password esta vacio";
+                    }
 
-                if (direccion.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo direccion esta vacio";
-                }
+                    if (email.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo email esta vacio";
+                    }
 
-                if (validaciones.equals("")) {
-                    usuario.setNombres(nombres);
-                    usuario.setApellidos(apellidos);
-                    usuario.setTipo_documento(tipDocumento);
-                    usuario.setNum_documento(numDocumento);
-                    usuario.setIdRol(idRolInt);
-                    usuario.setPassword(password);
-                    usuario.setDireccion(direccion);
-                    usuario.setTelefono(telefono);
-                    usuario.setEmail(email);
-                    mensaje = usuarioDao.insert(usuario);
-                }
-                request.setAttribute("usuarios", usuarioDao.findAll());
-                request.setAttribute("mensaje", mensaje);
-                request.setAttribute("validaciones", validaciones);
-                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
-                break;
+                    if (direccion.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo direccion esta vacio";
+                    }
 
-            case "modificar":
-                id = Integer.parseInt(request.getParameter("id"));
-                nombres = request.getParameter("nombres");
-                apellidos = request.getParameter("apellidos");
-                idRol = request.getParameter("rol");
-                tipDocumento = request.getParameter("tipDocumento");
-                numDocumento = request.getParameter("numDocumento");
-                password = request.getParameter("password");
-                telefono = request.getParameter("telefono");
-                email = request.getParameter("email");
-                direccion = request.getParameter("direccion");
-                idRolInt = (idRol.equals("") || idRol == null ? 0 : Integer.valueOf(idRol));
+                    if (validaciones.equals("")) {
+                        usuario.setNombres(nombres);
+                        usuario.setApellidos(apellidos);
+                        usuario.setTipo_documento(tipDocumento);
+                        usuario.setNum_documento(numDocumento);
+                        usuario.setIdRol(idRol);
+                        usuario.setPassword(password);
+                        usuario.setDireccion(direccion);
+                        usuario.setTelefono(telefono);
+                        usuario.setEmail(email);
+                        mensaje = usuarioDao.insert(usuario);
+                    }
+                    request.setAttribute("usuarios", usuarioDao.findAll());
+                    request.setAttribute("mensaje", mensaje);
+                    request.setAttribute("validaciones", validaciones);
+                    request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
+                    break;
 
-                if (nombres.replaceAll(" ", "").equals("")) {
-                    validaciones += "El campo nombres esta vacio";
-                }
+                case "modificar":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    nombres = request.getParameter("nombres");
+                    apellidos = request.getParameter("apellidos");
+                    tipDocumento = request.getParameter("tipDocumento");
+                    numDocumento = request.getParameter("numDocumento");
+                    password = request.getParameter("password");
+                    telefono = request.getParameter("telefono");
+                    email = request.getParameter("email");
+                    direccion = request.getParameter("direccion");
+                    idRol = (request.getParameter("rol") == null || request.getParameter("rol") == "") ? 0 : Integer.valueOf(request.getParameter("rol"));
+                    
+                    if (nombres.replaceAll(" ", "").equals("")) {
+                        validaciones += "El campo nombres esta vacio";
+                    }
 
-                if (apellidos.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo apellidos esta vacio";
-                }
-                if (idRolInt == 0) {
-                    validaciones += "<br/>Debes seleccionar un Rol";
-                }
+                    if (apellidos.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo apellidos esta vacio";
+                    }
+                    if (idRol == 0) {
+                        validaciones += "<br/>Debes seleccionar un Rol";
+                    }
 
-                if (tipDocumento.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>Debes seleccionar un Tipo de Documento";
-                }
+                    if (tipDocumento.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>Debes seleccionar un Tipo de Documento";
+                    }
 
-                if (numDocumento.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo Número de Documento esta vacio";
-                }
+                    if (numDocumento.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo Número de Documento esta vacio";
+                    }
 
-                /*if (password.replaceAll(" ", "").equals("")) {
+                    /*if (password.replaceAll(" ", "").equals("")) {
                     validaciones += "<br/>El campo password esta vacio";
                 }*/
+                    if (telefono.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo password esta vacio";
+                    }
 
-                if (telefono.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo password esta vacio";
-                }
+                    if (email.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo email esta vacio";
+                    }
 
-                if (email.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo email esta vacio";
-                }
+                    if (direccion.replaceAll(" ", "").equals("")) {
+                        validaciones += "<br/>El campo direccion esta vacio";
+                    }
 
-                if (direccion.replaceAll(" ", "").equals("")) {
-                    validaciones += "<br/>El campo direccion esta vacio";
-                }
+                    if (validaciones.equals("")) {
+                        usuario = new Usuario();
+                        usuario.setIdUsuario(id);
+                        usuario.setNombres(nombres);
+                        usuario.setApellidos(apellidos);
+                        usuario.setTipo_documento(tipDocumento);
+                        usuario.setNum_documento(numDocumento);
+                        usuario.setIdRol(idRol);
+                        usuario.setPassword(password);
+                        usuario.setDireccion(direccion);
+                        usuario.setTelefono(telefono);
+                        usuario.setEmail(email);
 
-                if (validaciones.equals("")) {
-                    usuario = new Usuario();
-                    usuario.setIdUsuario(id);
-                    usuario.setNombres(nombres);
-                    usuario.setApellidos(apellidos);
-                    usuario.setTipo_documento(tipDocumento);
-                    usuario.setNum_documento(numDocumento);
-                    usuario.setIdRol(idRolInt);
-                    usuario.setPassword(password);
-                    usuario.setDireccion(direccion);
-                    usuario.setTelefono(telefono);
-                    usuario.setEmail(email);
+                        mensaje = usuarioDao.update(usuario);
+                    }
 
-                    mensaje = usuarioDao.update(usuario);
-                }
+                    request.setAttribute("usuarios", usuarioDao.findAll());
+                    request.setAttribute("roles", rolDao.findAll());
+                    request.setAttribute("mensaje", mensaje);
+                    request.setAttribute("validaciones", validaciones);
+                    request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
 
-                request.setAttribute("usuarios", usuarioDao.findAll());
-                request.setAttribute("roles", rolDao.findAll());
-                request.setAttribute("mensaje", mensaje);
-                request.setAttribute("validaciones", validaciones);
-                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
+                    break;
 
-                break;
+                case "obtener":
+                    id = Integer.parseInt(request.getParameter("id"));
 
-            case "obtener":
-                id = Integer.parseInt(request.getParameter("id"));
+                    request.setAttribute("roles", rolDao.findAll());
+                    request.setAttribute("usuario", usuarioDao.find(id));
+                    request.setAttribute("usuarios", usuarioDao.findAll());
+                    request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
 
-                request.setAttribute("roles", rolDao.findAll());
-                request.setAttribute("usuario", usuarioDao.find(id));
-                request.setAttribute("usuarios", usuarioDao.findAll());
-                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
+                    break;
 
-                break;
-
-            case "eliminar":
-                id = Integer.parseInt(request.getParameter("id"));
-                usuarioDao.delete(id);
-                request.setAttribute("usuarios", usuarioDao.findAll());
-                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
-                break;
-            /*default:
-                request.setAttribute("usuarios", usuarioDao.findAll());
-                request.setAttribute("roles", rolDao.findAll());
-                request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);*/
+                case "eliminar":
+                    id = Integer.parseInt(request.getParameter("id"));
+                    usuarioDao.delete(id);
+                    request.setAttribute("usuarios", usuarioDao.findAll());
+                    request.getRequestDispatcher("/page-usuario.jsp").forward(request, response);
+                    break;
+             
+            }
         }
+
     }
 
     @Override
