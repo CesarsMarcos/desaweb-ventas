@@ -6,6 +6,7 @@ package com.utp.sistema.ventas.controller;
 
 import com.utp.sistema.ventas.model.*;
 import com.utp.sistema.ventas.model.dao.impl.*;
+import com.utp.sistema.ventas.model.dto.ProductoParaVenderDTO;
 import com.utp.sistema.ventas.model.dto.VentaDTO;
 import com.utp.sistema.ventas.model.util.Util;
 
@@ -159,7 +160,6 @@ public class VentaController extends HttpServlet {
                 break;
 
             case "guardar":
-
                 venta.setRuc("000000");
                 venta.setTipo_comprobante("tipo_comprobante");
                 venta.setNum_comprobante(util.generateNumComprobante());
@@ -195,6 +195,14 @@ public class VentaController extends HttpServlet {
                 ventaDTO = new VentaDTO();
                 // numSerie = util.generateNumComprobante();
                 //request.setAttribute("numSerie", numSerie);
+
+                float total = 0;
+                ArrayList<ProductoParaVenderDTO> carrito = this.obtenerCarrito(request);
+                for (ProductoParaVenderDTO p : carrito) {
+                    total += p.getTotal();
+                }
+                request.setAttribute("total", 5000);
+                request.setAttribute("mensaje", "Venta registrada con exito");
                 request.getRequestDispatcher("/page-venta.jsp").forward(request, response);
         }
 
@@ -212,6 +220,18 @@ public class VentaController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+
+    private ArrayList<ProductoParaVenderDTO> obtenerCarrito(HttpServletRequest request) {
+        ArrayList<ProductoParaVenderDTO> carrito = (ArrayList<ProductoParaVenderDTO>) request.getSession().getAttribute("carrtito");
+        if (carrito == null) {
+            carrito = new ArrayList<>();
+        }
+        return carrito;
+    }
+
+    private void guardarCarrito(ArrayList<ProductoParaVenderDTO> carrito, HttpServletRequest request) {
+        request.getSession().setAttribute("carrito", carrito);
     }
 
     @Override

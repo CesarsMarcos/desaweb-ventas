@@ -32,7 +32,7 @@ public class ArticuloController extends HttpServlet {
         String descripcion, stock, precio, idCategoria;
         String accion = request.getParameter("accion");
         int idCategoriaInt, stockInt;
-        double precioDouble;
+        Float precioFloat;
 
         Articulo articulo = new Articulo();
 
@@ -53,7 +53,7 @@ public class ArticuloController extends HttpServlet {
                 precio = request.getParameter("precioVenta");
                 idCategoriaInt = (idCategoria.equals("") || idCategoria == null ? 0 : Integer.valueOf(idCategoria));
                 stockInt = (stock.equals("") || stock == null ? 0 : Integer.valueOf(stock));
-                precioDouble = (precio.equals("") || precio == null ? 0 : Double.valueOf(precio));
+                precioFloat = (precio.equals("") || precio == null ? 0 : Float.valueOf(precio));
 
                 if (descripcion.replaceAll(" ", "").equals("")) {
                     validaciones += "El campo descripcion esta vacio";
@@ -62,7 +62,7 @@ public class ArticuloController extends HttpServlet {
                     validaciones += "<br />Ingresa el stock";
                 }
 
-                if (precioDouble == 0) {
+                if (precioFloat == 0) {
                     validaciones += "<br />Ingresa el precio";
                 }
 
@@ -73,7 +73,7 @@ public class ArticuloController extends HttpServlet {
                 articulo.setDescripcion(descripcion);
                 articulo.setIdCategoria(idCategoriaInt);
                 articulo.setStock(stockInt);
-                articulo.setPrecio_venta(precioDouble);
+                articulo.setPrecio_venta(precioFloat);
 
                 if (validaciones.equals("")) {
                     mensaje = articuloDao.insert(articulo);
@@ -96,14 +96,14 @@ public class ArticuloController extends HttpServlet {
                 precio = request.getParameter("precioVenta");
                 idCategoriaInt = (idCategoria.equals("") || idCategoria == null ? 0 : Integer.valueOf(idCategoria));
                 stockInt = (stock.equals("") || stock == null ? 0 : Integer.valueOf(stock));
-                precioDouble = (precio.equals("") || precio == null ? 0 : Double.valueOf(precio));
+                precioFloat = (precio.equals("") || precio == null ? 0 : Float.valueOf(precio));
 
                 if (validaciones.equals("")) {
                     articulo.setIdArticulo(id);
                     articulo.setDescripcion(descripcion);
                     articulo.setIdCategoria(idCategoriaInt);
                     articulo.setStock(stockInt);
-                    articulo.setPrecio_venta(precioDouble);
+                    articulo.setPrecio_venta(precioFloat);
                     mensaje = articuloDao.update(articulo);
                 }
 

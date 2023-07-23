@@ -9,7 +9,7 @@ public class Articulo {
     private int idArticulo;
     private int idCategoria;
     private String descripcion;
-    private double precio_venta;
+    private Float precio_venta;
     private int stock;
     private int estado;
 
@@ -17,7 +17,7 @@ public class Articulo {
     }
 
     public Articulo(int idArticulo, int idCategoria, String nombre,
-            String descripcion, double precio_venta, int stock, int estado) {
+            String descripcion, Float precio_venta, int stock, int estado) {
         this.idArticulo = idArticulo;
         this.idCategoria = idCategoria;
         this.descripcion = descripcion;
@@ -42,11 +42,11 @@ public class Articulo {
         this.idCategoria = idCategoria;
     }
 
-    public double getPrecio_venta() {
+    public Float getPrecio_venta() {
         return precio_venta;
     }
 
-    public void setPrecio_venta(double precio_venta) {
+    public void setPrecio_venta(Float precio_venta) {
         this.precio_venta = precio_venta;
     }
 
