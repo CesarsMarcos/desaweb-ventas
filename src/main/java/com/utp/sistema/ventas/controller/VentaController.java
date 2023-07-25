@@ -107,30 +107,34 @@ public class VentaController extends HttpServlet {
                     }
 
                     boolean encontrado = false;
-                    for (ProductoParaVenderDTO productoParaVenderActual : carrito) {
-                        if (productoParaVenderActual.getIdArticulo().equals(articulo.getIdArticulo())) {
-                            productoParaVenderActual.aumentarCantidad();
-                            encontrado = true;
-                            break;
+
+                    if (validaciones.equals("")) {
+                        for (ProductoParaVenderDTO productoParaVenderActual : carrito) {
+                            if (productoParaVenderActual.getIdArticulo().equals(articulo.getIdArticulo())) {
+                                productoParaVenderActual.aumentarCantidad();
+                                encontrado = true;
+                                break;
+                            }
+                        }
+
+                        if (!encontrado) {
+                            carrito.add(new ProductoParaVenderDTO(1f, articulo.getIdArticulo(),
+                                    articulo.getIdCategoria(),
+                                    articulo.getDescripcion(),
+                                    articulo.getPrecioVenta(),
+                                    articulo.getStock(),
+                                    articulo.getEstado()));
+                        }
+
+                        guardarCarrito(carrito, request);
+                        carrito = this.obtenerCarrito(request);
+                        for (ProductoParaVenderDTO p : carrito) {
+                            subTotal += p.getTotal();
+                            igv += p.getTotal() * 0.18;
+                            total += subTotal + igv;
                         }
                     }
 
-                    if (!encontrado) {
-                        carrito.add(new ProductoParaVenderDTO(1f, articulo.getIdArticulo(),
-                                articulo.getIdCategoria(),
-                                articulo.getDescripcion(),
-                                articulo.getPrecioVenta(),
-                                articulo.getStock(),
-                                articulo.getEstado()));
-                    }
-
-                    guardarCarrito(carrito, request);
-                    carrito = this.obtenerCarrito(request);
-                    for (ProductoParaVenderDTO p : carrito) {
-                        subTotal += p.getTotal();
-                        igv += p.getTotal() * 0.18;
-                        total += subTotal + igv;
-                    }
                     request.setAttribute("total", total);
                     request.setAttribute("subTotal", subTotal);
                     request.setAttribute("igv", igv);
@@ -195,7 +199,7 @@ public class VentaController extends HttpServlet {
 
                     if (validaciones.equals("")) {
 
-                        /*venta.setRuc("000000");
+                        venta.setRuc("000000");
                         venta.setTipo_comprobante("tipo_comprobante");
                         venta.setNum_comprobante(util.generateNumComprobante());
                         venta.setIdCliente(cliente.getIdCliente());
@@ -226,7 +230,7 @@ public class VentaController extends HttpServlet {
                             DetalleVenta detalle = new DetalleVenta(idVenta, productoParaVender.getIdArticulo(), productoParaVender.getCantidad(), productoParaVender.getPrecioVenta());
                             detalleDao.insert(detalle);
 
-                        }*/
+                        }
                         this.limpiarCarrito(request);
                         mensaje = "Venta registrada con éxito";
 

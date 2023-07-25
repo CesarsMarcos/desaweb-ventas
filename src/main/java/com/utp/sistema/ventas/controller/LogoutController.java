@@ -27,7 +27,6 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         HttpSession session = request.getSession();
         boolean isLoggedIn = (session != null && session.getAttribute("username") != null);
         if (isLoggedIn) {
@@ -35,7 +34,7 @@ public class LogoutController extends HttpServlet {
             request.setAttribute("message", "Cerraste Sessión de forma correcta");
             request.getRequestDispatcher("./page-login.jsp").forward(request, response);
         }
-
+        request.getRequestDispatcher("./page-login.jsp").forward(request, response);
     }
 
     @Override
