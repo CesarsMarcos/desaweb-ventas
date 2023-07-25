@@ -44,7 +44,11 @@
 
                                             </div>
                                         </div>
-                                        <div>${requestScope.validaciones}</div>    
+                                        <c:if test="${not empty validaciones}">          
+                                            <div class="alert alert-danger mt-1">
+                                                ${validaciones}
+                                            </div>
+                                        </c:if>     
                                         <c:if test="${not empty mensaje}">                
                                             <div class="alert alert-success">
                                                 ${mensaje}

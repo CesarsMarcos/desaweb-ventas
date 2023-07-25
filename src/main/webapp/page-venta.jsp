@@ -42,7 +42,6 @@
                                             <div class="col-sm-3">
                                                 <button type="submit" name="accion" value="AgregarACarrito" class="btn btn-success"><i class="fa fa-cart-plus" ></i></button>
                                             </div>
-
                                         </div>
                                         <hr>
                                         <div class="col-md-12">
@@ -81,18 +80,17 @@
                                             <div class="card-header  border-success text-center bg-success"> <h3 class="d-inline fw-bold">S/ ${total == null  ? 0.0 : total} </h3></div>
                                             <div class="card-body">
                                                 <div class="row g-3 center">
-                                                    <div class="col-sm-6">
+                                                    <div class="col-sm-12">
                                                         <label class="form-label fw-bold">Documento</label>
                                                         <select class="form-control"   name="tipDocumento">
                                                             <option value="">--Selecciona--</option>
-                                                            <option value="DNI" >DNI</option>
-                                                            <option value="RUC" >RUC</option>
+                                                            <option value="BOLETA" >BOLETA</option>
                                                         </select>
                                                     </div>
-                                                    <div class="col-sm-6">
+                                                    <!--<div class="col-sm-6">
                                                         <label  class="form-label fw-bold">Nro. Comprobante</label>
                                                         <input type="text" class="form-control" name="numSerie" value="${numSerie}"  placeholder="00001">
-                                                    </div>
+                                                    </div>-->
                                                     <div class="col-sm-6" >
                                                         <div class="input-group">
                                                             <input type="text" class="form-control" placeholder="DOI de cliente"  name="idCli" value="${cliente.getIdCliente()}">

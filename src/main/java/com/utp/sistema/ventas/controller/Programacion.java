@@ -69,6 +69,7 @@ public class Programacion extends HttpServlet {
                 request.setAttribute("mensaje", mensaje);
                 request.setAttribute("validaciones", validaciones);
                 request.setAttribute("programadas", entregaDao.findAll());
+                request.setAttribute("ventas", ventaDao.findAll());
                 request.getRequestDispatcher("/page-programacion.jsp").forward(request, response);
                 break;
 
@@ -85,6 +86,7 @@ public class Programacion extends HttpServlet {
                 request.setAttribute("mensaje", mensaje);
                 request.setAttribute("validaciones", validaciones);
                 request.setAttribute("programadas", entregaDao.findAll());
+                request.setAttribute("ventas", ventaDao.findAll());
                 request.getRequestDispatcher("/page-programacion.jsp").forward(request, response);
                 break;
 
